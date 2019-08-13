@@ -1,0 +1,11 @@
+.DS_Store
+
+# project files
+node_modules/
+/dist/
+npm-debug.log*
+
+# sublime files
+.editorconfig
+*.sublime-project
+*.sublime-workspace
