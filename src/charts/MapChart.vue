@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div id='chartdiv'></div>
-  </div>
+  <div id='mapdiv' />
 </template>
 
 <script>
-import chileLow from '@amcharts/amcharts4-geodata/chileLow'
+import * as chileLow from '@/assets/map_chile_low.json'
 
 const data = [
   {
@@ -66,54 +64,77 @@ export default {
   },
 
   mounted () {
-    var chart = this.$am4core.create('chartdiv', this.$am4maps.MapChart)
-    chart.projection = new this.$am4maps.projections.Mercator()
-    chart.geodata = chileLow
+    // create map, set projection and map
+    var map = this.$am4core.create('mapdiv', this.$am4maps.MapChart)
+    map.projection = new this.$am4maps.projections.Mercator()
+    map.geodata = chileLow
 
-    var polygonSeries = chart.series.push(new this.$am4maps.MapPolygonSeries())
+    // rotate to horizontal position
+    map.deltaLatitude = 110
+
+    // set data
+    var polygonSeries = map.series.push(new this.$am4maps.MapPolygonSeries())
     polygonSeries.data = this.data
     polygonSeries.useGeodata = true
 
+    // template to change data style
+    var polygonTemplate = polygonSeries.mapPolygons.template
+
+    // heatmap colors
     polygonSeries.heatRules.push({
       property: 'fill',
-      target: polygonSeries.mapPolygons.template,
+      target: polygonTemplate,
       min: this.$am4core.color('#dab592'),
       max: this.$am4core.color('#ff2500')
     })
 
-    let heatLegend = chart.createChild(this.$am4maps.HeatLegend)
-    heatLegend.series = polygonSeries
-    heatLegend.width = this.$am4core.percent(100)
-
-    polygonSeries.mapPolygons.template.events.on('over', function (event) {
-      if (!isNaN(event.target.dataItem.value)) {
-        heatLegend.valueAxis.showTooltipAt(event.target.dataItem.value)
-      } else {
-        heatLegend.valueAxis.hideTooltip()
-      }
-    })
-
-    polygonSeries.mapPolygons.template.events.on('out', function (event) {
-      heatLegend.valueAxis.hideTooltip()
-    })
-
-    var polygonTemplate = polygonSeries.mapPolygons.template
-    polygonTemplate.tooltipText = '{name}: {value}'
-    polygonTemplate.nonScalingStroke = true
-    polygonTemplate.strokeWidth = 0.5
-
+    // hover color
     var hover = polygonTemplate.states.create('hover')
     hover.properties.fill = '#6fb148'
 
-    chart.background.fill = this.$am4core.color('#aadaff')
-    chart.background.fillOpacity = 1
+    // background color
+    map.background.fill = this.$am4core.color('#aadaff')
+    map.background.fillOpacity = 1
 
-    this.chart = chart
+    // legend
+    let heatLegend = map.createChild(this.$am4charts.HeatLegend)
+    heatLegend.series = polygonSeries
+
+    // align in the middle of the bottom
+    heatLegend.valign = 'bottom'
+    heatLegend.width = this.$am4core.percent(50)
+    heatLegend.align = 'right'
+    heatLegend.marginRight = this.$am4core.percent(25)
+
+    // legend style
+    heatLegend.minHeight = 45
+    heatLegend.markerContainer.height = 20
+    heatLegend.valueAxis.renderer.minGridDistance = 50
+    heatLegend.valueAxis.renderer.labels.template.fontSize = 20
+
+    // tooltip text and stroke type
+    polygonTemplate.tooltipText = '{name}: {value}'
+    polygonTemplate.nonScalingStroke = true
+    polygonTemplate.strokeWidth = 0.5
+    polygonSeries.tooltip.background.filters.clear()
+
+    // disable pan and zoom
+    map.seriesContainer.draggable = false
+    map.seriesContainer.resizable = false
+    map.maxZoomLevel = 1
+
+    // allow page scroll when mouse over map
+    map.chartContainer.wheelable = false
+
+    // enable responsive
+    map.responsive.enabled = true
+
+    this.map = map
   },
 
   beforeDestroy () {
-    if (this.chart) {
-      this.chart.dispose()
+    if (this.map) {
+      this.map.dispose()
     }
   }
 }
@@ -121,9 +142,7 @@ export default {
 
 <style scoped>
 
-#chartdiv {
-  height: 800px;
-  width: 500px;
-  margin: auto;
+#mapdiv {
+  height: 30vw;
 }
 </style>

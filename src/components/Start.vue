@@ -2,8 +2,10 @@
   <div>
     <h1 class="text-center">La Salud en Chile</h1>
 
-    <div class="container">
-      <mapchart/>
+    <div class="row">
+      <div class="col-12">
+        <mapchart/>
+      </div>
     </div>
   </div>
 </template>
