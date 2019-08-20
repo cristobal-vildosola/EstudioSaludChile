@@ -71,8 +71,8 @@ export default {
 
     minColor: { type: String, default: '#f7fbff' },
     maxColor: { type: String, default: '#a52013' },
-    minValue: { type: Number, default: 0 },
-    maxValue: { type: Number, default: 10000 },
+    minValue: Number,
+    maxValue: Number,
 
     hoverColor: { type: String, default: '#c91200' },
     tooltipText: { type: String, default: '{name}: {value}' },

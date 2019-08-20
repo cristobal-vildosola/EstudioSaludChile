@@ -92,7 +92,7 @@ export default {
     // style
     horLegend.minHeight = 50
     horLegend.markerContainer.height = 20
-    horLegend.valueAxis.renderer.minGridDistance = 50
+    horLegend.valueAxis.renderer.minGridDistance = 100
     horLegend.valueAxis.renderer.labels.template.fontSize = 15
 
     // vertical legend
@@ -106,7 +106,7 @@ export default {
     vertLegend.align = 'right'
     vertLegend.height = am4core.percent(40)
     // style
-    vertLegend.marginRight = 50
+    vertLegend.marginRight = 80
     vertLegend.markerContainer.width = 20
     vertLegend.valueAxis.renderer.minGridDistance = 50
     vertLegend.valueAxis.renderer.labels.template.fontSize = 15

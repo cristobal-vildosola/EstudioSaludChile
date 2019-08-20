@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- big header -->
     <div class="w-100 pt-5 bg-main">
       <div class="container text-center text-clear">
           <div class="title">
@@ -16,8 +17,13 @@
       </div>
     </div>
 
-    <ChileChart class="py-4" />
+    <ChileChart class="py-4"
+      :data="licenciasRegion"
+      title="Licencias entregadas por Región"
+      description=""
+    />
 
+    <!-- footer -->
     <div class="w-100 py-3 bg-main">
       <div class="container text-center text-clear">
         <div>Comisión Nacional de productividad</div>
@@ -30,12 +36,20 @@
 </template>
 
 <script>
-import ChileChart from '../charts/ChileChart'
+import ChileChart from '@/charts/ChileChart'
+import { licenciasRegion } from '@/assets/data/licencias.js'
 
 export default {
   name: 'Start',
+
   components: {
     ChileChart
+  },
+
+  data () {
+    return {
+      licenciasRegion
+    }
   }
 }
 </script>
