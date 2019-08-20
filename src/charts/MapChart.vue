@@ -15,6 +15,7 @@ export default {
   props: {
     mapGeojson: { type: Object, required: true },
     data: { type: Array, required: true },
+    logaritmic: { type: Boolean, default: false },
 
     minColor: { type: String, default: '#f7fbff' },
     maxColor: { type: String, default: '#a52013' },
@@ -46,9 +47,41 @@ export default {
     map.geodata = this.mapGeojson
     this.map = map
 
+    // number formats
+    map.numberFormatter.numberFormat = '#,###'
+    let bigNumber = new am4core.NumberFormatter()
+    bigNumber.numberFormat = '#.0a'
+
+    // copy data for default display
+    let processed = JSON.parse(JSON.stringify(this.data))
+
+    let tooltipText = this.tooltipText
+    let labelAdapter = function (labelText) {
+      if (labelText) { return bigNumber.format(labelText.replace(/,/g, '')) }
+      return ''
+    }
+
+    if (this.logaritmic) {
+      // convert data to log scale
+      processed = processed.map(x => {
+        x.real = x.value
+        x.value = Math.log2(x.value)
+        return x
+      })
+
+      // fix tooltip to show original value
+      tooltipText = tooltipText.replace(/value/g, 'real')
+
+      // fix legend to show original value
+      labelAdapter = function (labelText) {
+        if (labelText) { return bigNumber.format(2 ** labelText.replace(/,/g, '')) }
+        return ''
+      }
+    }
+
     // set data
     var polygonSeries = map.series.push(new am4maps.MapPolygonSeries())
-    polygonSeries.data = this.data
+    polygonSeries.data = processed
     polygonSeries.useGeodata = true
 
     // template to change data style
@@ -57,6 +90,12 @@ export default {
     // map stroke
     polygonTemplate.nonScalingStroke = true
     polygonTemplate.strokeWidth = 0.5
+    polygonTemplate.strokeOpacity = 0.5
+
+    // tooltip
+    polygonTemplate.tooltipText = tooltipText
+    polygonTemplate.tooltipPosition = 'fixed'
+    polygonSeries.tooltip.background.filters.clear()
 
     // hover color
     if (this.hoverColor) {
@@ -90,10 +129,10 @@ export default {
     horLegend.align = 'center'
     horLegend.width = am4core.percent(30)
     // style
-    horLegend.minHeight = 50
     horLegend.markerContainer.height = 20
-    horLegend.valueAxis.renderer.minGridDistance = 100
+    horLegend.valueAxis.renderer.minGridDistance = 50
     horLegend.valueAxis.renderer.labels.template.fontSize = 15
+    horLegend.valueAxis.renderer.labels.template.adapter.add('text', labelAdapter)
 
     // vertical legend
     let vertLegend = map.createChild(am4charts.HeatLegend)
@@ -104,17 +143,13 @@ export default {
     // alignment
     vertLegend.valign = 'middle'
     vertLegend.align = 'right'
-    vertLegend.height = am4core.percent(40)
+    vertLegend.height = am4core.percent(50)
     // style
-    vertLegend.marginRight = 80
+    vertLegend.marginRight = 55
     vertLegend.markerContainer.width = 20
-    vertLegend.valueAxis.renderer.minGridDistance = 50
+    vertLegend.valueAxis.renderer.minGridDistance = 30
     vertLegend.valueAxis.renderer.labels.template.fontSize = 15
-
-    // tooltip
-    polygonTemplate.tooltipText = this.tooltipText
-    polygonTemplate.tooltipPosition = 'fixed'
-    polygonSeries.tooltip.background.filters.clear()
+    vertLegend.valueAxis.renderer.labels.template.adapter.add('text', labelAdapter)
 
     // disable pan and zoom
     map.seriesContainer.draggable = false

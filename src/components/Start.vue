@@ -19,8 +19,10 @@
 
     <ChileChart class="py-4"
       :data="licenciasRegion"
+      :logaritmic="true"
       title="Licencias entregadas por Región"
-      description=""
+      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur sollicitudin tortor, vehicula interdum erat cursus vel. Integer dictum velit leo. In hac habitasse platea dictumst. Aenean tempor odio eget magna pulvinar convallis. Donec eget augue orci. Sed quis feugiat est. Vestibulum hendrerit ultricies elit, eu consequat eros hendrerit sit amet."
+      tooltipText="{name}: {value} licencias"
     />
 
     <!-- footer -->

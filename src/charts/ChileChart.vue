@@ -7,6 +7,7 @@
     <MapChart class="py-3"
       :mapGeojson="mapGeojson"
       :data="data"
+      :logaritmic="logaritmic"
 
       :minColor="minColor"
       :maxColor="maxColor"
@@ -24,7 +25,6 @@
 
     <h5 class="container font-weight-normal">
       {{ description }}
-      dolor sit amet, consectetur adipiscing elit. Quisque efficitur sollicitudin tortor, vehicula interdum erat cursus vel. Integer dictum velit leo. In hac habitasse platea dictumst. Aenean tempor odio eget magna pulvinar convallis. Donec eget augue orci. Sed quis feugiat est. Vestibulum hendrerit ultricies elit, eu consequat eros hendrerit sit amet.
     </h5>
   </div>
 </template>
@@ -67,7 +67,9 @@ export default {
   props: {
     title: { type: String, default: 'Titulo' },
     description: { type: String, default: 'Lorem Ipsum' },
+
     data: { type: Array, default: randomData },
+    logaritmic: { type: Boolean, default: false },
 
     minColor: { type: String, default: '#f7fbff' },
     maxColor: { type: String, default: '#a52013' },
@@ -78,7 +80,7 @@ export default {
     tooltipText: { type: String, default: '{name}: {value}' },
 
     height: { type: String, default: '28vw' },
-    rotationBreakpoint: { type: Number, default: 800 },
+    rotationBreakpoint: { type: Number, default: 600 },
     rotationDeegres: { type: Number, default: 110 },
     rotatedHeight: { type: String, default: '90vh' }
   }
