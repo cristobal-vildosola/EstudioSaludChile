@@ -1,11 +1,17 @@
 <template>
   <div>
-    <h1 class="text-center">La Salud en Chile</h1>
+    <div class="w-100 py-5 bg-title">
+      <div class="container text-center text-clear">
+          <h1>Descubre la Realidad de la Salud en Chile</h1>
 
-    <div class="row">
-      <div class="col-12">
-        <mapchart/>
+          <h5>
+            Resultados del estudio "Eficiencia en Pabellones y priorización de pacientes para cirugía electiva" de la Comisión Nacional de Productividad
+          </h5>
       </div>
+    </div>
+
+    <div class="py-3">
+      <mapchart/>
     </div>
   </div>
 </template>

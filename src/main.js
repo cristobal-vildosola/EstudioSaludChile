@@ -3,6 +3,7 @@ import Vue from 'vue'
 // styles
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '@/assets/styles.css'
 
 // chart library
 import * as am4core from '@amcharts/amcharts4/core'

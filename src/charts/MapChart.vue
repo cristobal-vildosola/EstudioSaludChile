@@ -45,7 +45,6 @@ export default {
     var map = this.$am4core.create('mapdiv', am4maps.MapChart)
     map.projection = new am4maps.projections.Mercator()
     map.geodata = chileLow
-    map.id = 'mapchart'
     this.map = map
 
     // set data
@@ -60,30 +59,33 @@ export default {
     polygonTemplate.nonScalingStroke = true
     polygonTemplate.strokeWidth = 0.5
 
-    // heatmap colors
-    polygonSeries.heatRules.push({
-      property: 'fill',
-      target: polygonTemplate,
-      min: am4core.color('#deb06f'),
-      max: am4core.color('#de1a00')
-    })
-
     // hover color
     var hover = polygonTemplate.states.create('hover')
     hover.properties.fill = '#6fb148'
 
     // background color
     // map.background.fill = this.$am4core.color('#aadaff')
-    map.background.fillOpacity = 1
+    // map.background.fillOpacity = 1
+
+    // heatmap colors
+    polygonSeries.heatRules.push({
+      target: polygonTemplate,
+      property: 'fill',
+      minValue: 0,
+      min: am4core.color('#f7fbff'),
+      maxValue: 10000,
+      max: am4core.color('#A52013')
+    })
 
     // horizontal legend
     let heatLegend = map.createChild(am4charts.HeatLegend)
     heatLegend.series = polygonSeries
+    heatLegend.minValue = 0
+    heatLegend.maxValue = 10000
     // alignment
     heatLegend.valign = 'bottom'
-    heatLegend.align = 'right'
+    heatLegend.align = 'center'
     heatLegend.width = am4core.percent(30)
-    heatLegend.marginRight = am4core.percent(35)
     // style
     heatLegend.minHeight = 50
     heatLegend.markerContainer.height = 20
@@ -94,11 +96,12 @@ export default {
     let verticalHeatLegend = map.createChild(am4charts.HeatLegend)
     verticalHeatLegend.orientation = 'vertical'
     verticalHeatLegend.series = polygonSeries
+    verticalHeatLegend.minValue = 0
+    verticalHeatLegend.maxValue = 10000
     // alignment
     verticalHeatLegend.valign = 'middle'
     verticalHeatLegend.align = 'right'
     verticalHeatLegend.height = am4core.percent(40)
-    verticalHeatLegend.marginBottom = am4core.percent(30)
     // style
     verticalHeatLegend.marginRight = 50
     verticalHeatLegend.markerContainer.width = 20
