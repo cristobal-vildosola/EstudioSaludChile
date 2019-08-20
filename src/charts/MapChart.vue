@@ -3,48 +3,47 @@
 </template>
 
 <script>
-import * as chileLow from '@/assets/map_chile_low.json'
-
-const data = [
-  { id: 'CL-AI', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-AN', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-AP', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-AR', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-AT', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-BI', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-CO', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-LI', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-LL', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-LR', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-MA', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-ML', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-RM', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-TA', value: Math.round(Math.random() * 10000) },
-  { id: 'CL-VS', value: Math.round(Math.random() * 10000) }
-]
-
 export default {
-  name: 'mapchart',
+  name: 'MapChart',
 
   data () {
     return {
-      data,
       map: null
     }
+  },
+
+  props: {
+    mapGeojson: { type: Object, required: true },
+    data: { type: Array, required: true },
+
+    minColor: { type: String, default: '#f7fbff' },
+    maxColor: { type: String, default: '#a52013' },
+    // when not provided use data low and high
+    minValue: Number,
+    maxValue: Number,
+
+    hoverColor: String,
+    tooltipText: { type: String, default: '{name}: {value}' },
+
+    height: { type: String, default: '50vw' },
+    rotationBreakpoint: { type: Number, default: 0 },
+    rotationDeegres: { type: Number, default: 0 },
+    rotatedHeight: { type: String, default: '0' },
+
+    backgroundColor: String,
+    backgroundOpacity: { type: Number, default: 1 }
   },
 
   mounted () {
     let am4core = this.$am4core
     let am4maps = this.$am4maps
     let am4charts = this.$am4charts
+    let self = this
 
-    // add css classes
-    am4core.options.autoSetClassName = true
-
-    // create map, set projection and map
+    // create map, set projection and map geojson
     var map = this.$am4core.create('mapdiv', am4maps.MapChart)
     map.projection = new am4maps.projections.Mercator()
-    map.geodata = chileLow
+    map.geodata = this.mapGeojson
     this.map = map
 
     // set data
@@ -60,56 +59,60 @@ export default {
     polygonTemplate.strokeWidth = 0.5
 
     // hover color
-    var hover = polygonTemplate.states.create('hover')
-    hover.properties.fill = '#6fb148'
+    if (this.hoverColor) {
+      var hover = polygonTemplate.states.create('hover')
+      hover.properties.fill = this.hoverColor
+    }
 
     // background color
-    // map.background.fill = this.$am4core.color('#aadaff')
-    // map.background.fillOpacity = 1
+    if (this.backgroundColor) {
+      map.background.fill = this.backgroundColor
+      map.background.fillOpacity = this.backgroundOpacity
+    }
 
     // heatmap colors
     polygonSeries.heatRules.push({
       target: polygonTemplate,
       property: 'fill',
-      minValue: 0,
-      min: am4core.color('#f7fbff'),
-      maxValue: 10000,
-      max: am4core.color('#A52013')
+      minValue: this.minValue,
+      min: am4core.color(this.minColor),
+      maxValue: this.maxValue,
+      max: am4core.color(this.maxColor)
     })
 
     // horizontal legend
-    let heatLegend = map.createChild(am4charts.HeatLegend)
-    heatLegend.series = polygonSeries
-    heatLegend.minValue = 0
-    heatLegend.maxValue = 10000
+    let horLegend = map.createChild(am4charts.HeatLegend)
+    horLegend.series = polygonSeries
+    horLegend.minValue = this.minValue
+    horLegend.maxValue = this.maxValue
     // alignment
-    heatLegend.valign = 'bottom'
-    heatLegend.align = 'center'
-    heatLegend.width = am4core.percent(30)
+    horLegend.valign = 'bottom'
+    horLegend.align = 'center'
+    horLegend.width = am4core.percent(30)
     // style
-    heatLegend.minHeight = 50
-    heatLegend.markerContainer.height = 20
-    heatLegend.valueAxis.renderer.minGridDistance = 50
-    heatLegend.valueAxis.renderer.labels.template.fontSize = 15
+    horLegend.minHeight = 50
+    horLegend.markerContainer.height = 20
+    horLegend.valueAxis.renderer.minGridDistance = 50
+    horLegend.valueAxis.renderer.labels.template.fontSize = 15
 
     // vertical legend
-    let verticalHeatLegend = map.createChild(am4charts.HeatLegend)
-    verticalHeatLegend.orientation = 'vertical'
-    verticalHeatLegend.series = polygonSeries
-    verticalHeatLegend.minValue = 0
-    verticalHeatLegend.maxValue = 10000
+    let vertLegend = map.createChild(am4charts.HeatLegend)
+    vertLegend.orientation = 'vertical'
+    vertLegend.series = polygonSeries
+    vertLegend.minValue = this.minValue
+    vertLegend.maxValue = this.maxValue
     // alignment
-    verticalHeatLegend.valign = 'middle'
-    verticalHeatLegend.align = 'right'
-    verticalHeatLegend.height = am4core.percent(40)
+    vertLegend.valign = 'middle'
+    vertLegend.align = 'right'
+    vertLegend.height = am4core.percent(40)
     // style
-    verticalHeatLegend.marginRight = 50
-    verticalHeatLegend.markerContainer.width = 20
-    verticalHeatLegend.valueAxis.renderer.minGridDistance = 50
-    verticalHeatLegend.valueAxis.renderer.labels.template.fontSize = 15
+    vertLegend.marginRight = 50
+    vertLegend.markerContainer.width = 20
+    vertLegend.valueAxis.renderer.minGridDistance = 50
+    vertLegend.valueAxis.renderer.labels.template.fontSize = 15
 
     // tooltip
-    polygonTemplate.tooltipText = '{name}: {value}'
+    polygonTemplate.tooltipText = this.tooltipText
     polygonTemplate.tooltipPosition = 'fixed'
     polygonSeries.tooltip.background.filters.clear()
 
@@ -123,31 +126,27 @@ export default {
 
     // change orientation depending on screen width
     map.events.on('sizechanged', function (ev) {
-      if (ev.target.pixelWidth < 600) {
+      if (ev.target.pixelWidth < self.rotationBreakpoint) {
         // vertical
-        map.svgContainer.htmlElement.style.height = '90vh'
+        map.svgContainer.htmlElement.style.height = self.rotatedHeight
         map.deltaLatitude = 0
         map.goHome()
 
-        verticalHeatLegend.disabled = false
-        heatLegend.disabled = true
+        vertLegend.disabled = false
+        horLegend.disabled = true
       } else {
         // horizontal
-        map.svgContainer.htmlElement.style.height = '28vw'
-        map.deltaLatitude = 110
+        map.svgContainer.htmlElement.style.height = self.height
+        map.deltaLatitude = self.rotationDeegres
         map.goHome()
 
-        verticalHeatLegend.disabled = true
-        heatLegend.disabled = false
+        vertLegend.disabled = true
+        horLegend.disabled = false
       }
     })
 
-    /*
-    map.events.on('ready', function (ev) {
-      polygonSeries.getPolygonById('CL-RM').isHover = true
-      polygonSeries.getPolygonById('CL-AT').showTooltip = true
-    })
-    */
+    // add css classes
+    am4core.options.autoSetClassName = true
   },
 
   beforeDestroy () {
