@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center">
+    <h1 class="text-center font-weight-light">
       {{ title }}
     </h1>
 
@@ -22,7 +22,7 @@
       :rotatedHeight="rotatedHeight"
     />
 
-    <h5 class="container">
+    <h5 class="container font-weight-normal">
       {{ description }}
       dolor sit amet, consectetur adipiscing elit. Quisque efficitur sollicitudin tortor, vehicula interdum erat cursus vel. Integer dictum velit leo. In hac habitasse platea dictumst. Aenean tempor odio eget magna pulvinar convallis. Donec eget augue orci. Sed quis feugiat est. Vestibulum hendrerit ultricies elit, eu consequat eros hendrerit sit amet.
     </h5>
@@ -78,7 +78,7 @@ export default {
     tooltipText: { type: String, default: '{name}: {value}' },
 
     height: { type: String, default: '28vw' },
-    rotationBreakpoint: { type: Number, default: 600 },
+    rotationBreakpoint: { type: Number, default: 800 },
     rotationDeegres: { type: Number, default: 110 },
     rotatedHeight: { type: String, default: '90vh' }
   }

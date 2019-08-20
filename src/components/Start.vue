@@ -1,12 +1,18 @@
 <template>
   <div>
-    <div class="w-100 py-5 bg-main">
+    <div class="w-100 pt-5 bg-main">
       <div class="container text-center text-clear">
-          <h1>Descubre la Realidad de la Salud en Chile</h1>
+          <div class="title">
+            Descubre la Realidad de la Salud en Chile
+          </div>
 
-          <h5>
+          <div class="subtitle">
             Resultados del estudio "Eficiencia en Pabellones y priorización de pacientes para cirugía electiva" de la Comisión Nacional de Productividad
-          </h5>
+          </div>
+
+          <div class="pb-5 pt-4">
+            <img class="logo" width="234" height="100" src="/static/img/logoClaro.png">
+          </div>
       </div>
     </div>
 

@@ -7,5 +7,41 @@ body {
 }
 
 .text-clear {
-  color: #eae4e4;
+  color: #eaeaea;
+}
+
+.title, .subtitle {
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.logo {
+  max-width: 50%;
+  height: auto;
+}
+
+/* horizontal */
+@media (min-width: 800px) {
+  .title {
+    font-size: 6rem;
+    padding-bottom: 2rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
+}
+
+/* vertical */
+@media (max-width: 800px) {
+  .title {
+    font-size: 3rem;
+    padding-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+  }
 }
