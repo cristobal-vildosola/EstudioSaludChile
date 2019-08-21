@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import MapChart from './MapChart'
-import * as chileGeojson from '@/assets/maps/chileGeo.json'
+import MapChart from './MapChart.vue';
+import chileGeo from '@/assets/maps/chileGeo';
 
-function randomData () {
+function randomData() {
   return [
     { id: 'CL-AI', value: Math.round(Math.random() * 10000) },
     { id: 'CL-AN', value: Math.round(Math.random() * 10000) },
@@ -49,8 +49,8 @@ function randomData () {
     { id: 'CL-ML', value: Math.round(Math.random() * 10000) },
     { id: 'CL-RM', value: Math.round(Math.random() * 10000) },
     { id: 'CL-TA', value: Math.round(Math.random() * 10000) },
-    { id: 'CL-VS', value: Math.round(Math.random() * 10000) }
-  ]
+    { id: 'CL-VS', value: Math.round(Math.random() * 10000) },
+  ];
 }
 
 export default {
@@ -58,10 +58,10 @@ export default {
 
   components: { MapChart },
 
-  data () {
+  data() {
     return {
-      mapGeojson: chileGeojson
-    }
+      mapGeojson: chileGeo,
+    };
   },
 
   props: {
@@ -82,9 +82,9 @@ export default {
     height: { type: String, default: '28vw' },
     rotationBreakpoint: { type: Number, default: 600 },
     rotationDeegres: { type: Number, default: 110 },
-    rotatedHeight: { type: String, default: '90vh' }
-  }
-}
+    rotatedHeight: { type: String, default: '90vh' },
+  },
+};
 </script>
 
 <style scoped></style>

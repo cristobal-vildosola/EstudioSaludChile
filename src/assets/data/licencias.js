@@ -1,4 +1,4 @@
-let licenciasRegion = [
+const licenciasRegion = [
   { id: 'CL-AP', value: 137918 },
   { id: 'CL-TA', value: 234227 },
   { id: 'CL-AN', value: 321617 },
@@ -13,7 +13,7 @@ let licenciasRegion = [
   { id: 'CL-LR', value: 229687 },
   { id: 'CL-LL', value: 571986 },
   { id: 'CL-AI', value: 70436 },
-  { id: 'CL-MA', value: 156937 }
-]
+  { id: 'CL-MA', value: 156937 },
+];
 
-export { licenciasRegion }
+export { licenciasRegion };

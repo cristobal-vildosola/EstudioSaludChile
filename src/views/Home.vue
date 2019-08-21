@@ -8,21 +8,27 @@
           </div>
 
           <div class="subtitle">
-            Resultados del estudio "Eficiencia en Pabellones y priorización de pacientes para cirugía electiva" de la Comisión Nacional de Productividad
+            Resultados del estudio "Eficiencia en Pabellones y priorización de pacientes para
+            cirugía electiva" de la Comisión Nacional de Productividad
           </div>
 
           <div class="pb-5 pt-4">
-            <img class="logo" width="234" height="100" src="/static/img/logoClaro.png">
+            <img class="logo" width="234" height="100" src="@/assets/img/logoClaro.png">
           </div>
       </div>
     </div>
 
     <ChileChart class="py-4"
-      :data="licenciasRegion"
-      :logaritmic="true"
       title="Licencias entregadas por Región"
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur sollicitudin tortor, vehicula interdum erat cursus vel. Integer dictum velit leo. In hac habitasse platea dictumst. Aenean tempor odio eget magna pulvinar convallis. Donec eget augue orci. Sed quis feugiat est. Vestibulum hendrerit ultricies elit, eu consequat eros hendrerit sit amet."
+      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur
+      sollicitudin tortor, vehicula interdum erat cursus vel. Integer dictum velit leo. In hac
+      habitasse platea dictumst. Aenean tempor odio eget magna pulvinar convallis. Donec eget
+      augue orci. Sed quis feugiat est. Vestibulum hendrerit ultricies elit, eu consequat eros
+      hendrerit sit amet."
+
+      :data="licenciasRegion"
       tooltipText="{name}: {value} licencias"
+      :logaritmic="true"
     />
 
     <!-- footer -->
@@ -38,22 +44,22 @@
 </template>
 
 <script>
-import ChileChart from '@/charts/ChileChart'
-import { licenciasRegion } from '@/assets/data/licencias.js'
+import ChileChart from '@/components/ChileChart.vue';
+import { licenciasRegion } from '@/assets/data/licencias';
 
 export default {
   name: 'Start',
 
   components: {
-    ChileChart
+    ChileChart,
   },
 
-  data () {
+  data() {
     return {
-      licenciasRegion
-    }
-  }
-}
+      licenciasRegion,
+    };
+  },
+};
 </script>
 
 <style scoped></style>

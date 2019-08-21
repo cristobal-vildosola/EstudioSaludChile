@@ -10,7 +10,7 @@ module.exports = {
   },
   extends: [
     'plugin:vue/essential',
-    'standard',
+    '@vue/airbnb',
   ],
   // required to lint *.vue files
   plugins: [
