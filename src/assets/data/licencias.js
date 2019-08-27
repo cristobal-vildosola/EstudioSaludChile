@@ -16,4 +16,9 @@ const licenciasRegion = [
   { id: 'CL-MA', value: 156937 },
 ];
 
-export { licenciasRegion };
+const licenciasSexo = [
+  { id: 2, value: 10408382, name: 'Mujeres' },
+  { id: 1, value: 3563475, name: 'Hombres' },
+];
+
+export { licenciasRegion, licenciasSexo };

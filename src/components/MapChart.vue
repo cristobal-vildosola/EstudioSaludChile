@@ -53,7 +53,7 @@ export default {
     bigNumber.numberFormat = '#.0a';
 
     // copy data for default display
-    let processed = JSON.parse(JSON.stringify(this.data));
+    const processed = JSON.parse(JSON.stringify(this.data));
 
     let { tooltipText } = this;
     let labelAdapter = (labelText) => {
@@ -63,11 +63,10 @@ export default {
 
     if (this.logaritmic) {
       // convert data to log scale
-      processed = processed.map((x) => {
-        x.real = x.value;
-        x.value = Math.log2(x.value);
-        return x;
-      });
+      for (let i = 0; i < processed.length; i += 1) {
+        processed[i].real = processed[i].value;
+        processed[i].value = Math.log2(processed[i].value);
+      }
 
       // fix tooltip to show original value
       tooltipText = tooltipText.replace(/value/g, 'real');
