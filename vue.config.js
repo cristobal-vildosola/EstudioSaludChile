@@ -1,4 +1,4 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '~crmunoz/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? 'EstudioSaludChile/' : '/',
   runtimeCompiler: true,
 }
