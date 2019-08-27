@@ -21,4 +21,22 @@ const licenciasSexo = [
   { id: 1, value: 3563475, name: 'Hombres' },
 ];
 
-export { licenciasRegion, licenciasSexo };
+const licenciasTipo = [
+  { tipo: 'CURATIVA COMUN', value: 12670218 },
+  { tipo: 'MATERNAL', value: 1264353 },
+  { tipo: 'LABORAL', value: 96634 },
+];
+
+const licenciasTipoDosglose = [
+  { tipo: 'CURATIVA COMUN', subtipo: 'ENFERMEDAD O ACCIDENTE NO DEL TRABAJO', value: 12127341 },
+  { tipo: 'CURATIVA COMUN', subtipo: 'PRORROGA MEDICINA PREVENTIVA', value: 1663 },
+  { tipo: 'CURATIVA COMUN', subtipo: 'PATOLOGIAS DEL EMBARAZO', value: 541214 },
+  { tipo: 'MATERNAL', subtipo: 'LICENCIA MATERNAL', value: 705736 },
+  { tipo: 'MATERNAL', subtipo: 'ENFERMEDAD GRAVE HIJO MENOR DE 1 AÑO', value: 558617 },
+  { tipo: 'LABORAL', subtipo: 'ACCIDENTE DEL TRABAJO', value: 84189 },
+  { tipo: 'LABORAL', subtipo: 'ENFERMEDAD PROFESIONAL', value: 12445 },
+];
+
+export {
+  licenciasRegion, licenciasSexo, licenciasTipo, licenciasTipoDosglose,
+};

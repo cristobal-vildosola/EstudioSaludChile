@@ -31,6 +31,14 @@
       :logaritmic="true"
     />
 
+    <ChileChart class="py-4"
+      title="Pacientes atendidos por Región"
+      description=""
+
+      :data="pacientesRegion"
+      tooltipText="{name}: {value} pacientes"
+    />
+
     <!-- footer -->
     <div class="w-100 py-3 bg-main">
       <div class="container text-center text-clear">
@@ -46,6 +54,7 @@
 <script>
 import ChileChart from '@/components/ChileChart.vue';
 import { licenciasRegion } from '@/assets/data/licencias';
+import { pacientesRegion } from '@/assets/data/pacientes';
 
 export default {
   name: 'Start',
@@ -57,6 +66,7 @@ export default {
   data() {
     return {
       licenciasRegion,
+      pacientesRegion,
     };
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <div id='mapdiv' />
+  <div :id='`mapdiv_${ div_id }`' />
 </template>
 
 <script>
@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       map: null,
+      div_id: Math.random().toString(30).substr(2, 8),
     };
   },
 
@@ -42,7 +43,7 @@ export default {
     const self = this;
 
     // create map, set projection and map geojson
-    const map = this.$am4core.create('mapdiv', am4maps.MapChart);
+    const map = this.$am4core.create(`mapdiv_${this.div_id}`, am4maps.MapChart);
     map.projection = new am4maps.projections.Mercator();
     map.geodata = this.mapGeojson;
     this.map = map;
