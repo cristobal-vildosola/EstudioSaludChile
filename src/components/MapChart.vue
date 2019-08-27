@@ -89,8 +89,8 @@ export default {
 
     // map stroke
     polygonTemplate.nonScalingStroke = true;
-    polygonTemplate.strokeWidth = 0.5;
-    polygonTemplate.strokeOpacity = 0.5;
+    polygonTemplate.strokeWidth = 0.3;
+    polygonTemplate.stroke = '#000';
 
     // tooltip
     polygonTemplate.tooltipText = tooltipText;

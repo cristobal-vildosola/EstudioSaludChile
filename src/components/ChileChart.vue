@@ -71,8 +71,8 @@ export default {
     data: { type: Array, default: randomData },
     logaritmic: { type: Boolean, default: false },
 
-    minColor: { type: String, default: '#f7fbff' },
-    maxColor: { type: String, default: '#a52013' },
+    minColor: { type: String, default: '#fcde9c' },
+    maxColor: { type: String, default: '#d41111' },
     minValue: Number,
     maxValue: Number,
 
