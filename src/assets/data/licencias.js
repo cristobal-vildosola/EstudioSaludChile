@@ -22,21 +22,21 @@ const licenciasSexo = [
 ];
 
 const licenciasTipo = [
-  { tipo: 'CURATIVA COMUN', value: 12670218 },
-  { tipo: 'MATERNAL', value: 1264353 },
-  { tipo: 'LABORAL', value: 96634 },
+  { tipo: 'Curativa comun', value: 12670218 },
+  { tipo: 'Maternal', value: 1264353 },
+  { tipo: 'Laboral', value: 96634 },
 ];
 
-const licenciasTipoDosglose = [
-  { tipo: 'CURATIVA COMUN', subtipo: 'ENFERMEDAD O ACCIDENTE NO DEL TRABAJO', value: 12127341 },
-  { tipo: 'CURATIVA COMUN', subtipo: 'PRORROGA MEDICINA PREVENTIVA', value: 1663 },
-  { tipo: 'CURATIVA COMUN', subtipo: 'PATOLOGIAS DEL EMBARAZO', value: 541214 },
-  { tipo: 'MATERNAL', subtipo: 'LICENCIA MATERNAL', value: 705736 },
-  { tipo: 'MATERNAL', subtipo: 'ENFERMEDAD GRAVE HIJO MENOR DE 1 AÑO', value: 558617 },
-  { tipo: 'LABORAL', subtipo: 'ACCIDENTE DEL TRABAJO', value: 84189 },
-  { tipo: 'LABORAL', subtipo: 'ENFERMEDAD PROFESIONAL', value: 12445 },
+const licenciasTipoDesglose = [
+  { tipo: 'Curativa comun', subtipo: 'Enfermedad o accidente no del trabajo', value: 12127341 },
+  { tipo: 'Curativa comun', subtipo: 'Prorroga medicina preventiva', value: 1663 },
+  { tipo: 'Curativa comun', subtipo: 'Patologias del embarazo', value: 541214 },
+  { tipo: 'Maternal', subtipo: 'Licencia maternal', value: 705736 },
+  { tipo: 'Maternal', subtipo: 'Enfermedad grave hijo menor de 1 año', value: 558617 },
+  { tipo: 'Laboral', subtipo: 'Accidente del trabajo', value: 84189 },
+  { tipo: 'Laboral', subtipo: 'Enfermedad profesional', value: 12445 },
 ];
 
 export {
-  licenciasRegion, licenciasSexo, licenciasTipo, licenciasTipoDosglose,
+  licenciasRegion, licenciasSexo, licenciasTipo, licenciasTipoDesglose,
 };

@@ -18,6 +18,10 @@
       </div>
     </div>
 
+    <BarChart style="height: 500px" class="container py-4"
+      :data="licenciasTipoDesglose"
+    />
+
     <ChileChart class="py-4"
       title="Licencias entregadas por Región"
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur
@@ -53,7 +57,8 @@
 
 <script>
 import ChileChart from '@/components/ChileChart.vue';
-import { licenciasRegion } from '@/assets/data/licencias';
+import BarChart from '@/components/BarChart.vue';
+import { licenciasRegion, licenciasTipoDesglose } from '@/assets/data/licencias';
 import { pacientesRegion } from '@/assets/data/pacientes';
 
 export default {
@@ -61,12 +66,14 @@ export default {
 
   components: {
     ChileChart,
+    BarChart,
   },
 
   data() {
     return {
       licenciasRegion,
       pacientesRegion,
+      licenciasTipoDesglose,
     };
   },
 };
