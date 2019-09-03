@@ -1,12 +1,6 @@
 <template>
   <div>
 
-    <div class="container">
-      <BarChart style="height: 500px" class="container py-4"
-        :data="licenciasTipoDesglose"
-      />
-    </div>
-
     <!-- big header -->
     <div class="w-100 pt-5 bg-main">
       <div class="container text-center text-clear">
@@ -26,25 +20,42 @@
     </div>
 
     <ChileChart class="py-4"
-      title="Licencias entregadas por Región"
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur
-      sollicitudin tortor, vehicula interdum erat cursus vel. Integer dictum velit leo. In hac
-      habitasse platea dictumst. Aenean tempor odio eget magna pulvinar convallis. Donec eget
-      augue orci. Sed quis feugiat est. Vestibulum hendrerit ultricies elit, eu consequat eros
-      hendrerit sit amet."
-
-      :data="licenciasRegion"
-      tooltipText="{name}: {value} licencias"
-      :logaritmic="true"
-    />
-
-    <ChileChart class="py-4"
-      title="Pacientes atendidos por Región"
-      description=""
+      title="Pacientes atendidos"
 
       :data="pacientesRegion"
       tooltipText="{name}: {value} pacientes"
     />
+
+    <ChileChart class="py-4"
+      title="Pacientes atendidos (Normalizados según población)"
+
+      :data="pacientesRegionNorm"
+      tooltipText="{name}: {value.formatNumber('.0%')} de la población"
+      legendFormat=".0%"
+      :maxValue="1"
+    />
+
+    <ChileChart class="py-4"
+      title="licencias entregadas"
+
+      :data="licenciasRegion"
+      tooltipText="{name}: {value} de la población"
+    />
+
+    <ChileChart class="py-4"
+      title="Licencias entregadas (Normalizadas según población)"
+
+      :data="licenciasRegionNorm"
+      tooltipText="{name}: {value.formatNumber('.0%')} licencias"
+      legendFormat=".0%"
+      :maxValue="1"
+    />
+
+    <div class="container">
+      <BarChart style="height: 500px" class="container py-4"
+        :data="licenciasTipoDesglose"
+      />
+    </div>
 
     <!-- footer -->
     <div class="w-100 py-3 bg-main">
@@ -63,6 +74,14 @@ import ChileChart from '@/components/ChileChart.vue';
 import BarChart from '@/components/BarChart.vue';
 import { licenciasRegion, licenciasTipoDesglose } from '@/assets/data/licencias';
 import { pacientesRegion } from '@/assets/data/pacientes';
+import { poblacionRegion } from '@/assets/data/poblacion';
+
+const pacientesRegionNorm = pacientesRegion.map(
+  x => ({ id: x.id, value: x.value / poblacionRegion[x.id] }),
+);
+const licenciasRegionNorm = licenciasRegion.map(
+  x => ({ id: x.id, value: x.value / poblacionRegion[x.id] }),
+);
 
 export default {
   name: 'Start',
@@ -77,6 +96,8 @@ export default {
       licenciasRegion,
       pacientesRegion,
       licenciasTipoDesglose,
+      pacientesRegionNorm,
+      licenciasRegionNorm,
     };
   },
 };

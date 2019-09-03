@@ -26,6 +26,7 @@ export default {
 
     hoverColor: { type: String },
     tooltipText: { type: String, default: '{name}: {value}' },
+    legendFormat: { type: String, default: '#.0a' },
 
     height: { type: String, default: '50vw' },
     rotationBreakpoint: { type: Number, default: 0 },
@@ -50,15 +51,15 @@ export default {
 
     // number formats
     map.numberFormatter.numberFormat = '#,###';
-    const bigNumber = new am4core.NumberFormatter();
-    bigNumber.numberFormat = '#.0a';
+    const LegendFormatter = new am4core.NumberFormatter();
+    LegendFormatter.numberFormat = this.legendFormat;
 
     // copy data for default display
     const processed = JSON.parse(JSON.stringify(this.data));
 
     let { tooltipText } = this;
     let labelAdapter = (labelText) => {
-      if (labelText) { return bigNumber.format(labelText.replace(/,/g, '')); }
+      if (labelText) { return LegendFormatter.format(labelText.replace(/,/g, '')); }
       return '';
     };
 
@@ -74,7 +75,7 @@ export default {
 
       // fix legend to show original value
       labelAdapter = (labelText) => {
-        if (labelText) { return bigNumber.format(2 ** labelText.replace(/,/g, '')); }
+        if (labelText) { return LegendFormatter.format(2 ** labelText.replace(/,/g, '')); }
         return '';
       };
     }

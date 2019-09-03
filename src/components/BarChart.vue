@@ -1,15 +1,29 @@
 <template>
-  <div :id='`chartdiv_${ div_id }`' />
+  <div :id='id' />
 </template>
 
 <script>
+
+function isInViewport(id, threshold = 100) {
+  const element = document.getElementById(id);
+  const bounding = element.getBoundingClientRect();
+
+  const windHeight = window.innerHeight || document.documentElement.clientHeight;
+  const windWidth = window.innerWidth || document.documentElement.clientWidth;
+
+  return bounding.bottom >= 0 + threshold
+      && bounding.right >= 0 + threshold
+      && bounding.top <= windHeight - threshold
+      && bounding.left <= windWidth - threshold;
+}
+
 export default {
   name: 'BarChart',
 
   data() {
     return {
       chart: null,
-      div_id: Math.random().toString(30).substr(2, 8),
+      id: `chartdiv_${Math.random().toString(30).substr(2, 8)}`,
     };
   },
 
@@ -26,15 +40,17 @@ export default {
   mounted() {
     const am4core = this.$am4core;
     const am4charts = this.$am4charts;
+    const self = this;
 
     // create chart
-    const chart = this.$am4core.create(`chartdiv_${this.div_id}`, am4charts.XYChart);
+    const chart = this.$am4core.create(this.id, am4charts.XYChart);
     chart.data = this.data;
 
     const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'subtipo';
     categoryAxis.title.text = 'Tipo de Licencia';
     categoryAxis.title.fontSize = 14;
+    categoryAxis.renderer.inversed = true;
 
     categoryAxis.fontSize = 12;
     categoryAxis.renderer.grid.template.disabled = true;
@@ -48,7 +64,6 @@ export default {
     valueAxis.min = 0;
     valueAxis.max = 12200000;
 
-    valueAxis.renderer.grid.template.disabled = true;
     valueAxis.renderer.minGridDistance = 100;
     valueAxis.fontSize = 12;
 
@@ -59,20 +74,21 @@ export default {
     axisBreak.startValue = 800000;
     axisBreak.endValue = 12000000;
     axisBreak.breakSize = 0.005;
-    axisBreak.defaultState.transitionDuration = 1000;
 
     const hoverState = axisBreak.states.create('hover');
     hoverState.properties.breakSize = 1;
     hoverState.properties.opacity = 0;
+
+    axisBreak.defaultState.transitionDuration = 1000;
     hoverState.transitionDuration = 2000;
 
+    // columns
     const series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.categoryY = 'subtipo';
-    series.name = 'licencias';
     series.dataFields.valueX = 'value';
-
+    series.dataFields.categoryY = 'subtipo';
     series.columns.template.tooltipText = '{categoryY}:\n[bold]{valueX}[/] licencias';
 
+    // modify tooltip
     series.tooltip.pointerOrientation = 'left';
     series.columns.template.tooltipX = 0;
     series.tooltip.getFillFromObject = false;
@@ -80,9 +96,27 @@ export default {
     series.tooltip.label.fill = am4core.color('#000');
     series.tooltip.background.filters.clear();
 
+    // fill each column with a different color
     series.columns.template.strokeOpacity = 0;
     series.columns.template.adapter.add('fill',
       (fill, target) => chart.colors.getIndex(target.dataItem.index));
+
+    // animations
+    series.interpolationDuration = 500;
+    series.sequencedInterpolationDelay = 200;
+    series.sequencedInterpolation = true;
+
+    // animate when entering window
+    window.addEventListener('scroll',
+      () => {
+        if (isInViewport(self.id)) {
+          if ((series.isHidden || series.isHiding) && !series.isShowing) {
+            series.appear();
+          }
+        } else if (!series.isHidden && !series.isHiding) {
+          series.hide();
+        }
+      }, false);
   },
 
   beforeDestroy() {

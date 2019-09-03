@@ -16,6 +16,7 @@
 
       :hoverColor="hoverColor"
       :tooltipText="tooltipText"
+      :legendFormat="legendFormat"
 
       :height="height"
       :rotationBreakpoint="rotationBreakpoint"
@@ -76,8 +77,9 @@ export default {
     minValue: Number,
     maxValue: Number,
 
-    hoverColor: { type: String, default: '#c91200' },
+    hoverColor: { type: String },
     tooltipText: { type: String, default: '{name}: {value}' },
+    legendFormat: { type: String, default: '#.0a' },
 
     height: { type: String, default: '28vw' },
     rotationBreakpoint: { type: Number, default: 600 },
