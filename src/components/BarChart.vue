@@ -31,17 +31,29 @@ export default {
     const chart = this.$am4core.create(`chartdiv_${this.div_id}`, am4charts.XYChart);
     chart.data = this.data;
 
-    const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'subtipo';
     categoryAxis.title.text = 'Tipo de Licencia';
-    categoryAxis.renderer.minGridDistance = 40;
-    categoryAxis.fontSize = 11;
+    categoryAxis.title.fontSize = 14;
 
-    const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    categoryAxis.fontSize = 12;
+    categoryAxis.renderer.grid.template.disabled = true;
+    categoryAxis.renderer.line.strokeOpacity = 1;
+
+    const valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+    valueAxis.title.text = 'Número de Licencias';
+    valueAxis.title.fontSize = 14;
+
+    valueAxis.strictMinMax = true;
     valueAxis.min = 0;
     valueAxis.max = 12200000;
-    valueAxis.strictMinMax = true;
-    valueAxis.title.text = 'Número de Licencias';
+
+    valueAxis.renderer.grid.template.disabled = true;
+    valueAxis.renderer.minGridDistance = 100;
+    valueAxis.fontSize = 12;
+
+    valueAxis.numberFormatter = new am4core.NumberFormatter();
+    valueAxis.numberFormatter.numberFormat = '#.0a';
 
     const axisBreak = valueAxis.axisBreaks.create();
     axisBreak.startValue = 800000;
@@ -51,15 +63,26 @@ export default {
 
     const hoverState = axisBreak.states.create('hover');
     hoverState.properties.breakSize = 1;
-    hoverState.properties.opacity = 0.1;
+    hoverState.properties.opacity = 0;
     hoverState.transitionDuration = 2000;
 
     const series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.categoryX = 'subtipo';
+    series.dataFields.categoryY = 'subtipo';
     series.name = 'licencias';
-    series.dataFields.valueY = 'value';
-    series.columns.template.tooltipText = '{categoryX}: [bold]{valueY}[/] licencias';
-    series.columns.template.width = am4core.percent(60);
+    series.dataFields.valueX = 'value';
+
+    series.columns.template.tooltipText = '{categoryY}:\n[bold]{valueX}[/] licencias';
+
+    series.tooltip.pointerOrientation = 'left';
+    series.columns.template.tooltipX = 0;
+    series.tooltip.getFillFromObject = false;
+    series.tooltip.background.fill = am4core.color('#fff');
+    series.tooltip.label.fill = am4core.color('#000');
+    series.tooltip.background.filters.clear();
+
+    series.columns.template.strokeOpacity = 0;
+    series.columns.template.adapter.add('fill',
+      (fill, target) => chart.colors.getIndex(target.dataItem.index));
   },
 
   beforeDestroy() {

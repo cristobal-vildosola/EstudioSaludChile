@@ -1,5 +1,12 @@
 <template>
   <div>
+
+    <div class="container">
+      <BarChart style="height: 500px" class="container py-4"
+        :data="licenciasTipoDesglose"
+      />
+    </div>
+
     <!-- big header -->
     <div class="w-100 pt-5 bg-main">
       <div class="container text-center text-clear">
@@ -17,10 +24,6 @@
           </div>
       </div>
     </div>
-
-    <BarChart style="height: 500px" class="container py-4"
-      :data="licenciasTipoDesglose"
-    />
 
     <ChileChart class="py-4"
       title="Licencias entregadas por Región"

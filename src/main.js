@@ -9,10 +9,13 @@ import '@/assets/styles.css';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4maps from '@amcharts/amcharts4/maps';
+import am4themesAnimated from '@amcharts/amcharts4/themes/animated';
 
 // project objects
 import App from '@/App.vue';
 import router from '@/router';
+
+am4core.useTheme(am4themesAnimated);
 
 Object.defineProperty(Vue.prototype, '$am4charts', { value: am4charts });
 Object.defineProperty(Vue.prototype, '$am4core', { value: am4core });
