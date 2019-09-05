@@ -71,7 +71,7 @@ export default {
     legendFormat: { type: String, default: '#.0a' },
 
     height: { type: String, default: '28vw' },
-    rotationBreakpoint: { type: Number, default: 600 },
+    rotationBreakpoint: { type: Number, default: 800 },
     rotationDeegres: { type: Number, default: 110 },
     rotatedHeight: { type: String, default: '90vh' },
   },

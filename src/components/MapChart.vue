@@ -162,7 +162,10 @@ export default {
 
     // change orientation depending on screen width
     map.events.on('sizechanged', (ev) => {
-      if (ev.target.pixelWidth < self.rotationBreakpoint) {
+      const windHeight = window.innerHeight || document.documentElement.clientHeight;
+      const windWidth = window.innerWidth || document.documentElement.clientWidth;
+
+      if (windWidth < windHeight && ev.target.pixelWidth < self.rotationBreakpoint) {
         // vertical
         map.svgContainer.htmlElement.style.height = self.rotatedHeight;
         map.deltaLatitude = 0;
