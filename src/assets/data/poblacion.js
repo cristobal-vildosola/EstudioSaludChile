@@ -1,4 +1,4 @@
-const poblacionRegion = {
+const poblacionRegionDict = {
   'CL-AP': 226068,
   'CL-TA': 330558,
   'CL-AN': 607534,
@@ -22,5 +22,5 @@ const poblacionSexo = [
 ];
 
 export {
-  poblacionRegion, poblacionSexo,
+  poblacionRegionDict, poblacionSexo,
 };

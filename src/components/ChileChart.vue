@@ -1,10 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center font-weight-light">
-      {{ title }}
-    </h1>
-
-    <MapChart class="py-3"
+    <MapChart
       :mapGeojson="mapGeojson"
       :data="data"
       :logaritmic="logaritmic"
@@ -23,10 +19,6 @@
       :rotationDeegres="rotationDeegres"
       :rotatedHeight="rotatedHeight"
     />
-
-    <h5 class="container font-weight-normal">
-      {{ description }}
-    </h5>
   </div>
 </template>
 
@@ -66,9 +58,6 @@ export default {
   },
 
   props: {
-    title: { type: String, default: 'Titulo' },
-    description: { type: String, default: 'Lorem Ipsum' },
-
     data: { type: Array, default: randomData },
     logaritmic: { type: Boolean, default: false },
 

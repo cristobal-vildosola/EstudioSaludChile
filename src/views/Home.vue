@@ -1,55 +1,62 @@
 <template>
   <div>
+    <Header />
 
-    <!-- big header -->
-    <div class="w-100 pt-5 bg-main">
-      <div class="container text-center text-clear">
-          <div class="title">
-            Descubre la Realidad de la Salud en Chile
-          </div>
-
-          <div class="subtitle">
-            Resultados del estudio "Eficiencia en Pabellones y priorización de pacientes para
-            cirugía electiva" de la Comisión Nacional de Productividad
-          </div>
-
-          <div class="pb-5 pt-4">
-            <img class="logo" width="234" height="100" src="@/assets/img/logoClaro.png">
-          </div>
+    <div class="py-4">
+      <div class="title">
+        Pacientes atendidos <small class="font-weight-light">(% de la población)</small>
       </div>
+
+      <ChileChart class="py-3"
+        :data="pacientesRegionNorm"
+        :tooltipText="`{name}:
+                      [bold]{value.formatNumber('.#%')}[/] de la población
+                      {total} pacientes en total`"
+        legendFormat="#%"
+        :maxValue="1"
+      />
+
+      <h5 class="container font-weight-normal">
+        Este mapa representa el número de personas atendidas en el sistema de salud público entre los años 2014 y 2017. Si es que una persona se atendió 10 veces en este periodo, solo se cuenta 1 vez.
+      </h5>
     </div>
 
-    <ChileChart class="py-4"
-      title="Pacientes atendidos"
+    <div class="py-4">
+      <div class="title">
+        Licencias entregadas <small class="font-weight-light">(% de la población)</small>
+      </div>
 
-      :data="pacientesRegion"
-      tooltipText="{name}: {value} pacientes"
-    />
+      <ChileChart class="py-3"
+        :data="licenciasRegionNorm"
+        :tooltipText="`{name}:
+                      [bold]{value.formatNumber('.#%')}[/] de la población
+                      {total} licencias en total`"
+        legendFormat="#%"
+        :maxValue="1"
+      />
 
-    <ChileChart class="py-4"
-      title="Pacientes atendidos (Normalizados según población)"
+      <h5 class="container font-weight-normal">
+        Este mapa representa el número de licencias entregadas entre los años 2014 y 2017.
+      </h5>
+    </div>
 
-      :data="pacientesRegionNorm"
-      tooltipText="{name}: {value.formatNumber('.0%')} de la población"
-      legendFormat=".0%"
-      :maxValue="1"
-    />
+    <div class="py-4">
+      <div class="title">
+        Licencias promedio por paciente
+      </div>
 
-    <ChileChart class="py-4"
-      title="licencias entregadas"
+      <ChileChart class="py-3"
+        :data="licenciasPacienteRegion"
+        :tooltipText="`{name}:
+                      [bold]{value.formatNumber('.##')}[/] licencias por paciente
+                      {total} licencias en total`"
+        legendFormat=".#"
+        :maxValue="2.5"
+      />
 
-      :data="licenciasRegion"
-      tooltipText="{name}: {value} de la población"
-    />
-
-    <ChileChart class="py-4"
-      title="Licencias entregadas (Normalizadas según población)"
-
-      :data="licenciasRegionNorm"
-      tooltipText="{name}: {value.formatNumber('.0%')} licencias"
-      legendFormat=".0%"
-      :maxValue="1"
-    />
+      <h5 class="container font-weight-normal">
+      </h5>
+    </div>
 
     <div class="container">
       <BarChart style="height: 500px" class="container py-4"
@@ -57,47 +64,49 @@
       />
     </div>
 
-    <!-- footer -->
-    <div class="w-100 py-3 bg-main">
-      <div class="container text-center text-clear">
-        <div>Comisión Nacional de productividad</div>
-        <div class="d-inline-block">Amunategui 232 of. 401, Santiago, Chile /</div>
-        <div class="d-inline-block">(+562) 24733444 /</div>
-        <div class="d-inline-block">consultascnp@cnp.gob.cl</div>
-      </div>
-    </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from '@/common/Footer.vue';
+import Header from '@/common/Header.vue';
 import ChileChart from '@/components/ChileChart.vue';
 import BarChart from '@/components/BarChart.vue';
 import { licenciasRegion, licenciasTipoDesglose } from '@/assets/data/licencias';
 import { pacientesRegion } from '@/assets/data/pacientes';
-import { poblacionRegion } from '@/assets/data/poblacion';
+import { poblacionRegionDict } from '@/assets/data/poblacion';
 
 const pacientesRegionNorm = pacientesRegion.map(
-  x => ({ id: x.id, value: x.value / poblacionRegion[x.id] }),
+  x => ({ id: x.id, value: x.value / poblacionRegionDict[x.id], total: x.value }),
 );
 const licenciasRegionNorm = licenciasRegion.map(
-  x => ({ id: x.id, value: x.value / poblacionRegion[x.id] }),
+  x => ({ id: x.id, value: x.value / poblacionRegionDict[x.id], total: x.value }),
+);
+
+const pacientesRegionDict = {};
+pacientesRegion.forEach((x) => { pacientesRegionDict[x.id] = x.value; });
+
+const licenciasPacienteRegion = licenciasRegion.map(
+  x => ({ id: x.id, value: x.value / pacientesRegionDict[x.id], total: x.value }),
 );
 
 export default {
   name: 'Start',
 
   components: {
+    Footer,
+    Header,
     ChileChart,
     BarChart,
   },
 
   data() {
     return {
-      licenciasRegion,
-      pacientesRegion,
       licenciasTipoDesglose,
       pacientesRegionNorm,
       licenciasRegionNorm,
+      licenciasPacienteRegion,
     };
   },
 };

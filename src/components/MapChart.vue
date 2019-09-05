@@ -28,7 +28,7 @@ export default {
     tooltipText: { type: String, default: '{name}: {value}' },
     legendFormat: { type: String, default: '#.0a' },
 
-    height: { type: String, default: '50vw' },
+    height: { type: String, default: '50vh' },
     rotationBreakpoint: { type: Number, default: 0 },
     rotationDeegres: { type: Number, default: 0 },
     rotatedHeight: { type: String, default: '0' },

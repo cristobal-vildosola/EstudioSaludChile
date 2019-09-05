@@ -4,7 +4,7 @@
 
 <script>
 
-function isInViewport(id, threshold = 100) {
+function isVisible(id, threshold = 100) {
   const element = document.getElementById(id);
   const bounding = element.getBoundingClientRect();
 
@@ -102,14 +102,14 @@ export default {
       (fill, target) => chart.colors.getIndex(target.dataItem.index));
 
     // animations
-    series.interpolationDuration = 500;
-    series.sequencedInterpolationDelay = 200;
+    series.interpolationDuration = 350;
+    series.sequencedInterpolationDelay = 100;
     series.sequencedInterpolation = true;
 
     // animate when entering window
     window.addEventListener('scroll',
       () => {
-        if (isInViewport(self.id)) {
+        if (isVisible(self.id)) {
           if ((series.isHidden || series.isHiding) && !series.isShowing) {
             series.appear();
           }
