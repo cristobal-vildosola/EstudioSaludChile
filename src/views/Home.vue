@@ -17,7 +17,27 @@
       />
 
       <h5 class="container font-weight-normal">
-        Este mapa representa el número de personas atendidas en el sistema de salud público entre los años 2014 y 2017. Si es que una persona se atendió 10 veces en este periodo, solo se cuenta 1 vez.
+        Este mapa representa el número de personas atendidas en el sistema de salud público
+        entre los años 2014 y 2017. Si es que una persona se atendió 10 veces en este periodo,
+        solo se cuenta 1 vez.
+      </h5>
+    </div>
+
+    <div class="py-4">
+      <div class="title">
+        Licencias promedio por paciente
+      </div>
+
+      <ChileChart class="py-3"
+        :data="licenciasPacienteRegion"
+        :tooltipText="`{name}:
+                      [bold]{value.formatNumber('.##')}[/] licencias por paciente
+                      {total} licencias en total`"
+        legendFormat=".#"
+        :maxValue="2.5"
+      />
+
+      <h5 class="container font-weight-normal">
       </h5>
     </div>
 
@@ -37,24 +57,6 @@
 
       <h5 class="container font-weight-normal">
         Este mapa representa el número de licencias entregadas entre los años 2014 y 2017.
-      </h5>
-    </div>
-
-    <div class="py-4">
-      <div class="title">
-        Licencias promedio por paciente
-      </div>
-
-      <ChileChart class="py-3"
-        :data="licenciasPacienteRegion"
-        :tooltipText="`{name}:
-                      [bold]{value.formatNumber('.##')}[/] licencias por paciente
-                      {total} licencias en total`"
-        legendFormat=".#"
-        :maxValue="2.5"
-      />
-
-      <h5 class="container font-weight-normal">
       </h5>
     </div>
 

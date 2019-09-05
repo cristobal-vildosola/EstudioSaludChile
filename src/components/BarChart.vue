@@ -49,23 +49,22 @@ export default {
     const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'subtipo';
     categoryAxis.title.text = 'Tipo de Licencia';
-    categoryAxis.title.fontSize = 14;
-    categoryAxis.renderer.inversed = true;
+    categoryAxis.title.fontSize = '1rem';
+    categoryAxis.fontSize = '.8rem';
 
-    categoryAxis.fontSize = 12;
     categoryAxis.renderer.grid.template.disabled = true;
     categoryAxis.renderer.line.strokeOpacity = 1;
+    categoryAxis.renderer.inversed = true;
 
     const valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
     valueAxis.title.text = 'Número de Licencias';
-    valueAxis.title.fontSize = 14;
+    valueAxis.title.fontSize = '1rem';
+    valueAxis.fontSize = '.8rem';
 
+    valueAxis.renderer.minGridDistance = 100;
     valueAxis.strictMinMax = true;
     valueAxis.min = 0;
     valueAxis.max = 12200000;
-
-    valueAxis.renderer.minGridDistance = 100;
-    valueAxis.fontSize = 12;
 
     valueAxis.numberFormatter = new am4core.NumberFormatter();
     valueAxis.numberFormatter.numberFormat = '#.0a';

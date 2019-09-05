@@ -132,7 +132,7 @@ export default {
     // style
     horLegend.markerContainer.height = 20;
     horLegend.valueAxis.renderer.minGridDistance = 50;
-    horLegend.valueAxis.renderer.labels.template.fontSize = 15;
+    horLegend.valueAxis.renderer.labels.template.fontSize = '.8rem';
     horLegend.valueAxis.renderer.labels.template.adapter.add('text', labelAdapter);
 
     // vertical legend
@@ -149,7 +149,7 @@ export default {
     vertLegend.marginRight = 55;
     vertLegend.markerContainer.width = 20;
     vertLegend.valueAxis.renderer.minGridDistance = 30;
-    vertLegend.valueAxis.renderer.labels.template.fontSize = 15;
+    vertLegend.valueAxis.renderer.labels.template.fontSize = '.8rem';
     vertLegend.valueAxis.renderer.labels.template.adapter.add('text', labelAdapter);
 
     // disable pan and zoom
