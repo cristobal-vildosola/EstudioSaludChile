@@ -60,9 +60,22 @@
       </h5>
     </div>
 
-    <div class="container">
-      <BarChart style="height: 500px" class="container py-4"
+    <div class="container px-0">
+      <BarChart style="height: 90vh" class="py-4"
         :data="licenciasTipoDesglose"
+        :horizontal="false"
+
+        category="subtipo"
+        :min="0"
+        :max="12210000"
+
+        categoryTitle="Tipo de Licencia"
+        valueTitle="Cantidad de Licencias"
+        valueFormat="#.#a"
+        :tooltipText="`{category}:
+                      [bold]{value}[/] licencias`"
+
+        :axisBreak="{ start: 800000, end: 12000000 }"
       />
     </div>
 

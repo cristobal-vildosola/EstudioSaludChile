@@ -45,7 +45,7 @@ body {
 
 }
 
-/* vertical */
+/* reduce size in smaller devices */
 @media (max-width: 1000px) {
   .title {
     font-size: 2rem;
