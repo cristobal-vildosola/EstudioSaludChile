@@ -9,12 +9,9 @@ function isVisible(id, threshold = 100) {
   const bounding = element.getBoundingClientRect();
 
   const windHeight = window.innerHeight || document.documentElement.clientHeight;
-  const windWidth = window.innerWidth || document.documentElement.clientWidth;
 
   return bounding.bottom >= 0 + threshold
-      && bounding.right >= 0 + threshold
-      && bounding.top <= windHeight - threshold
-      && bounding.left <= windWidth - threshold;
+      && bounding.top <= windHeight - threshold;
 }
 
 export default {
@@ -24,6 +21,8 @@ export default {
     return {
       chart: null,
       id: `chartdiv_${Math.random().toString(30).substr(2, 8)}`,
+
+      rotated: false,
     };
   },
 
@@ -42,6 +41,7 @@ export default {
     tooltipText: { type: String, default: '{categoryY}: {valueX}' },
 
     axisBreak: {
+      type: Object,
       validator(value) { // expects { start: x, end: y }
         if (!value) return true; // accept null
         if (Object.prototype.toString.call(value) !== '[object Object]') return false; // must be an object
@@ -49,137 +49,161 @@ export default {
         return true;
       },
     },
+
+    height: { type: String, default: '50vh' },
+    rotationBreakpoint: { type: Number, default: 0 },
+    rotatedHeight: { type: String },
   },
 
-  mounted() {
-    const am4core = this.$am4core;
-    const am4charts = this.$am4charts;
-    const self = this;
+  methods: {
+    drawChart() {
+      const am4core = this.$am4core;
+      const am4charts = this.$am4charts;
+      const self = this;
 
-    // create chart
-    const chart = this.$am4core.create(this.id, am4charts.XYChart);
-    chart.data = this.data;
+      const horizontal = (this.horizontal && !this.rotated) || (!this.horizontal && this.rotated);
 
-    let categoryAxis;
-    let valueAxis;
-    let { tooltipText } = this;
+      // create chart
+      const chart = this.$am4core.create(this.id, am4charts.XYChart);
+      this.chart = chart;
+      chart.data = this.data;
 
-    if (this.horizontal) {
-      categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
-      valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-      tooltipText = tooltipText.replace(/{category/g, '{categoryY');
-      tooltipText = tooltipText.replace(/{value/g, '{valueX');
+      if (this.rotated && this.rotatedHeight) {
+        chart.svgContainer.htmlElement.style.height = this.rotatedHeight;
+      } else {
+        chart.svgContainer.htmlElement.style.height = this.height;
+      }
 
-    } else {
-      categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-      valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-      tooltipText = tooltipText.replace(/{category/g, '{categoryX');
-      tooltipText = tooltipText.replace(/{value/g, '{valueY');
-    }
+      let categoryAxis;
+      let valueAxis;
 
-    categoryAxis.dataFields.category = this.category;
-    categoryAxis.title.text = this.categoryTitle;
-    categoryAxis.title.fontSize = '1rem';
-    categoryAxis.fontSize = '.8rem';
+      if (horizontal) {
+        categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+        valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+      } else {
+        categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+      }
 
-    categoryAxis.renderer.line.strokeOpacity = 1;
-    categoryAxis.renderer.grid.template.disabled = true;
+      categoryAxis.dataFields.category = this.category;
+      categoryAxis.title.text = this.categoryTitle;
+      categoryAxis.title.fontSize = '1rem';
+      categoryAxis.fontSize = '.8rem';
 
-    if (this.horizontal) { // display top to bottom when bars are horizontal
-      categoryAxis.renderer.inversed = true;
-    } else { // rotate labels when bars are vertical
-      categoryAxis.renderer.labels.template.rotation = 90;
-      categoryAxis.renderer.labels.template.horizontalCenter = "left";
-      categoryAxis.renderer.labels.template.verticalCenter = "middle";
+      categoryAxis.renderer.line.strokeOpacity = 1;
+      categoryAxis.renderer.grid.template.disabled = true;
+      categoryAxis.renderer.minGridDistance = 1;
       categoryAxis.renderer.labels.template.truncate = false;
       categoryAxis.renderer.labels.template.hideOversized = false;
-      categoryAxis.renderer.minGridDistance = 1;
-    }
+      categoryAxis.renderer.labels.template.verticalCenter = 'middle';
 
-    valueAxis.title.text = this.valueTitle;
-    valueAxis.title.fontSize = '1rem';
-    valueAxis.fontSize = '.8rem';
+      if (horizontal) { // display top to bottom when bars are horizontal
+        categoryAxis.renderer.inversed = true;
+        valueAxis.renderer.minGridDistance = 100;
+      } else { // rotate labels when bars are vertical
+        categoryAxis.renderer.labels.template.rotation = 90;
+        categoryAxis.renderer.labels.template.horizontalCenter = 'left';
 
-    valueAxis.renderer.minGridDistance = 100;
-    valueAxis.strictMinMax = true;
-    valueAxis.min = this.min;
-    valueAxis.max = this.max;
+        valueAxis.renderer.minGridDistance = 40;
+      }
 
-    valueAxis.numberFormatter = new am4core.NumberFormatter();
-    valueAxis.numberFormatter.numberFormat = this.valueFormat;
+      valueAxis.title.text = this.valueTitle;
+      valueAxis.title.fontSize = '1rem';
+      valueAxis.fontSize = '.8rem';
 
-    if (this.axisBreak) {
-      const axisBreak = valueAxis.axisBreaks.create();
-      axisBreak.startValue = this.axisBreak.start;
-      axisBreak.endValue = this.axisBreak.end;
-      axisBreak.breakSize = 0.005;
+      valueAxis.strictMinMax = true;
+      valueAxis.min = this.min;
+      valueAxis.max = this.max;
 
-      const hoverState = axisBreak.states.create('hover');
-      hoverState.properties.breakSize = 1;
-      hoverState.properties.opacity = 0;
+      valueAxis.numberFormatter = new am4core.NumberFormatter();
+      valueAxis.numberFormatter.numberFormat = this.valueFormat;
 
-      axisBreak.defaultState.transitionDuration = 1000;
-      hoverState.transitionDuration = 2000;
-    }
+      if (this.axisBreak) {
+        const axisBreak = valueAxis.axisBreaks.create();
+        axisBreak.startValue = this.axisBreak.start;
+        axisBreak.endValue = this.axisBreak.end;
+        axisBreak.breakSize = 0.005;
 
-    // columns
-    const series = chart.series.push(new am4charts.ColumnSeries());
+        const hoverState = axisBreak.states.create('hover');
+        hoverState.properties.breakSize = 1;
+        hoverState.properties.opacity = 0;
 
-    // set data
-    if (this.horizontal) {
+        axisBreak.defaultState.transitionDuration = 1000;
+        hoverState.transitionDuration = 2000;
+      }
+
+      // columns
+      const series = chart.series.push(new am4charts.ColumnSeries());
+      this.series = series;
+
       series.dataFields.valueX = this.value;
-      series.dataFields.categoryY = this.category;
-
-      series.columns.template.tooltipX = 10;
-      series.tooltip.pointerOrientation = 'left';
-    } else {
       series.dataFields.valueY = this.value;
       series.dataFields.categoryX = this.category;
+      series.dataFields.categoryY = this.category;
 
-      series.tooltip.pointerOrientation = 'down';
-    }
+      // tooltip changes
+      if (horizontal) {
+        series.columns.template.tooltipX = 10;
+        series.tooltip.pointerOrientation = 'left';
+      } else {
+        series.tooltip.pointerOrientation = 'down';
+      }
 
-    // modify tooltip
-    series.columns.template.tooltipText = tooltipText;
-    series.tooltip.getFillFromObject = false;
-    series.tooltip.background.fill = am4core.color('#fff');
-    series.tooltip.label.fill = am4core.color('#000');
-    series.tooltip.background.filters.clear();
+      // modify tooltip
+      series.columns.template.tooltipText = this.tooltipText;
+      series.tooltip.getFillFromObject = false;
+      series.tooltip.background.fill = am4core.color('#fff');
+      series.tooltip.label.fill = am4core.color('#000');
+      series.tooltip.background.filters.clear();
 
-    // fill each column with a different color
-    series.columns.template.strokeOpacity = 0;
-    series.columns.template.adapter.add('fill',
-      (fill, target) => chart.colors.getIndex(target.dataItem.index));
+      // fill each column with a different color
+      series.columns.template.strokeOpacity = 0;
+      series.columns.template.adapter.add('fill',
+        (fill, target) => chart.colors.getIndex(target.dataItem.index));
 
-    // animations
-    series.interpolationDuration = 350;
-    series.sequencedInterpolationDelay = 100;
-    series.sequencedInterpolation = true;
+      // animations
+      series.interpolationDuration = 350;
+      series.sequencedInterpolationDelay = 100;
+      series.sequencedInterpolation = true;
+    },
 
-    // animate when entering window
-    window.addEventListener('scroll',
-      () => {
-        if (isVisible(self.id)) {
-          if ((series.isHidden || series.isHiding) && !series.isShowing) {
-            series.appear();
-          }
-        } else if (!series.isHidden && !series.isHiding) {
-          series.hide();
+    appearOnScroll() {
+      const { series } = this;
+      if (isVisible(this.id)) {
+        if ((series.isHidden || series.isHiding) && !series.isShowing) {
+          series.appear();
         }
-      }, false);
+      } else if (!series.isHidden && !series.isHiding) {
+        series.hide();
+      }
+    },
 
-    chart.events.on('sizechanged', (ev) => {
+    rotateOnResize() {
+      const { chart, rotated, rotationBreakpoint } = this;
       const windHeight = window.innerHeight || document.documentElement.clientHeight;
       const windWidth = window.innerWidth || document.documentElement.clientWidth;
 
-      if (windWidth < windHeight && ev.target.pixelWidth < self.rotationBreakpoint) {
-        // vertical
-        chart.svgContainer.htmlElement.style.height = self.rotatedHeight;
-      } else {
-        // horizontal
-        chart.svgContainer.htmlElement.style.height = self.height;
+      if (windWidth < windHeight && chart.pixelWidth < rotationBreakpoint) {
+        // rotate
+        if (!rotated) {
+          this.rotated = true;
+          chart.dispose();
+          this.drawChart();
+        }
+      } else if (rotated) {
+        // return to normal orientation
+        this.rotated = false;
+        chart.dispose();
+        this.drawChart();
       }
-    });
+    },
+  },
+
+  mounted() {
+    this.drawChart();
+    this.rotateOnResize();
+    window.addEventListener('scroll', this.appearOnScroll, false);
+    window.addEventListener('resize', this.rotateOnResize, false);
   },
 
   beforeDestroy() {
