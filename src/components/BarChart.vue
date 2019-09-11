@@ -101,9 +101,8 @@ export default {
         categoryAxis.renderer.inversed = true;
         valueAxis.renderer.minGridDistance = 100;
       } else { // rotate labels when bars are vertical
-        categoryAxis.renderer.labels.template.rotation = 90;
-        categoryAxis.renderer.labels.template.horizontalCenter = 'left';
-
+        categoryAxis.renderer.labels.template.rotation = 270;
+        categoryAxis.renderer.labels.template.horizontalCenter = 'right';
         valueAxis.renderer.minGridDistance = 40;
       }
 
