@@ -33,19 +33,24 @@ export default {
     max: { type: Number },
 
     category: { type: String, default: 'category' },
-    categoryTitle: { type: String, default: 'Categoría' },
+    categoryTitle: { type: String },
 
     value: { type: String, default: 'value' },
-    valueTitle: { type: String, default: 'Valor' },
+    valueTitle: { type: String },
     valueFormat: { type: String, default: '#' },
     tooltipText: { type: String, default: '{categoryY}: {valueX}' },
 
     axisBreak: {
       type: Object,
-      validator(value) { // expects { start: x, end: y }
+      validator(value) { // expects { start: x, end: y, breakSize: z }
         if (!value) return true; // accept null
-        if (Object.prototype.toString.call(value) !== '[object Object]') return false; // must be an object
-        if (!('start' in value) || !('end' in value)) return false; // must set limits
+
+        // must be an object
+        if (Object.prototype.toString.call(value) !== '[object Object]') return false;
+
+        // must set limits and size
+        if (!('start' in value) || !('end' in value) || !('breakSize' in value)) return false;
+
         return true;
       },
     },
@@ -59,14 +64,17 @@ export default {
     drawChart() {
       const am4core = this.$am4core;
       const am4charts = this.$am4charts;
-      const self = this;
-
-      const horizontal = (this.horizontal && !this.rotated) || (!this.horizontal && this.rotated);
 
       // create chart
       const chart = this.$am4core.create(this.id, am4charts.XYChart);
       this.chart = chart;
       chart.data = this.data;
+
+      // determine if the chart will be horizontal or vertical
+      const windHeight = window.innerHeight || document.documentElement.clientHeight;
+      const windWidth = window.innerWidth || document.documentElement.clientWidth;
+      this.rotated = windWidth < windHeight && chart.pixelWidth < this.rotationBreakpoint;
+      const horizontal = (this.horizontal && !this.rotated) || (!this.horizontal && this.rotated);
 
       if (this.rotated && this.rotatedHeight) {
         chart.svgContainer.htmlElement.style.height = this.rotatedHeight;
@@ -121,7 +129,7 @@ export default {
         const axisBreak = valueAxis.axisBreaks.create();
         axisBreak.startValue = this.axisBreak.start;
         axisBreak.endValue = this.axisBreak.end;
-        axisBreak.breakSize = 0.005;
+        axisBreak.breakSize = this.axisBreak.breakSize;
 
         const hoverState = axisBreak.states.create('hover');
         hoverState.properties.breakSize = 1;
@@ -200,7 +208,6 @@ export default {
 
   mounted() {
     this.drawChart();
-    this.rotateOnResize();
     window.addEventListener('scroll', this.appearOnScroll, false);
     window.addEventListener('resize', this.rotateOnResize, false);
   },

@@ -67,20 +67,19 @@
 
       <BarChart class="py-3"
         :data="licenciasTipoDesglose"
-        :horizontal="true"
 
         category="subtipo"
         :min="0"
         :max="12210000"
-        :axisBreak="{ start: 800000, end: 12000000 }"
+        :axisBreak="{ start: 800000, end: 12000000, breakSize: 0.005, }"
 
-        categoryTitle="Tipo de Licencia"
         valueTitle="Cantidad de Licencias"
         valueFormat="#.#a"
         :tooltipText="`{subtipo}:
                       [bold]{value}[/] licencias`"
 
-        height="500px"
+        :horizontal="true"
+        height="30rem"
         :rotationBreakpoint="1000"
         rotatedHeight="90vh"
       />
