@@ -3,6 +3,7 @@ import Vue from 'vue';
 // styles
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 import '@/assets/styles.css';
 
 // chart library

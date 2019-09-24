@@ -12,6 +12,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.5.14",
     "@amcharts/amcharts4-geodata": "^4.1.7",
+    "@fortawesome/fontawesome-free": "^5.11.2",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
     "jquery": "^3.4.1",
