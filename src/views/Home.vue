@@ -2,6 +2,8 @@
   <div>
     <Header />
 
+    <Sidebar />
+
     <div class="py-4">
       <div class="title">
         Pacientes atendidos <small class="font-weight-light">(% de la población)</small>
@@ -92,6 +94,7 @@
 <script>
 import Footer from '@/common/Footer.vue';
 import Header from '@/common/Header.vue';
+import Sidebar from '@/common/Sidebar.vue';
 import ChileChart from '@/components/ChileChart.vue';
 import BarChart from '@/components/BarChart.vue';
 import { licenciasRegion, licenciasTipoDesglose } from '@/assets/data/licencias';
@@ -118,6 +121,7 @@ export default {
   components: {
     Footer,
     Header,
+    Sidebar,
     ChileChart,
     BarChart,
   },
