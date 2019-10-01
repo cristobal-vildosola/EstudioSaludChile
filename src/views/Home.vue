@@ -117,6 +117,31 @@
       />
     </div>
 
+    <div class="container px-0 py-4">
+      <div class="title">
+        Top 10 enfermedades GES más antendidas
+      </div>
+
+      <BarChart class="py-3"
+        :data="top10GES"
+
+        category="enfermedad"
+        value="cuenta"
+
+        :min="0"
+
+        valueTitle="número de atenciones"
+        valueFormat="#.#a"
+        :tooltipText="`{enfermedad}:
+                      [bold]{cuenta}[/] licencias`"
+
+        :horizontal="true"
+        height="30rem"
+        :rotationBreakpoint="1000"
+        rotatedHeight="90vh"
+      />
+    </div>
+
     <Footer />
   </div>
 </template>
@@ -128,6 +153,7 @@ import Sidebar from '@/common/Sidebar.vue';
 import ChileChart from '@/components/ChileChart.vue';
 import BarChart from '@/components/BarChart.vue';
 import StackedBarChart from '@/components/StackedBarChart.vue';
+import { top10GES } from '@/assets/data/atenciones';
 import { licenciasRegion, licenciasTipoDesglose, licenciasTipoSexo } from '@/assets/data/licencias';
 import { pacientesRegion } from '@/assets/data/pacientes';
 import { poblacionRegionDict } from '@/assets/data/poblacion';
@@ -165,6 +191,7 @@ export default {
       licenciasRegionNorm,
       licenciasPacienteRegion,
       licenciasTipoSexo,
+      top10GES,
     };
   },
 };
