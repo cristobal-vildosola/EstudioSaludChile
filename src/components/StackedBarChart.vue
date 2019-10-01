@@ -194,6 +194,9 @@ export default {
           self.hidden.add(name);
         }
       });
+
+      // disable zoom out
+      chart.zoomOutButton.disabled = true;
     },
 
     appearOnScroll() {
