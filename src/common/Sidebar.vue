@@ -13,6 +13,8 @@
         </button>
       </div>
 
+      <li><a href="#licencias">Licencias</a></li>
+
       <li>
         <a href="#homeSubmenu"
           data-toggle="collapse"
@@ -28,7 +30,7 @@
         </ul>
       </li>
 
-      <li><a href="#">Finanzamiento</a></li>
+      <li><a href="#">Financiamiento</a></li>
 
       <li><a href="#">Lista de Espera</a></li>
     </ul>

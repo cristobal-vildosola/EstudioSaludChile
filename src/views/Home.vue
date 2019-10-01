@@ -25,7 +25,7 @@
       </h5>
     </div>
 
-    <div class="py-4">
+    <div class="py-4" id="licencias">
       <div class="title">
         Licencias promedio por paciente
       </div>

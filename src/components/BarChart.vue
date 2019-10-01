@@ -4,7 +4,7 @@
 
 <script>
 
-function isVisible(id, threshold = 100) {
+function isVisible(id, threshold = 50) {
   const element = document.getElementById(id);
   const bounding = element.getBoundingClientRect();
 
