@@ -87,6 +87,36 @@
       />
     </div>
 
+    <div class="container px-0 py-4">
+      <div class="title">
+        Licencias entregadas según sexo
+      </div>
+
+      <StackedBarChart
+        :data="licenciasTipoSexo"
+        category="sexo"
+        :values="[
+          {value: 'Enfermedad o accidente no del trabajo', stacked: true },
+          {value: 'Prorroga medicina preventiva', stacked: false },
+          {value: 'Patologias del embarazo', stacked: true },
+          {value: 'Licencia maternal', stacked: true },
+          {value: 'Enfermedad grave hijo menor de 1 año', stacked: true },
+          {value: 'Accidente del trabajo', stacked: true },
+          {value: 'Enfermedad profesional', stacked: true },
+        ]"
+
+        valueTitle="Cantidad de Licencias"
+        valueFormat="#.#a"
+        :tooltipText="`{name}:
+                      [bold]{valueX}[/] licencias`"
+
+        :horizontal="true"
+        height="30rem"
+        :rotationBreakpoint="1000"
+        rotatedHeight="90vh"
+      />
+    </div>
+
     <Footer />
   </div>
 </template>
@@ -97,7 +127,8 @@ import Header from '@/common/Header.vue';
 import Sidebar from '@/common/Sidebar.vue';
 import ChileChart from '@/components/ChileChart.vue';
 import BarChart from '@/components/BarChart.vue';
-import { licenciasRegion, licenciasTipoDesglose } from '@/assets/data/licencias';
+import StackedBarChart from '@/components/StackedBarChart.vue';
+import { licenciasRegion, licenciasTipoDesglose, licenciasTipoSexo } from '@/assets/data/licencias';
 import { pacientesRegion } from '@/assets/data/pacientes';
 import { poblacionRegionDict } from '@/assets/data/poblacion';
 
@@ -124,6 +155,7 @@ export default {
     Sidebar,
     ChileChart,
     BarChart,
+    StackedBarChart,
   },
 
   data() {
@@ -132,6 +164,7 @@ export default {
       pacientesRegionNorm,
       licenciasRegionNorm,
       licenciasPacienteRegion,
+      licenciasTipoSexo,
     };
   },
 };
