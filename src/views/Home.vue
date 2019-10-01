@@ -2,9 +2,21 @@
   <div>
     <Header />
 
-    <Sidebar />
+    <Sidebar
+      :links="{
+        'Número de pacientes': 'pacientes',
+        Licencias: {
+          promedio: 'licencias-promedio',
+          total: 'licencias-porc',
+          'por tipo': 'licencias-tipo',
+          'por sexo': 'licencias-sexo',
+        },
+        'top 10 GES': 'top10GES',
+        'link demasiado largo que debería hacer que se agrande terrible de caleta la ventana del sidebar': 'E'
+      }"
+    />
 
-    <div class="py-4">
+    <div class="py-4" id="pacientes">
       <div class="title">
         Pacientes atendidos <small class="font-weight-light">(% de la población)</small>
       </div>
@@ -25,7 +37,7 @@
       </h5>
     </div>
 
-    <div class="py-4" id="licencias">
+    <div class="py-4" id="licencias-promedio">
       <div class="title">
         Licencias promedio por paciente
       </div>
@@ -43,7 +55,7 @@
       </h5>
     </div>
 
-    <div class="py-4">
+    <div class="py-4" id="licencias-porc">
       <div class="title">
         Licencias entregadas <small class="font-weight-light">(% de la población)</small>
       </div>
@@ -62,7 +74,7 @@
       </h5>
     </div>
 
-    <div class="container px-0 py-4">
+    <div class="container px-0 py-4" id="licencias-tipo">
       <div class="title">
         Licencias entregadas según tipo
       </div>
@@ -87,7 +99,7 @@
       />
     </div>
 
-    <div class="container px-0 py-4">
+    <div class="container px-0 py-4" id="licencias-sexo">
       <div class="title">
         Licencias entregadas según sexo
       </div>
@@ -117,7 +129,7 @@
       />
     </div>
 
-    <div class="container px-0 py-4">
+    <div class="container px-0 py-4" id="top10GES">
       <div class="title">
         Top 10 enfermedades GES más antendidas
       </div>

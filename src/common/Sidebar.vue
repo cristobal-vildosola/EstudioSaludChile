@@ -1,40 +1,44 @@
 <template>
-  <div class="sidebar-container">
+  <nav class="sidebar-container">
     <button type="button" class="btn show-btn" @click="switchState" :class="{ 'hidden': open }">
       <i class="fas fa-bars"></i>
     </button>
 
     <ul class="sidebar" :class="{ active : open }">
       <div class="header">
-        secciones
-
+        Secciones
         <button type="button" @click="switchState" class="btn collapse-btn">
           <i class="fas fa-arrow-left"></i>
         </button>
       </div>
 
-      <li><a href="#licencias">Licencias</a></li>
+      <li v-for="(link, name) in links" v-bind:key="`${name}-${link}`">
 
-      <li>
-        <a href="#homeSubmenu"
+        <!-- direct link -->
+        <a v-if="typeof link === 'string'" :href="`#${link}`">
+          {{ name }}
+        </a>
+
+        <!-- submenu -->
+        <a v-else
+          :href="`#${name}-submenu`"
           data-toggle="collapse"
           aria-expanded="false"
           class="dropdown-toggle">
-          Pacientes
+          {{ name }}
         </a>
 
-        <ul class="collapse" id="homeSubmenu">
-          <li><a href="#">Gráfico 1</a></li>
-          <li><a href="#">Gráfico 2</a></li>
-          <li><a href="#">Gráfico 3</a></li>
+        <ul class="collapse" :id="`${name}-submenu`">
+          <li v-for="(sublink, name) in link" v-bind:key="`${name}-${sublink}`">
+            <a :href="`#${sublink}`">
+              {{ name }}
+            </a>
+          </li>
         </ul>
+
       </li>
-
-      <li><a href="#">Financiamiento</a></li>
-
-      <li><a href="#">Lista de Espera</a></li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -45,6 +49,10 @@ export default {
     return {
       open: false,
     };
+  },
+
+  props: {
+    links: { type: Object },
   },
 
   methods: {
@@ -59,6 +67,9 @@ export default {
 * {
   transition: 0.5s;
 }
+ul {
+  list-style: none;
+}
 
 /* sticky container of height 0 */
 .sidebar-container {
@@ -71,12 +82,12 @@ export default {
 /* button to display the sidebar */
 .show-btn {
   position: absolute;
-  top: 1em;
-  left: 1em;
+  top: 1rem;
+  left: 1rem;
 
-  width: 3em;
-  height: 3em;
-  background-color: #0a488d;
+  width: 3rem;
+  height: 3rem;
+  background: #0a488d;
   color: #fff;
 }
 .show-btn.hidden {
@@ -87,22 +98,25 @@ export default {
 /* sidebar */
 .sidebar {
   position: absolute;
-  top: 1em;
-  width: 12em;
-  margin-left: -12em;
+  top: 1rem;
+  min-width: 12rem;
+  max-width: 20rem;
 
-  padding: 0 .6em .6em;
+  padding: 0 0 .8rem;
   background: #0a488d;
   color: #eaeaea;
+
+  transform: translateX(-100%);
 }
 .sidebar.active {
-  margin-left: 0;
+  transform: translateX(0%);
 }
 
 /* header and close button */
 .sidebar .header {
-  padding: .6em;
-  font-size: 1.2em;
+  padding: .8rem;
+  font-size: 1.4rem;
+  background: #063467;
 }
 .sidebar .collapse-btn {
   position: absolute;
@@ -111,12 +125,8 @@ export default {
 }
 
 /* links */
-.sidebar ul {
-  list-style: none;
-  margin: 0;
-}
 .sidebar li a {
-  padding: .6em;
+  padding: .8rem;
   display: block;
 
   color: inherit;
