@@ -4,14 +4,13 @@
 
     <Sidebar
       :links="{
-        'Número de pacientes': 'pacientes',
-        Licencias: {
-          promedio: 'licencias-promedio',
-          total: 'licencias-porc',
-          'por tipo': 'licencias-tipo',
-          'por sexo': 'licencias-sexo',
-        },
-        'top 10 GES': 'top10GES',
+        'pacientes atendidos': 'pacientes',
+        'licencias promedio': 'licencias-promedio',
+        'licencias entregadas': 'licencias-total',
+        'licencias por tipo': 'licencias-tipo',
+        'licencias por sexo': 'licencias-sexo',
+        'top 10 casos GES': 'top10GES',
+        'top 10 casos no GES': 'top10noGES',
       }"
     />
 
@@ -54,7 +53,7 @@
       </h5>
     </div>
 
-    <div class="container px-0 py-4" id="licencias-porc">
+    <div class="container px-0 py-4" id="licencias-total">
       <div class="title">
         Licencias entregadas <small class="font-weight-light">(% de la población)</small>
       </div>
@@ -147,7 +146,7 @@
       />
     </div>
 
-    <div class="container px-0 py-4" id="top10GES">
+    <div class="container px-0 py-4" id="top10noGES">
       <div class="title">
         Top 10 enfermedades no GES más antendidas
       </div>

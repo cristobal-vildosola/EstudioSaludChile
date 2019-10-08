@@ -15,7 +15,7 @@
       <li v-for="(link, name) in links" v-bind:key="`${name}-${link}`">
 
         <!-- direct link -->
-        <a v-if="typeof link === 'string'" :href="`#${link}`">
+        <a v-if="typeof link === 'string'" @click="() => { scrollTo(link) }">
           {{ name }}
         </a>
 
@@ -30,7 +30,7 @@
 
         <ul class="collapse" :id="`${name}-submenu`">
           <li v-for="(sublink, name) in link" v-bind:key="`${name}-${sublink}`">
-            <a :href="`#${sublink}`">
+            <a @click="() => { scrollTo(sublink) }">
               {{ name }}
             </a>
           </li>
@@ -58,6 +58,11 @@ export default {
   methods: {
     switchState() {
       this.open = !this.open;
+    },
+
+    scrollTo(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+      window.history.pushState(null, '', `#${id}`);
     },
   },
 };
