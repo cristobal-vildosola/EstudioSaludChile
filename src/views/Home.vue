@@ -116,7 +116,7 @@
         valueTitle="Cantidad de Licencias"
         valueFormat="#.#a"
         :tooltipText="`{name}:
-                      [bold]{valueX}[/] licencias`"
+                      [bold]{value}[/] licencias`"
 
         :horizontal="true"
         height="30rem"
@@ -132,14 +132,14 @@
         :data="top10GES"
 
         category="enfermedad"
-        value="cuenta"
+        value="casos"
 
         :min="0"
 
         valueTitle="número de atenciones"
         valueFormat="#.#a"
         :tooltipText="`{enfermedad}:
-                      [bold]{cuenta}[/] atenciones`"
+                      [bold]{casos}[/] atenciones`"
 
         :horizontal="true"
         height="30rem"
@@ -155,14 +155,37 @@
         :data="top10noGES"
 
         category="enfermedad"
-        value="cuenta"
+        value="casos"
 
         :min="0"
 
         valueTitle="número de atenciones"
         valueFormat="#.#a"
         :tooltipText="`{enfermedad}:
-                      [bold]{cuenta}[/] atenciones`"
+                      [bold]{casos}[/] atenciones`"
+
+        :horizontal="true"
+        height="30rem"
+      />
+    </div>
+
+    <div class="container px-0 py-4" id="licencias-sexo">
+      <div class="title">
+        Horas pedidas vs Horas disponibles
+      </div>
+
+      <StackedBarChart
+        :data="horasPedidasDisponibles"
+        category="especialidad"
+        :values="[
+          {value: 'pedidas', stacked: false },
+          {value: 'disponibles', stacked: false },
+        ]"
+
+        valueTitle="número de horas"
+        valueFormat="#.#a"
+        :tooltipText="`{category}:
+                      [bold]{value}[/] horas {name}`"
 
         :horizontal="true"
         height="30rem"
@@ -180,7 +203,7 @@ import Sidebar from '@/common/Sidebar.vue';
 import ChileChart from '@/components/ChileChart.vue';
 import BarChart from '@/components/BarChart.vue';
 import StackedBarChart from '@/components/StackedBarChart.vue';
-import { top10GES, top10noGES } from '@/assets/data/atenciones';
+import { top10GES, top10noGES, horasPedidasDisponibles } from '@/assets/data/atenciones';
 import { licenciasRegion, licenciasTipoDesglose, licenciasTipoSexo } from '@/assets/data/licencias';
 import { pacientesRegion } from '@/assets/data/pacientes';
 import { poblacionRegionDict } from '@/assets/data/poblacion';
@@ -220,6 +243,7 @@ export default {
       licenciasTipoSexo,
       top10GES,
       top10noGES,
+      horasPedidasDisponibles,
     };
   },
 };

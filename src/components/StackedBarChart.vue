@@ -98,6 +98,8 @@ export default {
       categoryAxis.renderer.labels.template.truncate = false;
       categoryAxis.renderer.labels.template.hideOversized = false;
       categoryAxis.renderer.labels.template.verticalCenter = 'middle';
+      categoryAxis.renderer.cellStartLocation = 0.1;
+      categoryAxis.renderer.cellEndLocation = 0.9;
 
       if (horizontal) { // display top to bottom when bars are horizontal
         categoryAxis.renderer.inversed = true;
@@ -142,10 +144,15 @@ export default {
         self.series.push(series);
 
         series.name = field;
+        series.dataFields.value = field;
         series.dataFields.valueX = field;
         series.dataFields.valueY = field;
+        series.dataFields.category = self.category;
         series.dataFields.categoryX = self.category;
         series.dataFields.categoryY = self.category;
+
+        series.columns.template.height = am4core.percent(100);
+        series.columns.template.width = am4core.percent(100);
 
         // tooltip changes
         if (!horizontal) {
