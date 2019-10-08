@@ -3,16 +3,7 @@
 </template>
 
 <script>
-
-function isVisible(id, threshold = 50) {
-  const element = document.getElementById(id);
-  const bounding = element.getBoundingClientRect();
-
-  const windHeight = window.innerHeight || document.documentElement.clientHeight;
-
-  return bounding.bottom >= 0 + threshold
-      && bounding.top <= windHeight - threshold;
-}
+import { isScrolled } from '@/assets/utils';
 
 export default {
   name: 'BarChart',
@@ -149,10 +140,7 @@ export default {
       series.dataFields.categoryY = this.category;
 
       // tooltip changes
-      if (horizontal) {
-        series.columns.template.tooltipX = 10;
-        series.tooltip.pointerOrientation = 'left';
-      } else {
+      if (!horizontal) {
         series.tooltip.pointerOrientation = 'down';
       }
 
@@ -176,7 +164,7 @@ export default {
 
     appearOnScroll() {
       const { series } = this;
-      if (isVisible(this.id)) {
+      if (isScrolled(this.id)) {
         if ((series.isHidden || series.isHiding) && !series.isShowing) {
           series.appear();
         }

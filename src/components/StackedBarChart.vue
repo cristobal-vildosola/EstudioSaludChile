@@ -3,16 +3,7 @@
 </template>
 
 <script>
-
-function isVisible(id, threshold = 100) {
-  const element = document.getElementById(id);
-  const bounding = element.getBoundingClientRect();
-
-  const windHeight = window.innerHeight || document.documentElement.clientHeight;
-
-  return bounding.bottom >= 0 + threshold
-      && bounding.top <= windHeight - threshold;
-}
+import { isScrolled } from '@/assets/utils';
 
 export default {
   name: 'StackedBarChart',
@@ -157,10 +148,7 @@ export default {
         series.dataFields.categoryY = self.category;
 
         // tooltip changes
-        if (horizontal) {
-          series.columns.template.tooltipX = 10;
-          series.tooltip.pointerOrientation = 'left';
-        } else {
+        if (!horizontal) {
           series.tooltip.pointerOrientation = 'down';
         }
 
@@ -201,7 +189,7 @@ export default {
 
     appearOnScroll() {
       const { hidden, series } = this;
-      if (isVisible(this.id)) {
+      if (isScrolled(this.id)) {
         for (let i = 0; i < series.length; i += 1) {
           if ((series[i].isHidden || series[i].isHiding)
             && !series[i].isShowing
