@@ -52,6 +52,8 @@ export default {
     height: { type: String, default: '50vh' },
     rotationBreakpoint: { type: Number, default: 1000 },
     rotatedHeight: { type: String, default: '90vh' },
+
+    animationDuration: { type: Number, default: 500 },
   },
 
   methods: {
@@ -169,8 +171,9 @@ export default {
         series.tooltip.background.filters.clear();
 
         // animations
-        series.interpolationDuration = 350;
-        series.sequencedInterpolationDelay = 100;
+        const duration = self.animationDuration / self.data.length;
+        series.interpolationDuration = duration * 2;
+        series.sequencedInterpolationDelay = duration;
         series.sequencedInterpolation = true;
       }
 

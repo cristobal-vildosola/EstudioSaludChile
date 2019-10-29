@@ -49,6 +49,8 @@ export default {
     height: { type: String, default: '50vh' },
     rotationBreakpoint: { type: Number, default: 1000 },
     rotatedHeight: { type: String, default: '90vh' },
+
+    animationDuration: { type: Number, default: 500 },
   },
 
   methods: {
@@ -59,7 +61,14 @@ export default {
       // create chart
       const chart = this.$am4core.create(this.id, am4charts.XYChart);
       this.chart = chart;
-      chart.data = this.data;
+
+      // determine when the column will be too small and show tooltip
+      const maxValue = Math.max(...this.data.map(e => e[this.value]), this.max || 0);
+      const range = this.axisBreak ? this.axisBreak.end - this.axisBreak.start : 0;
+      const data = this.data.map(
+        e => ({ ...e, showTooltip: e[this.value] / (maxValue - range) < 0.01 }),
+      );
+      chart.data = data;
 
       // determine if the chart will be horizontal or vertical
       const windHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -140,12 +149,14 @@ export default {
       series.dataFields.categoryY = this.category;
 
       // tooltip changes
+      series.tooltip.pointerOrientation = 'left';
       if (!horizontal) {
         series.tooltip.pointerOrientation = 'down';
       }
 
       // modify tooltip
       series.columns.template.tooltipText = this.tooltipText;
+      series.columns.template.propertyFields.alwaysShowTooltip = 'showTooltip';
       series.tooltip.getFillFromObject = false;
       series.tooltip.background.fill = am4core.color('#fff');
       series.tooltip.label.fill = am4core.color('#000');
@@ -154,11 +165,12 @@ export default {
       // fill each column with a different color
       series.columns.template.strokeOpacity = 0;
       series.columns.template.adapter.add('fill',
-        (fill, target) => chart.colors.getIndex(target.dataItem.index));
+        (fill, target) => chart.colors.getIndex(target.dataItem.index + 3));
 
       // animations
-      series.interpolationDuration = 350;
-      series.sequencedInterpolationDelay = 100;
+      const duration = this.animationDuration / this.data.length;
+      series.interpolationDuration = duration * 2;
+      series.sequencedInterpolationDelay = duration;
       series.sequencedInterpolation = true;
     },
 
