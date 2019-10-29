@@ -85,7 +85,7 @@
         :max="12210000"
         :axisBreak="{ start: 800000, end: 12000000, breakSize: 0.005, }"
 
-        valueTitle="Cantidad de Licencias"
+        valueTitle="licencias"
         valueFormat="#.#a"
         :tooltipText="`{subtipo}:
                       [bold]{value}[/] licencias`"
@@ -104,16 +104,16 @@
         :data="licenciasTipoSexo"
         category="sexo"
         :values="[
-          {value: 'Enfermedad o accidente no del trabajo', stacked: true },
-          {value: 'Prorroga medicina preventiva', stacked: false },
-          {value: 'Patologias del embarazo', stacked: true },
-          {value: 'Licencia maternal', stacked: true },
-          {value: 'Enfermedad grave hijo menor de 1 año', stacked: true },
-          {value: 'Accidente del trabajo', stacked: true },
-          {value: 'Enfermedad profesional', stacked: true },
+          { value: 'Enfermedad o accidente no del trabajo', stacked: true },
+          { value: 'Prorroga medicina preventiva', stacked: true },
+          { value: 'Patologias del embarazo', stacked: true },
+          { value: 'Licencia maternal', stacked: true },
+          { value: 'Enfermedad grave hijo menor de 1 año', stacked: true },
+          { value: 'Accidente del trabajo', stacked: true },
+          { value: 'Enfermedad profesional', stacked: true },
         ]"
 
-        valueTitle="Cantidad de Licencias"
+        valueTitle="licencias"
         valueFormat="#.#a"
         :tooltipText="`{name}:
                       [bold]{value}[/] licencias`"
@@ -129,14 +129,60 @@
       </div>
 
       <BarChart class="py-3"
-        :data="top10GES"
+        :data="top20GES.slice(0,10)"
 
         category="enfermedad"
         value="casos"
 
         :min="0"
 
-        valueTitle="número de atenciones"
+        valueTitle="atenciones"
+        valueFormat="#.#a"
+        :tooltipText="`{enfermedad}:
+                      [bold]{casos}[/] atenciones`"
+
+        :horizontal="true"
+        height="30rem"
+      />
+    </div>
+
+    <div class="container px-0 py-4" id="top10GESQx">
+      <div class="title">
+        Top 10 enfermedades GES quirurgicas más antendidas
+      </div>
+
+      <BarChart class="py-3"
+        :data="top10GESQx"
+
+        category="enfermedad"
+        value="casos"
+
+        :min="0"
+
+        valueTitle="atenciones"
+        valueFormat="#.#a"
+        :tooltipText="`{enfermedad}:
+                      [bold]{casos}[/] atenciones`"
+
+        :horizontal="true"
+        height="30rem"
+      />
+    </div>
+
+    <div class="container px-0 py-4" id="top10GESnoQx">
+      <div class="title">
+        Top 10 enfermedades GES no quirurgicas más antendidas
+      </div>
+
+      <BarChart class="py-3"
+        :data="top10GESnoQx"
+
+        category="enfermedad"
+        value="casos"
+
+        :min="0"
+
+        valueTitle="atenciones"
         valueFormat="#.#a"
         :tooltipText="`{enfermedad}:
                       [bold]{casos}[/] atenciones`"
@@ -159,7 +205,7 @@
 
         :min="0"
 
-        valueTitle="número de atenciones"
+        valueTitle="atenciones"
         valueFormat="#.#a"
         :tooltipText="`{enfermedad}:
                       [bold]{casos}[/] atenciones`"
@@ -178,8 +224,8 @@
         :data="horasPedidasDisponibles"
         category="especialidad"
         :values="[
-          {value: 'pedidas', stacked: false },
-          {value: 'disponibles', stacked: false },
+          { value: 'pedidas', stacked: false },
+          { value: 'disponibles', stacked: false },
         ]"
 
         valueTitle="número de horas"
@@ -201,12 +247,16 @@ import Footer from '@/common/Footer.vue';
 import Header from '@/common/Header.vue';
 import Sidebar from '@/common/Sidebar.vue';
 import ChileChart from '@/components/ChileChart.vue';
+import MarkedChileChart from '@/components/MarkedChileChart.vue';
 import BarChart from '@/components/BarChart.vue';
 import StackedBarChart from '@/components/StackedBarChart.vue';
-import { top10GES, top10noGES, horasPedidasDisponibles } from '@/assets/data/atenciones';
+import {
+  top20GES, top10GESQx, top10GESnoQx, top10noGES, horasPedidasDisponibles,
+} from '@/assets/data/atenciones';
 import { licenciasRegion, licenciasTipoDesglose, licenciasTipoSexo } from '@/assets/data/licencias';
 import { pacientesRegion } from '@/assets/data/pacientes';
 import { poblacionRegionDict } from '@/assets/data/poblacion';
+import { establecimientos } from '@/assets/data/establecimientos';
 
 const pacientesRegionNorm = pacientesRegion.map(
   x => ({ id: x.id, value: x.value / poblacionRegionDict[x.id], total: x.value }),
@@ -241,9 +291,12 @@ export default {
       licenciasRegionNorm,
       licenciasPacienteRegion,
       licenciasTipoSexo,
-      top10GES,
+      top20GES,
       top10noGES,
+      top10GESQx,
+      top10GESnoQx,
       horasPedidasDisponibles,
+      establecimientos,
     };
   },
 };
