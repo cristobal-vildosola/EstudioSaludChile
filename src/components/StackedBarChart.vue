@@ -153,6 +153,8 @@ export default {
 
         series.columns.template.height = am4core.percent(100);
         series.columns.template.width = am4core.percent(100);
+        series.columns.template.fill = chart.colors.getIndex(chart.series.length - 1 + 3);
+        series.columns.template.strokeOpacity = 0;
 
         // tooltip changes
         if (!horizontal) {

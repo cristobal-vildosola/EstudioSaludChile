@@ -18,8 +18,8 @@ export default {
     data: { type: Array, required: true },
     logaritmic: { type: Boolean, default: false },
 
-    minColor: { type: String, default: '#f7fbff' },
-    maxColor: { type: String, default: '#a52013' },
+    minColor: { type: String, default: '#fcde9c' },
+    maxColor: { type: String, default: '#d41111' },
     // when not provided use data low and high
     minValue: { type: Number },
     maxValue: { type: Number },

@@ -19,7 +19,8 @@ export default {
 
     tooltipText: { type: String, default: '{name}: {value}' },
 
-    fillColor: { type: String },
+    fillColor: { type: String, default: '#fcde9c' },
+    markColor: { type: String, default: '#a52013' },
 
     height: { type: String, default: '50vh' },
     rotationBreakpoint: { type: Number, default: 0 },
@@ -48,12 +49,10 @@ export default {
     // template to change data style
     const polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.nonScalingStroke = true;
+
     polygonTemplate.strokeWidth = 0.3;
     polygonTemplate.stroke = '#000';
-
-    if (this.fillColor) {
-      polygonTemplate.fill = am4core.color(this.fillColor);
-    }
+    polygonTemplate.fill = am4core.color(this.fillColor);
 
     // disable wheel interaction
     map.chartContainer.wheelable = false;
@@ -70,7 +69,7 @@ export default {
 
     const circle = imageSeriesTemplate.createChild(am4core.Circle);
     circle.radius = 6;
-    circle.fill = am4core.color('#0a488d');
+    circle.fill = am4core.color(this.markColor);
     circle.stroke = am4core.color('#fff');
     circle.strokeWidth = 1;
     circle.nonScaling = true;

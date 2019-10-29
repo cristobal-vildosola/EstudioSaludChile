@@ -25,7 +25,6 @@
                       {quirofanos} quirófanos
                       {camas} camas
                       comuna: {comuna}`"
-        fillColor="#69b892"
       />
     </div>
 

@@ -61,10 +61,10 @@ export default {
     data: { type: Array, default: randomData },
     logaritmic: { type: Boolean, default: false },
 
-    minColor: { type: String, default: '#fcde9c' },
-    maxColor: { type: String, default: '#d41111' },
-    minValue: Number,
-    maxValue: Number,
+    minColor: { type: String },
+    maxColor: { type: String },
+    minValue: { type: Number },
+    maxValue: { type: Number },
 
     hoverColor: { type: String },
     tooltipText: { type: String, default: '{name}: {value}' },

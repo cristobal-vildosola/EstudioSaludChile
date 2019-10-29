@@ -7,6 +7,7 @@
       :tooltipText="tooltipText"
 
       :fillColor="fillColor"
+      :markColor="markColor"
 
       :height="height"
       :rotationBreakpoint="rotationBreakpoint"
@@ -56,6 +57,7 @@ export default {
     tooltipText: { type: String, default: '{name}: {value}' },
 
     fillColor: { type: String },
+    markColor: { type: String },
 
     height: { type: String, default: '28vw' },
     rotationBreakpoint: { type: Number, default: 800 },
