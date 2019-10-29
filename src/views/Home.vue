@@ -14,6 +14,21 @@
       }"
     />
 
+    <div class="container px-0 py-4" id="establecimientos">
+      <div class="title">
+        Establecimientos con quirófanos
+      </div>
+
+      <MarkedChileChart class="py-3"
+        :data="establecimientos"
+        :tooltipText="`{nombre}:
+                      {quirofanos} quirófanos
+                      {camas} camas
+                      comuna: {comuna}`"
+        fillColor="#69b892"
+      />
+    </div>
+
     <div class="container px-0 py-4" id="pacientes">
       <div class="title">
         Pacientes atendidos <small class="font-weight-light">(% de la población)</small>
@@ -280,6 +295,7 @@ export default {
     Header,
     Sidebar,
     ChileChart,
+    MarkedChileChart,
     BarChart,
     StackedBarChart,
   },
