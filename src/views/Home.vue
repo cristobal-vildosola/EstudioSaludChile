@@ -114,7 +114,7 @@
         Licencias entregadas según sexo
       </div>
 
-      <StackedBarChart
+      <MultiBarChart
         :data="licenciasTipoSexo"
         category="sexo"
         :values="[
@@ -234,7 +234,7 @@
         Horas pedidas vs Horas disponibles
       </div>
 
-      <StackedBarChart
+      <MultiBarChart
         :data="horasPedidasDisponibles"
         category="especialidad"
         :values="[
@@ -263,7 +263,7 @@ import Sidebar from '@/common/Sidebar.vue';
 import ChileChart from '@/components/ChileChart.vue';
 import MarkedChileChart from '@/components/MarkedChileChart.vue';
 import BarChart from '@/components/BarChart.vue';
-import StackedBarChart from '@/components/StackedBarChart.vue';
+import MultiBarChart from '@/components/MultiBarChart.vue';
 import {
   top20GES, top10GESQx, top10GESnoQx, top10noGES, horasPedidasDisponibles,
 } from '@/assets/data/atenciones';
@@ -296,7 +296,7 @@ export default {
     ChileChart,
     MarkedChileChart,
     BarChart,
-    StackedBarChart,
+    MultiBarChart,
   },
 
   data() {

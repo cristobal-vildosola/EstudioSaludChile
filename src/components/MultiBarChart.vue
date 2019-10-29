@@ -6,7 +6,7 @@
 import { isScrolled } from '@/assets/utils';
 
 export default {
-  name: 'StackedBarChart',
+  name: 'MultiBarChart',
 
   data() {
     return {
