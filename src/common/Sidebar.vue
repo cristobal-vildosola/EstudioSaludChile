@@ -100,6 +100,18 @@ ul {
   visibility: none;
 }
 
+/* reduce size in smaller devices */
+@media (max-width: 1000px) {
+  .show-btn {
+    left: .5rem;
+
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    padding: 1px 6px;
+  }
+}
+
 /* sidebar */
 .sidebar {
   position: absolute;
