@@ -3,7 +3,7 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   env: {
     browser: true,
@@ -14,11 +14,11 @@ module.exports = {
   ],
   // required to lint *.vue files
   plugins: [
-    'vue'
+    'vue',
   ],
   // add your custom rules here
   rules: {
     // allow console during development
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  }
-}
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+  },
+};
