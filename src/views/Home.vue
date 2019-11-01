@@ -23,8 +23,7 @@
         :data="establecimientos"
         :tooltipText="`{nombre}:
                       {quirofanos} quirófanos
-                      {camas} camas
-                      comuna: {comuna}`"
+                      {camas} camas`"
       />
     </div>
 
@@ -229,6 +228,29 @@
       />
     </div>
 
+    <div class="container px-0 py-4" id="top10noGES">
+      <div class="title">
+        Top 10 enfermedades no GES quirurjicos más antendidas
+      </div>
+
+      <BarChart class="py-3"
+        :data="top10noGESQx"
+
+        category="enfermedad"
+        value="casos"
+
+        :min="0"
+
+        valueTitle="atenciones"
+        valueFormat="#.#a"
+        :tooltipText="`{enfermedad}:
+                      [bold]{casos}[/] atenciones`"
+
+        :horizontal="true"
+        height="30rem"
+      />
+    </div>
+
     <div class="container px-0 py-4" id="licencias-sexo">
       <div class="title">
         Horas pedidas vs Horas disponibles
@@ -242,7 +264,7 @@
           { value: 'disponibles', stacked: false },
         ]"
 
-        valueTitle="número de horas"
+        valueTitle="horas"
         valueFormat="#.#a"
         :tooltipText="`{category}:
                       [bold]{value}[/] horas {name}`"
@@ -265,8 +287,8 @@ import MarkedChileChart from '@/components/MarkedChileChart.vue';
 import BarChart from '@/components/BarChart.vue';
 import MultiBarChart from '@/components/MultiBarChart.vue';
 import {
-  top20GES, top10GESQx, top10GESnoQx, top10noGES, horasPedidasDisponibles,
-} from '@/assets/data/atenciones';
+  top20GES, top10GESQx, top10GESnoQx, top10noGES, top10noGESQx, horasPedidasDisponibles,
+} from '@/assets/data/casos';
 import { licenciasRegion, licenciasTipoDesglose, licenciasTipoSexo } from '@/assets/data/licencias';
 import { pacientesRegion } from '@/assets/data/pacientes';
 import { poblacionRegionDict } from '@/assets/data/poblacion';
@@ -307,9 +329,10 @@ export default {
       licenciasPacienteRegion,
       licenciasTipoSexo,
       top20GES,
-      top10noGES,
       top10GESQx,
       top10GESnoQx,
+      top10noGES,
+      top10noGESQx,
       horasPedidasDisponibles,
       establecimientos,
     };
