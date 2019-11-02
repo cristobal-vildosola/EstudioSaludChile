@@ -14,6 +14,22 @@
       }"
     />
 
+    <div class="container px-0 py-4" id="pacientes">
+      <div class="title">
+        Tiempo de espera en lista no GES (dias)
+      </div>
+
+      <ChileChart class="py-3"
+        :data="tiempoEsperaRegion"
+        :tooltipText="`{name}:
+                      [bold]{value.formatNumber('.#')}[/] días de espera en promedio
+
+                      mediana según servicio de salud
+                      {medianas}`"
+        legendFormat="#"
+      />
+    </div>
+
     <div class="container px-0 py-4" id="establecimientos">
       <div class="title">
         Establecimientos con quirófanos
@@ -293,6 +309,7 @@ import { licenciasRegion, licenciasTipoDesglose, licenciasTipoSexo } from '@/ass
 import { pacientesRegion } from '@/assets/data/pacientes';
 import { poblacionRegionDict } from '@/assets/data/poblacion';
 import { establecimientos } from '@/assets/data/establecimientos';
+import tiempoEsperaRegion from '@/assets/data/tiempoEspera';
 
 const pacientesRegionNorm = pacientesRegion.map(
   x => ({ id: x.id, value: x.value / poblacionRegionDict[x.id], total: x.value }),
@@ -335,6 +352,7 @@ export default {
       top10noGESQx,
       horasPedidasDisponibles,
       establecimientos,
+      tiempoEsperaRegion,
     };
   },
 };
