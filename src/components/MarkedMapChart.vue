@@ -26,6 +26,7 @@ export default {
 
     remarkThreshold: { type: Number },
     remarkValue: { type: String },
+    remarkValueName: { type: String, default: '' },
     remarkColor: { type: String, default: '#0a488d' },
     remarkRadius: { type: Number, default: 5 },
 
@@ -39,6 +40,7 @@ export default {
   },
 
   mounted() {
+    const am4charts = this.$am4charts;
     const am4core = this.$am4core;
     const am4maps = this.$am4maps;
     const self = this;
@@ -74,38 +76,87 @@ export default {
     const imageSeries = map.series.push(new am4maps.MapImageSeries());
     const imageSeriesTemplate = imageSeries.mapImages.template;
 
+    imageSeries.data = this.data;
+    imageSeriesTemplate.propertyFields.latitude = 'latitud';
+    imageSeriesTemplate.propertyFields.longitude = 'longitud';
+
     const circle = imageSeriesTemplate.createChild(am4core.Circle);
     circle.stroke = am4core.color('#fff');
     circle.strokeWidth = 0.7;
     circle.nonScaling = true;
     circle.tooltipText = this.tooltipText;
 
-    // change color after threshold
-    circle.adapter.add('fill',
-      (fill, target) => {
-        if (this.remarkThreshold && this.remarkValue
-          && target.dataItem && target.dataItem.dataContext
+
+    if (this.remarkValue && this.remarkThreshold) {
+      // change color after threshold
+      circle.adapter.add('fill', (fill, target) => {
+        if (target.dataItem && target.dataItem.dataContext
           && target.dataItem.dataContext[this.remarkValue] >= this.remarkThreshold) {
           return am4core.color(this.remarkColor);
         }
         return am4core.color(this.markColor);
       });
 
-    // change size after threshold
-    circle.adapter.add('radius',
-      (fill, target) => {
-        if (this.remarkThreshold && this.remarkValue
-          && target.dataItem && target.dataItem.dataContext
+      // change size after threshold
+      circle.adapter.add('radius', (radius, target) => {
+        if (target.dataItem && target.dataItem.dataContext
           && target.dataItem.dataContext[this.remarkValue] >= this.remarkThreshold) {
           return this.remarkRadius;
         }
         return this.markRadius;
       });
 
-    imageSeriesTemplate.propertyFields.latitude = 'latitud';
-    imageSeriesTemplate.propertyFields.longitude = 'longitud';
+      // add legend
+      const legend = new am4charts.Legend();
+      legend.parent = map.chartContainer;
 
-    imageSeries.data = this.data;
+      legend.position = 'left';
+      legend.valign = 'top';
+      legend.width = 250;
+      legend.padding(10, 15, 10, 15);
+      legend.background.fill = am4core.color('#fff');
+      legend.background.fillOpacity = 0.5;
+
+      legend.data = [
+        {
+          name: `${this.remarkThreshold} o más ${this.remarkValueName}`,
+          fill: this.remarkColor,
+          radius: this.remarkRadius,
+        }, {
+          name: `menos de ${this.remarkThreshold} ${this.remarkValueName}`,
+          fill: this.markColor,
+          radius: this.markRadius,
+        },
+      ];
+
+      const cornerRadius = (radius, target) => {
+        if (target.dataItem && target.dataItem.dataContext) {
+          return 2 * target.dataItem.dataContext.radius;
+        }
+        return radius;
+      };
+      const sizeAdapter = (size, target) => {
+        if (target.dataItem && target.dataItem.dataContext) {
+          return 4 * target.dataItem.dataContext.radius;
+        }
+        return size;
+      };
+
+      const marker = legend.markers.template.children.getIndex(0);
+      marker.adapter.add('cornerRadiusTopLeft', cornerRadius);
+      marker.adapter.add('cornerRadiusTopRight', cornerRadius);
+      marker.adapter.add('cornerRadiusBottomLeft', cornerRadius);
+      marker.adapter.add('cornerRadiusBottomRight', cornerRadius);
+      marker.adapter.add('pixelHeight', sizeAdapter);
+      marker.adapter.add('pixelWidth', sizeAdapter);
+
+      legend.itemContainers.template.clickable = false;
+      legend.itemContainers.template.focusable = false;
+      legend.itemContainers.template.cursorOverStyle = am4core.MouseCursorStyle.default;
+    } else {
+      circle.fill = this.markColor;
+      circle.radius = this.markRadius;
+    }
 
     // change orientation depending on screen width
     map.events.on('sizechanged', (ev) => {

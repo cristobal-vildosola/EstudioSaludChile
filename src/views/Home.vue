@@ -39,6 +39,8 @@
         :data="establecimientos"
         :remarkThreshold="10"
         remarkValue="quirofanos"
+        remarkValueName="quirófanos"
+
         :tooltipText="`{nombre}:
                       {quirofanos} quirófanos
                       {camas} camas`"

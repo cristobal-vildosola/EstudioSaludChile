@@ -13,6 +13,7 @@
 
       :remarkThreshold="remarkThreshold"
       :remarkValue="remarkValue"
+      :remarkValueName="remarkValueName"
       :remarkColor="remarkColor"
       :remarkRadius="remarkRadius"
 
@@ -69,6 +70,7 @@ export default {
 
     remarkThreshold: { type: Number },
     remarkValue: { type: String },
+    remarkValueName: { type: String },
     remarkColor: { type: String },
     remarkRadius: { type: Number },
 
