@@ -97,6 +97,7 @@ export default {
     polygonTemplate.tooltipText = tooltipText;
     polygonTemplate.tooltipPosition = 'fixed';
     polygonSeries.tooltip.background.filters.clear();
+    polygonSeries.tooltip.label.wrap = true;
 
     // hover color
     if (this.hoverColor) {
@@ -164,6 +165,8 @@ export default {
     map.events.on('sizechanged', (ev) => {
       const windHeight = window.innerHeight || document.documentElement.clientHeight;
       const windWidth = window.innerWidth || document.documentElement.clientWidth;
+
+      polygonSeries.tooltip.label.maxWidth = windWidth;
 
       if (windWidth < windHeight && ev.target.pixelWidth < self.rotationBreakpoint) {
         // vertical

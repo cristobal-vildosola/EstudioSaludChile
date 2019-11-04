@@ -85,7 +85,7 @@ export default {
     circle.strokeWidth = 0.7;
     circle.nonScaling = true;
     circle.tooltipText = this.tooltipText;
-
+    imageSeries.tooltip.label.wrap = true;
 
     if (this.remarkValue && this.remarkThreshold) {
       // change color after threshold
@@ -162,6 +162,8 @@ export default {
     map.events.on('sizechanged', (ev) => {
       const windHeight = window.innerHeight || document.documentElement.clientHeight;
       const windWidth = window.innerWidth || document.documentElement.clientWidth;
+
+      imageSeries.tooltip.label.maxWidth = windWidth;
 
       if (windWidth < windHeight && ev.target.pixelWidth < self.rotationBreakpoint) {
         // vertical
