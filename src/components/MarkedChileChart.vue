@@ -7,7 +7,14 @@
       :tooltipText="tooltipText"
 
       :fillColor="fillColor"
+
       :markColor="markColor"
+      :markRadius="markRadius"
+
+      :remarkThreshold="remarkThreshold"
+      :remarkValue="remarkValue"
+      :remarkColor="remarkColor"
+      :remarkRadius="remarkRadius"
 
       :height="height"
       :rotationBreakpoint="rotationBreakpoint"
@@ -58,6 +65,12 @@ export default {
 
     fillColor: { type: String },
     markColor: { type: String },
+    markRadius: { type: Number },
+
+    remarkThreshold: { type: Number },
+    remarkValue: { type: String },
+    remarkColor: { type: String },
+    remarkRadius: { type: Number },
 
     height: { type: String, default: '28vw' },
     rotationBreakpoint: { type: Number, default: 800 },

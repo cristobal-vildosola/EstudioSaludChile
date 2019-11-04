@@ -19,8 +19,15 @@ export default {
 
     tooltipText: { type: String, default: '{name}: {value}' },
 
-    fillColor: { type: String, default: '#fcde9c' },
+    fillColor: { type: String, default: '#aaaaaa' },
+
     markColor: { type: String, default: '#a52013' },
+    markRadius: { type: Number, default: 4 },
+
+    remarkThreshold: { type: Number },
+    remarkValue: { type: String },
+    remarkColor: { type: String, default: '#0a488d' },
+    remarkRadius: { type: Number, default: 5 },
 
     height: { type: String, default: '50vh' },
     rotationBreakpoint: { type: Number, default: 0 },
@@ -68,13 +75,32 @@ export default {
     const imageSeriesTemplate = imageSeries.mapImages.template;
 
     const circle = imageSeriesTemplate.createChild(am4core.Circle);
-    circle.radius = 6;
-    circle.fill = am4core.color(this.markColor);
     circle.stroke = am4core.color('#fff');
-    circle.strokeWidth = 1;
+    circle.strokeWidth = 0.7;
     circle.nonScaling = true;
-
     circle.tooltipText = this.tooltipText;
+
+    // change color after threshold
+    circle.adapter.add('fill',
+      (fill, target) => {
+        if (this.remarkThreshold && this.remarkValue
+          && target.dataItem && target.dataItem.dataContext
+          && target.dataItem.dataContext[this.remarkValue] >= this.remarkThreshold) {
+          return am4core.color(this.remarkColor);
+        }
+        return am4core.color(this.markColor);
+      });
+
+    // change size after threshold
+    circle.adapter.add('radius',
+      (fill, target) => {
+        if (this.remarkThreshold && this.remarkValue
+          && target.dataItem && target.dataItem.dataContext
+          && target.dataItem.dataContext[this.remarkValue] >= this.remarkThreshold) {
+          return this.remarkRadius;
+        }
+        return this.markRadius;
+      });
 
     imageSeriesTemplate.propertyFields.latitude = 'latitud';
     imageSeriesTemplate.propertyFields.longitude = 'longitud';

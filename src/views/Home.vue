@@ -37,6 +37,8 @@
 
       <MarkedChileChart class="py-3"
         :data="establecimientos"
+        :remarkThreshold="10"
+        remarkValue="quirofanos"
         :tooltipText="`{nombre}:
                       {quirofanos} quirófanos
                       {camas} camas`"

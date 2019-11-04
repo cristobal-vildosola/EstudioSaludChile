@@ -352,6 +352,9 @@ const establecimientos = [
   },
 ];
 
+// sort in ascending order
+establecimientos.sort((a, b) => (a.quirofanos - b.quirofanos));
+
 export {
   establecimientos,
 };
