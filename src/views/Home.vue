@@ -23,7 +23,7 @@
         :data="tiempoEsperaRegion"
         :tooltipText="`{name}:
                       [bold]{value.formatNumber('.#')}[/] días de espera en promedio
-
+                      [opacity: 0].[/]
                       mediana según servicio de salud
                       {medianas}`"
         legendFormat="#"
@@ -66,6 +66,33 @@
         entre los años 2014 y 2017. Si es que una persona se atendió 10 veces en este periodo,
         solo se cuenta 1 vez.
       </h5>
+    </div>
+
+    <div class="main-section header">
+      <div class="container">
+          <div class="title">
+            ¿Dónde se encuentran las licencias?
+          </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="offset-2 col-4">
+          <Bubble
+            icon="leaf"
+            title="Lorem Ipsum"
+            description="lorem ipsum et sevanem ug siteriam nostre bolde furitonas"
+          />
+        </div>
+        <div class="col-4">
+          <Bubble
+            text="158"
+            title="Lorem Ipsum"
+            description="lorem ipsum et sevanem ug siteriam nostre bolde furitonas"
+          />
+        </div>
+      </div>
     </div>
 
     <div class="container px-0 py-4" id="licencias-promedio">
@@ -158,7 +185,7 @@
 
     <div class="container px-0 py-4" id="top10GES">
       <div class="title">
-        Top 10 enfermedades GES más antendidas
+        Top 10 casos GES más antendidos
       </div>
 
       <BarChart class="py-3"
@@ -181,7 +208,7 @@
 
     <div class="container px-0 py-4" id="top10GESQx">
       <div class="title">
-        Top 10 enfermedades GES quirurgicas más antendidas
+        Top 10 casos GES quirurgicos más antendidos
       </div>
 
       <BarChart class="py-3"
@@ -204,7 +231,7 @@
 
     <div class="container px-0 py-4" id="top10GESnoQx">
       <div class="title">
-        Top 10 enfermedades GES no quirurgicas más antendidas
+        Top 10 casos GES no quirurgicos más antendidos
       </div>
 
       <BarChart class="py-3"
@@ -227,7 +254,7 @@
 
     <div class="container px-0 py-4" id="top10noGES">
       <div class="title">
-        Top 10 enfermedades no GES más antendidas
+        Top 10 casos no GES más antendidos
       </div>
 
       <BarChart class="py-3"
@@ -250,7 +277,7 @@
 
     <div class="container px-0 py-4" id="top10noGES">
       <div class="title">
-        Top 10 enfermedades no GES quirurjicos más antendidas
+        Top 10 casos no GES quirurjicos más antendidos
       </div>
 
       <BarChart class="py-3"
@@ -302,17 +329,20 @@
 import Footer from '@/common/Footer.vue';
 import Header from '@/common/Header.vue';
 import Sidebar from '@/common/Sidebar.vue';
-import ChileChart from '@/components/ChileChart.vue';
-import MarkedChileChart from '@/components/MarkedChileChart.vue';
+
+import Bubble from '@/components/Bubble.vue';
 import BarChart from '@/components/BarChart.vue';
 import MultiBarChart from '@/components/MultiBarChart.vue';
+import ChileChart from '@/components/ChileChart.vue';
+import MarkedChileChart from '@/components/MarkedChileChart.vue';
+
 import {
   top20GES, top10GESQx, top10GESnoQx, top10noGES, top10noGESQx, horasPedidasDisponibles,
 } from '@/assets/data/casos';
 import { licenciasRegion, licenciasTipoDesglose, licenciasTipoSexo } from '@/assets/data/licencias';
 import { pacientesRegion } from '@/assets/data/pacientes';
 import { poblacionRegionDict } from '@/assets/data/poblacion';
-import { establecimientos } from '@/assets/data/establecimientos';
+import establecimientos from '@/assets/data/establecimientos';
 import tiempoEsperaRegion from '@/assets/data/tiempoEspera';
 
 const pacientesRegionNorm = pacientesRegion.map(
@@ -336,6 +366,7 @@ export default {
     Footer,
     Header,
     Sidebar,
+    Bubble,
     ChileChart,
     MarkedChileChart,
     BarChart,
