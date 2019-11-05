@@ -30,7 +30,7 @@ export default {
 
 .bubble {
   background: #e06e2e;
-  color: #f2eded;
+  color: #fff;
 
   margin: 1.5rem auto;
   width: 150px;

@@ -10,7 +10,7 @@
           cirugía electiva" de la Comisión Nacional de Productividad
         </div>
 
-        <img class="logo" width="234" height="100" src="@/assets/img/logoClaro.png">
+        <img class="logo" width="234" height="100" src="@/assets/img/logo.png">
     </div>
   </div>
 </template>
@@ -23,8 +23,8 @@ export default {
 
 <style scoped>
 .header {
-  padding: 2rem;
-  background-color: #0a488d;
+  background-color: #f3f3f3;
+  color: #4d4d4d;
 }
 
 .logo {
