@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueWaypoint from 'vue-waypoint';
 
 // styles
 import 'bootstrap';
@@ -16,6 +17,9 @@ import moonrisekingdom from '@amcharts/amcharts4/themes/moonrisekingdom';
 // project objects
 import App from '@/App.vue';
 import router from '@/router';
+
+// Waypoint plugin
+Vue.use(VueWaypoint);
 
 am4core.useTheme(am4themesAnimated);
 am4core.useTheme(moonrisekingdom);

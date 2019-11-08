@@ -1,9 +1,14 @@
 <template>
-  <div :id='id' />
+  <div
+    :id='id'
+    v-waypoint="{
+      active: animationActive,
+      callback: appearOnScroll,
+    }"
+  />
 </template>
 
 <script>
-import { isScrolled } from '@/assets/utils';
 
 export default {
   name: 'MultiBarChart',
@@ -14,8 +19,8 @@ export default {
       id: `chardiv_${Math.random().toString(30).substr(2, 8)}`,
 
       rotated: false,
+      appeared: false,
       series: [],
-      hidden: new Set(),
     };
   },
 
@@ -54,6 +59,7 @@ export default {
     rotatedHeight: { type: String, default: '90vh' },
 
     animationDuration: { type: Number, default: 500 },
+    animationActive: { type: Boolean, default: true },
   },
 
   methods: {
@@ -199,21 +205,12 @@ export default {
       chart.zoomOutButton.disabled = true;
     },
 
-    appearOnScroll() {
-      const { hidden, series } = this;
-      if (isScrolled(this.id)) {
+    appearOnScroll({ going }) {
+      const { series, appeared } = this;
+      if (!appeared && going === this.$waypointMap.GOING_IN) {
+        this.appeared = true;
         for (let i = 0; i < series.length; i += 1) {
-          if ((series[i].isHidden || series[i].isHiding)
-            && !series[i].isShowing
-            && !hidden.has(series[i].name)) {
-            series[i].appear();
-          }
-        }
-      } else {
-        for (let i = 0; i < series.length; i += 1) {
-          if (!series[i].isHidden && !series[i].isHiding) {
-            series[i].hide();
-          }
+          series[i].appear();
         }
       }
     },

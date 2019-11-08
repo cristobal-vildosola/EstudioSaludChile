@@ -1,9 +1,14 @@
 <template>
-  <div :id='id' />
+  <div
+    :id='id'
+    v-waypoint="{
+      active: animationActive,
+      callback: appearOnScroll,
+    }"
+  />
 </template>
 
 <script>
-import { isScrolled } from '@/assets/utils';
 
 export default {
   name: 'BarChart',
@@ -14,6 +19,7 @@ export default {
       id: `chartdiv_${Math.random().toString(30).substr(2, 8)}`,
 
       rotated: false,
+      appeared: false,
     };
   },
 
@@ -51,6 +57,7 @@ export default {
     rotatedHeight: { type: String, default: '90vh' },
 
     animationDuration: { type: Number, default: 500 },
+    animationActive: { type: Boolean, default: true },
   },
 
   methods: {
@@ -174,14 +181,11 @@ export default {
       series.sequencedInterpolation = true;
     },
 
-    appearOnScroll() {
-      const { series } = this;
-      if (isScrolled(this.id)) {
-        if ((series.isHidden || series.isHiding) && !series.isShowing) {
-          series.appear();
-        }
-      } else if (!series.isHidden && !series.isHiding) {
-        series.hide();
+    appearOnScroll({ going }) {
+      const { series, appeared } = this;
+      if (!appeared && going === this.$waypointMap.GOING_IN) {
+        this.appeared = true;
+        series.appear();
       }
     },
 
@@ -208,7 +212,6 @@ export default {
 
   mounted() {
     this.drawChart();
-    window.addEventListener('scroll', this.appearOnScroll, false);
     window.addEventListener('resize', this.rotateOnResize, false);
   },
 

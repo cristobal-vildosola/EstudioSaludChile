@@ -18,7 +18,8 @@
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.3"
+    "vue-router": "^3.0.3",
+    "vue-waypoint": "^3.2.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
