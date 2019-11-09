@@ -4,6 +4,7 @@
     v-waypoint="{
       active: animationActive,
       callback: appearOnScroll,
+      options: intersectionOptions,
     }"
   />
 </template>
@@ -20,6 +21,10 @@ export default {
 
       rotated: false,
       appeared: false,
+
+      intersectionOptions: {
+        threshold: [0.5],
+      },
     };
   },
 
@@ -175,17 +180,21 @@ export default {
         (fill, target) => chart.colors.getIndex(target.dataItem.index + 3));
 
       // animations
-      const duration = this.animationDuration / this.data.length;
+      const duration = this.animationDuration / (this.data.length + 1);
       series.interpolationDuration = duration * 2;
       series.sequencedInterpolationDelay = duration;
       series.sequencedInterpolation = true;
+
+      // start hidden
+      series.hidden = true;
     },
 
     appearOnScroll({ going }) {
       const { series, appeared } = this;
       if (!appeared && going === this.$waypointMap.GOING_IN) {
-        this.appeared = true;
+        series.hidden = false;
         series.appear();
+        this.appeared = true;
       }
     },
 

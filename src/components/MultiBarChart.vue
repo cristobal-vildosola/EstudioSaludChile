@@ -4,6 +4,7 @@
     v-waypoint="{
       active: animationActive,
       callback: appearOnScroll,
+      options: intersectionOptions,
     }"
   />
 </template>
@@ -17,10 +18,14 @@ export default {
     return {
       chart: null,
       id: `chardiv_${Math.random().toString(30).substr(2, 8)}`,
+      series: [],
 
       rotated: false,
       appeared: false,
-      series: [],
+
+      intersectionOptions: {
+        threshold: [0.5],
+      },
     };
   },
 
@@ -177,10 +182,13 @@ export default {
         series.tooltip.background.filters.clear();
 
         // animations
-        const duration = self.animationDuration / self.data.length;
+        const duration = self.animationDuration / (self.data.length + 1);
         series.interpolationDuration = duration * 2;
         series.sequencedInterpolationDelay = duration;
         series.sequencedInterpolation = true;
+
+        // start hidden
+        series.hidden = true;
       }
 
       for (let i = 0; i < this.values.length; i += 1) {
@@ -191,16 +199,6 @@ export default {
       chart.legend = new am4charts.Legend();
       chart.legend.fontSize = '.8rem';
 
-      // save hidden state of series
-      chart.legend.itemContainers.template.events.on('hit', (ev) => {
-        const { name } = ev.target.dataItem.dataContext;
-        if (self.hidden.has(name)) {
-          self.hidden.delete(name);
-        } else {
-          self.hidden.add(name);
-        }
-      });
-
       // disable zoom out
       chart.zoomOutButton.disabled = true;
     },
@@ -208,10 +206,11 @@ export default {
     appearOnScroll({ going }) {
       const { series, appeared } = this;
       if (!appeared && going === this.$waypointMap.GOING_IN) {
-        this.appeared = true;
         for (let i = 0; i < series.length; i += 1) {
+          series[i].hidden = false;
           series[i].appear();
         }
+        this.appeared = true;
       }
     },
 

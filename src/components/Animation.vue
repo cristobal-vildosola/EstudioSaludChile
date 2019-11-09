@@ -1,6 +1,10 @@
 <template>
-  <div v-waypoint="{ active: animationActive, callback: appearOnScroll }" >
-    <div class="animation" :class="[direction, {'in': appeared}]" >
+  <div v-waypoint="{
+    active,
+    callback: appearOnScroll,
+    options: { threshold },
+  }" >
+    <div class="animation" :class="[direction, {'in': appeared || !active}]" >
       <slot></slot>
     </div>
   </div>
@@ -17,15 +21,15 @@ export default {
   },
 
   props: {
-    active: { type: String },
     direction: { type: String, default: 'up' },
-    animationActive: { type: Boolean, default: true },
+    active: { type: Boolean, default: true },
+    threshold: { type: Number, default: 0.5 },
   },
 
   methods: {
-    appearOnScroll({ going }) {
+    appearOnScroll({ going, _entry }) {
       if (!this.appeared && going === this.$waypointMap.GOING_IN) {
-        this.appeared = true;
+        this.appeared = _entry.intersectionRatio > this.threshold;
       }
     },
   },
@@ -35,8 +39,8 @@ export default {
 <style scoped>
 .animation {
   opacity: 0;
-  transition-delay: .1s;
-  transition: all .4s ease-in-out;
+  transition: transform ease-out, opacity ease-in-out;
+  transition-duration: .6s
 }
 
 .left {
