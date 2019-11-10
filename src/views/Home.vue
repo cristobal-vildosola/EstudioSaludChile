@@ -4,13 +4,13 @@
 
     <Sidebar
       :links="{
-        'pacientes atendidos': 'pacientes',
-        'licencias promedio': 'licencias-promedio',
-        'licencias entregadas': 'licencias-total',
-        'licencias por tipo': 'licencias-tipo',
-        'licencias por sexo': 'licencias-sexo',
-        'top 10 casos GES': 'top10GES',
-        'top 10 casos no GES': 'top10noGES',
+        'Top 10 casos GES': 'top10GES',
+        'Top 10 casos no GES': 'top10noGES',
+        'Oferta vs Demanda': 'oferta-demanda',
+        'Establecimientos' : 'establecimientos',
+        'Licencias': 'licencias',
+        'Licencias por tipo': 'licencias-tipo',
+        'Licencias por sexo': 'licencias-sexo',
       }"
     />
 
@@ -87,7 +87,7 @@
       />
     </div>
 
-    <div class="container px-0 py-4" id="top10GESQx">
+    <div class="container px-0 py-4" id="top10GES-Qx">
       <div class="title">
         Top 10 casos GES quirurgicos más antendidos
       </div>
@@ -110,7 +110,7 @@
       />
     </div>
 
-    <div class="container px-0 py-4" id="top10GESnoQx">
+    <div class="container px-0 py-4" id="top10GES-noQx">
       <div class="title">
         Top 10 casos GES no quirurgicos más antendidos
       </div>
@@ -156,7 +156,7 @@
       />
     </div>
 
-    <div class="container px-0 py-4" id="top10noGES">
+    <div class="container px-0 py-4" id="top10noGES-Qx">
       <div class="title">
         Top 10 casos no GES quirurjicos más antendidos
       </div>
@@ -179,7 +179,7 @@
       />
     </div>
 
-    <div class="container px-0 py-4" id="">
+    <div class="container px-0 py-4" id="oferta-demanda">
       <div class="title">
         Horas pedidas vs Horas disponibles
       </div>
@@ -203,7 +203,7 @@
       />
     </div>
 
-    <div class="container px-0 py-4" id="pacientes">
+    <div class="container px-0 py-4" id="tiempo-espera">
       <div class="title">
         Tiempo de espera en lista no GES (dias)
       </div>
@@ -236,7 +236,7 @@
       />
     </div>
 
-    <div class="main-section header">
+    <div class="main-section header" id="licencias">
       <div class="container">
           <div class="title">
             ¿Dónde se encuentran las licencias?
