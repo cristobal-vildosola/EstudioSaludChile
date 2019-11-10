@@ -150,6 +150,7 @@ export default {
       marker.adapter.add('pixelHeight', sizeAdapter);
       marker.adapter.add('pixelWidth', sizeAdapter);
 
+      // disable interactions
       legend.itemContainers.template.clickable = false;
       legend.itemContainers.template.focusable = false;
       legend.itemContainers.template.cursorOverStyle = am4core.MouseCursorStyle.default;

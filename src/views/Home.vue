@@ -197,6 +197,7 @@
         :tooltipText="`{category}:
                       [bold]{value}[/] horas {name}`"
 
+        :disableLegend="true"
         :horizontal="true"
         height="30rem"
       />
@@ -326,22 +327,20 @@
 
       <MultiBarChart
         :data="licenciasTipoSexo"
-        category="sexo"
+        category="subtipo"
         :values="[
-          { value: 'Enfermedad o accidente no del trabajo', stacked: true },
-          { value: 'Prorroga medicina preventiva', stacked: true },
-          { value: 'Patologias del embarazo', stacked: true },
-          { value: 'Licencia maternal', stacked: true },
-          { value: 'Enfermedad grave hijo menor de 1 año', stacked: true },
-          { value: 'Accidente del trabajo', stacked: true },
-          { value: 'Enfermedad profesional', stacked: true },
+          { value: 'hombres' },
+          { value: 'mujeres' },
         ]"
+        :calcPercent="true"
 
         valueTitle="licencias"
         valueFormat="#.#a"
         :tooltipText="`{name}:
-                      [bold]{value}[/] licencias`"
+                      [bold]{value}[/] licencias
+                      {value.totalPercent.formatNumber('#.00')}%`"
 
+        :disableLegend="true"
         :horizontal="true"
         height="30rem"
       />

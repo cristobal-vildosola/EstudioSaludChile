@@ -39,24 +39,19 @@ const licenciasTipoDesglose = [
 
 const licenciasTipoSexo = [
   {
-    sexo: 'Masculino',
-    'Enfermedad o accidente no del trabajo': 3517830,
-    'Prorroga medicina preventiva': 622,
-    'Patologias del embarazo': 110,
-    'Licencia maternal': 67,
-    'Enfermedad grave hijo menor de 1 año': 536,
-    'Accidente del trabajo': 41791,
-    'Enfermedad profesional': 2519,
-  },
-  {
-    sexo: 'Femenino',
-    'Enfermedad o accidente no del trabajo': 8553508,
-    'Prorroga medicina preventiva': 1025,
-    'Patologias del embarazo': 540405,
-    'Licencia maternal': 703691,
-    'Enfermedad grave hijo menor de 1 año': 557778,
-    'Accidente del trabajo': 42071,
-    'Enfermedad profesional': 9904,
+    tipo: 'Curativa comun', subtipo: 'Enfermedad o accidente no del trabajo', hombres: 3517830, mujeres: 8553508,
+  }, {
+    tipo: 'Curativa comun', subtipo: 'Prorroga medicina preventiva', hombres: 622, mujeres: 1025,
+  }, {
+    tipo: 'Curativa comun', subtipo: 'Patologias del embarazo', hombres: 110, mujeres: 540405,
+  }, {
+    tipo: 'Maternal', subtipo: 'Licencia maternal', hombres: 67, mujeres: 703691,
+  }, {
+    tipo: 'Maternal', subtipo: 'Enfermedad grave hijo menor de 1 año', hombres: 536, mujeres: 557778,
+  }, {
+    tipo: 'Laboral', subtipo: 'Accidente del trabajo', hombres: 41791, mujeres: 42071,
+  }, {
+    tipo: 'Laboral', subtipo: 'Enfermedad profesional', hombres: 2519, mujeres: 9904,
   },
 ];
 

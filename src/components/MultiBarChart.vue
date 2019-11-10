@@ -44,6 +44,9 @@ export default {
     valueFormat: { type: String, default: '#' },
     tooltipText: { type: String, default: '{categoryY}: {valueX}' },
 
+    calcPercent: { type: Boolean, default: false },
+    disableLegend: { type: Boolean, default: false },
+
     axisBreak: {
       type: Object,
       validator(axisBreak) { // expects { start: x, end: y, breakSize: z }
@@ -127,8 +130,15 @@ export default {
       valueAxis.title.fontSize = '1rem';
       valueAxis.fontSize = '.8rem';
 
-      valueAxis.min = this.min;
-      valueAxis.max = this.max;
+      if (this.calcPercent) {
+        valueAxis.min = 0;
+        valueAxis.max = 100;
+        valueAxis.strictMinMax = true;
+        valueAxis.calculateTotals = true;
+      } else {
+        valueAxis.min = this.min;
+        valueAxis.max = this.max;
+      }
 
       valueAxis.numberFormatter = new am4core.NumberFormatter();
       valueAxis.numberFormatter.numberFormat = this.valueFormat;
@@ -153,7 +163,7 @@ export default {
 
       function createSeries(field, stacked = true) {
         const series = chart.series.push(new am4charts.ColumnSeries());
-        series.stacked = stacked;
+        series.stacked = stacked || self.calcPercent;
         self.series.push(series);
 
         series.name = field;
@@ -163,6 +173,11 @@ export default {
         series.dataFields.category = self.category;
         series.dataFields.categoryX = self.category;
         series.dataFields.categoryY = self.category;
+
+        if (self.calcPercent) {
+          series.dataFields.valueYShow = 'totalPercent';
+          series.dataFields.valueXShow = 'totalPercent';
+        }
 
         series.columns.template.height = am4core.percent(100);
         series.columns.template.width = am4core.percent(100);
@@ -182,13 +197,15 @@ export default {
         series.tooltip.background.filters.clear();
 
         // animations
-        const duration = self.animationDuration / (self.data.length + 1);
-        series.interpolationDuration = duration * 2;
-        series.sequencedInterpolationDelay = duration;
-        series.sequencedInterpolation = true;
+        if (!self.calcPercent) {
+          const duration = self.animationDuration / (self.data.length + 1);
+          series.interpolationDuration = duration * 2;
+          series.sequencedInterpolationDelay = duration;
+          series.sequencedInterpolation = true;
 
-        // start hidden
-        series.hidden = true;
+          // start hidden
+          series.hidden = true;
+        }
       }
 
       for (let i = 0; i < this.values.length; i += 1) {
@@ -201,6 +218,13 @@ export default {
 
       // disable zoom out
       chart.zoomOutButton.disabled = true;
+
+      // disable legend
+      if (this.disableLegend) {
+        chart.legend.itemContainers.template.clickable = false;
+        chart.legend.itemContainers.template.focusable = false;
+        chart.legend.itemContainers.template.cursorOverStyle = am4core.MouseCursorStyle.default;
+      }
     },
 
     appearOnScroll({ going }) {
@@ -237,7 +261,9 @@ export default {
 
   mounted() {
     this.drawChart();
-    window.addEventListener('scroll', this.appearOnScroll, false);
+    if (!this.calcPercent) {
+      window.addEventListener('scroll', this.appearOnScroll, false);
+    }
     window.addEventListener('resize', this.rotateOnResize, false);
   },
 
