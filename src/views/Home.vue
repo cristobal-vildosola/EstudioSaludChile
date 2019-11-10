@@ -16,7 +16,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-4">
+        <div class="col-md-4 col-sm-6">
           <Animation direction="right">
             <Bubble
               icon="building"
@@ -25,8 +25,8 @@
             />
           </Animation>
         </div>
-        <div class="col-4">
-          <Animation direction="up">
+        <div class="col-md-4 col-sm-6">
+          <Animation direction="right">
             <Bubble
               text="158"
               title="Lorem Ipsum"
@@ -34,8 +34,8 @@
             />
           </Animation>
         </div>
-        <div class="col-4">
-          <Animation direction="left">
+        <div class="col-md-4 col-sm-6">
+          <Animation direction="right">
             <Bubble
               icon="history"
               title="Lorem Ipsum"
@@ -43,8 +43,8 @@
             />
           </Animation>
         </div>
-        <div class="col-6">
-          <Animation direction="up">
+        <div class="col-md-4 offset-md-2 col-sm-6">
+          <Animation direction="left">
             <Bubble
               icon="user"
               title="Lorem Ipsum"
@@ -52,8 +52,8 @@
             />
           </Animation>
         </div>
-        <div class="col-6">
-          <Animation direction="down">
+        <div class="col-md-4 offset-md-0 col-sm-6 offset-sm-3">
+          <Animation direction="left">
             <Bubble
               text="5000"
               title="Lorem Ipsum"
@@ -179,7 +179,7 @@
       />
     </div>
 
-    <div class="container px-0 py-4" id="licencias-sexo">
+    <div class="container px-0 py-4" id="">
       <div class="title">
         Horas pedidas vs Horas disponibles
       </div>
@@ -246,14 +246,14 @@
 
     <div class="container">
       <div class="row">
-        <div class="offset-2 col-4">
+        <div class="col-md-4 offset-md-2 col-sm-6">
           <Bubble
             icon="leaf"
             title="Lorem Ipsum"
             :description="lorem"
           />
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-sm-6">
           <Bubble
             text="158"
             title="Lorem Ipsum"
@@ -371,16 +371,12 @@ import { poblacionRegionDict } from '@/assets/data/poblacion';
 import establecimientos from '@/assets/data/establecimientos';
 import tiempoEsperaRegion from '@/assets/data/tiempoEspera';
 
-const pacientesRegionNorm = pacientesRegion.map(
-  x => ({ id: x.id, value: x.value / poblacionRegionDict[x.id], total: x.value }),
-);
 const licenciasRegionNorm = licenciasRegion.map(
   x => ({ id: x.id, value: x.value / poblacionRegionDict[x.id], total: x.value }),
 );
 
 const pacientesRegionDict = {};
 pacientesRegion.forEach((x) => { pacientesRegionDict[x.id] = x.value; });
-
 const licenciasPacienteRegion = licenciasRegion.map(
   x => ({ id: x.id, value: x.value / pacientesRegionDict[x.id], total: x.value }),
 );
@@ -403,7 +399,6 @@ export default {
   data() {
     return {
       licenciasTipoDesglose,
-      pacientesRegionNorm,
       licenciasRegionNorm,
       licenciasPacienteRegion,
       licenciasTipoSexo,

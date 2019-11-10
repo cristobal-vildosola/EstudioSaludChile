@@ -187,6 +187,7 @@ export default {
 
       // start hidden
       series.hidden = true;
+      this.appeared = false;
     },
 
     appearOnScroll({ going }) {

@@ -211,6 +211,7 @@ export default {
       for (let i = 0; i < this.values.length; i += 1) {
         createSeries(this.values[i].value, this.values[i].stacked);
       }
+      this.appeared = false;
 
       // Legend
       chart.legend = new am4charts.Legend();
