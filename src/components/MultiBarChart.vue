@@ -2,7 +2,7 @@
   <div
     :id='id'
     v-waypoint="{
-      active: animationActive,
+      active: animationActive && !calcPercent,
       callback: appearOnScroll,
       options: intersectionOptions,
     }"
@@ -265,9 +265,6 @@ export default {
 
   mounted() {
     this.drawChart();
-    if (!this.calcPercent) {
-      window.addEventListener('scroll', this.appearOnScroll, false);
-    }
     window.addEventListener('resize', this.rotateOnResize, false);
   },
 
