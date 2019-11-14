@@ -12,7 +12,7 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4maps from '@amcharts/amcharts4/maps';
 import am4themesAnimated from '@amcharts/amcharts4/themes/animated';
-import moonrisekingdom from '@amcharts/amcharts4/themes/moonrisekingdom';
+import dataviz from '@amcharts/amcharts4/themes/dataviz';
 
 // project objects
 import App from '@/App.vue';
@@ -22,7 +22,7 @@ import router from '@/router';
 Vue.use(VueWaypoint);
 
 am4core.useTheme(am4themesAnimated);
-am4core.useTheme(moonrisekingdom);
+am4core.useTheme(dataviz);
 
 Object.defineProperty(Vue.prototype, '$am4charts', { value: am4charts });
 Object.defineProperty(Vue.prototype, '$am4core', { value: am4core });

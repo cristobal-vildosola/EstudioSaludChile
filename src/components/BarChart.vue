@@ -61,6 +61,7 @@ export default {
     rotationBreakpoint: { type: Number, default: 1000 },
     rotatedHeight: { type: String, default: '90vh' },
 
+    colorOffset: { type: Number, default: 0 },
     animationDuration: { type: Number, default: 500 },
     animationActive: { type: Boolean, default: true },
   },
@@ -177,7 +178,7 @@ export default {
       // fill each column with a different color
       series.columns.template.strokeOpacity = 0;
       series.columns.template.adapter.add('fill',
-        (fill, target) => chart.colors.getIndex(target.dataItem.index + 3));
+        (fill, target) => chart.colors.getIndex(target.dataItem.index + this.colorOffset));
 
       // animations
       const duration = this.animationDuration / (this.data.length + 1);
