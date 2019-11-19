@@ -29,7 +29,7 @@ export default {
 }
 
 .bubble {
-  background: #e06e2e;
+  background: var(--main-color);
   color: #fff;
 
   margin: 1.5rem auto;
@@ -39,8 +39,6 @@ export default {
 
   line-height: 150px;
   font-size: 48px;
-
-  box-shadow: 0 0 0 0 rgba(0,0,0,0.0);
 }
 
 .bubble-title {

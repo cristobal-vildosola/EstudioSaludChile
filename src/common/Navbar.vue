@@ -7,9 +7,9 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbar">
-      <div class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <a class="nav-item nav-link" href="/">Home</a>
-        <a class="nav-item nav-link" href="/licencias">Licencias</a>
+      <div class="navbar-nav mt-2 mt-lg-0">
+        <router-link :to="{ name: 'home' }" class="nav-link">Inicio</router-link>
+        <router-link :to="{ name: 'licencias' }" class="nav-link">Licencias</router-link>
       </div>
     </div>
   </nav>
@@ -31,9 +31,28 @@ export default {
   border-bottom: 1px solid #ccc;
 }
 
+.nav-link {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: inherit;
+
+  padding: .5rem;
+  margin: 0 .5rem;
+
+  border-bottom: 3px solid white;
+}
+.nav-link:hover {
+  color: var(--main-color);
+}
+@media (min-width: 992px) {
+  .router-link-active {
+    border-color: var(--main-color);
+  }
+}
+
 .logo {
   height: 50px;
   width: auto;
-  margin-right: 4em;
+  margin-right: 3em;
 }
 </style>

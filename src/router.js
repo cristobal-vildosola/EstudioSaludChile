@@ -10,13 +10,13 @@ export default new Router({
 
   routes: [
     {
-      path: '',
-      name: 'Home',
-      component: Home,
-    },
-    {
       path: 'licencias',
       name: 'licencias',
+    },
+    {
+      path: '*',
+      name: 'home',
+      component: Home,
     },
   ],
 

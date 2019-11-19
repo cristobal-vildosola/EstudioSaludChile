@@ -1,3 +1,7 @@
+:root {
+  --main-color: #e06e2e;
+}
+
 #app {
   color: #4d4d4d;
   min-height: 100vh;
@@ -7,7 +11,7 @@
 
 .main-section {
   padding: 3rem;
-  background: #e06e2e;
+  background: var(--main-color);
   color: #eaeaea;
   text-align: center;
   width: 100%;
