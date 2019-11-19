@@ -345,13 +345,10 @@
         height="30rem"
       />
     </div>
-
-    <Footer />
   </div>
 </template>
 
 <script>
-import Footer from '@/common/Footer.vue';
 import Header from '@/common/Header.vue';
 import Sidebar from '@/common/Sidebar.vue';
 
@@ -385,7 +382,6 @@ export default {
   name: 'Start',
 
   components: {
-    Footer,
     Header,
     Sidebar,
     Animation,

@@ -1,5 +1,8 @@
-body {
+#app {
   color: #4d4d4d;
+  min-height: 100vh;
+  flex-direction: column;
+  display: flex;
 }
 
 .main-section {

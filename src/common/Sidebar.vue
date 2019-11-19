@@ -79,7 +79,7 @@ ul {
 /* sticky container of height 0 */
 .sidebar-container {
   position: sticky;
-  top: 0;
+  top: calc(51px + 1rem); /* navbar height */
   z-index: 1000;
   height: 0;
 }
