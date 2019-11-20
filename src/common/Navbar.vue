@@ -8,8 +8,25 @@
 
     <div class="collapse navbar-collapse" id="navbar">
       <div class="navbar-nav mt-2 mt-lg-0">
-        <router-link :to="{ name: 'home' }" class="nav-link">Inicio</router-link>
-        <router-link :to="{ name: 'licencias' }" class="nav-link">Licencias</router-link>
+        <router-link class="nav-link" :to="{ name: 'inicio' }">
+          Inicio
+        </router-link>
+
+        <router-link class="nav-link" :to="{ name: 'tiempos-espera' }">
+          Tiempos de espera
+        </router-link>
+
+        <router-link class="nav-link" :to="{ name: 'eficiencia-pabellones' }">
+          Eficiencia en Pabellones
+        </router-link>
+
+        <router-link class="nav-link" :to="{ name: 'gestion-hospitalaria' }">
+          Gestión Hospitalaria
+        </router-link>
+
+        <router-link class="nav-link" :to="{ name: 'licencias' }">
+          Licencias
+        </router-link>
       </div>
     </div>
   </nav>
@@ -32,11 +49,11 @@ export default {
 }
 
 .nav-link {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   line-height: 1;
   color: inherit;
 
-  padding: .5rem;
+  padding: .5rem 0 !important;
   margin: 0 .5rem;
 
   border-bottom: 3px solid white;

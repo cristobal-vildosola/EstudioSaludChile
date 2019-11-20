@@ -17,6 +17,10 @@
   width: 100%;
 }
 
+.main-section .title {
+  padding-bottom: 1rem;
+}
+
 .main-title, .main-subtitle, .title {
   font-weight: 300;
   line-height: 1.2;
@@ -40,6 +44,10 @@
 
 /* reduce size in smaller devices */
 @media (max-width: 1000px) {
+  .main-section {
+    padding: 1.5rem;
+  }
+
   .main-title {
     font-size: 3rem;
     padding-bottom: 1rem;
