@@ -185,23 +185,22 @@
 
     <div class="container px-0 py-4" id="oferta-demanda">
       <div class="title">
-        Horas pedidas vs Horas disponibles
+        Diferencias entre Oferta y Demanda de Quirófanos
       </div>
 
-      <MultiBarChart
-        :data="horasPedidasDisponibles"
+      <BarChart class="py-3"
+        :data="ofertaPor100Especialidad"
+
         category="especialidad"
-        :values="[
-          { value: 'pedidas', stacked: false },
-          { value: 'disponibles', stacked: false },
-        ]"
+        value="ofertaPor100"
 
-        valueTitle="horas"
-        valueFormat="#.#a"
-        :tooltipText="`{category}:
-                      [bold]{value}[/] horas {name}`"
+        :min="0"
+        :max="60"
 
-        :disableLegend="true"
+        valueTitle="horas disponibles por cada 100 horas demandadas"
+        valueFormat="#"
+        :tooltipText="`{especialidad}: [bold]{ofertaPor100}[/] horas`"
+
         :horizontal="true"
         height="30rem"
       />
@@ -232,10 +231,9 @@ import Sidebar from '@/common/Sidebar.vue';
 import Animation from '@/components/Animation.vue';
 import Bubble from '@/components/Bubble.vue';
 import BarChart from '@/components/BarChart.vue';
-import MultiBarChart from '@/components/MultiBarChart.vue';
 import ChileChart from '@/components/ChileChart.vue';
 
-import tiempoEsperaRegion from '@/assets/data/tiempoEspera';
+import { tiempoEsperaRegion, ofertaPor100Especialidad } from '@/assets/data/tiempoEspera';
 import {
   top20GES, top10GESQx, top10GESnoQx, top10noGES, top10noGESQx, horasPedidasDisponibles,
 } from '@/assets/data/casos';
@@ -249,7 +247,6 @@ export default {
     Bubble,
     ChileChart,
     BarChart,
-    MultiBarChart,
   },
 
   data() {
@@ -261,6 +258,7 @@ export default {
       top10noGESQx,
       horasPedidasDisponibles,
       tiempoEsperaRegion,
+      ofertaPor100Especialidad,
 
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     };

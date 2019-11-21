@@ -15,32 +15,38 @@ export default new Router({
 
   routes: [
     {
-      path: 'tiempos-espera',
+      path: '/',
+      name: 'inicio',
+      component: Inicio,
+    },
+
+    {
+      path: '/tiempos-espera',
       name: 'tiempos-espera',
       component: Tiempos,
     },
 
     {
-      path: 'eficiencia-pabellones',
+      path: '/eficiencia-pabellones',
       name: 'eficiencia-pabellones',
       component: Pabellones,
     },
 
     {
-      path: 'gestion-hospitalaria',
+      path: '/gestion-hospitalaria',
       name: 'gestion-hospitalaria',
       component: Gestion,
     },
 
     {
-      path: 'licencias',
+      path: '/licencias',
       name: 'licencias',
       component: Licencias,
     },
 
     {
-      path: '*',
-      name: 'inicio',
+      path: '/*',
+      name: 'catch-all',
       component: Inicio,
     },
   ],

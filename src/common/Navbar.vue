@@ -62,7 +62,7 @@ export default {
   color: var(--main-color);
 }
 @media (min-width: 992px) {
-  .router-link-active {
+  .router-link-exact-active {
     border-color: var(--main-color);
   }
 }

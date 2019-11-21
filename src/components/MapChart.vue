@@ -40,7 +40,6 @@ export default {
   mounted() {
     const am4core = this.$am4core;
     const am4maps = this.$am4maps;
-    const am4charts = this.$am4charts;
     const self = this;
 
     // create map, set projection and map geojson
@@ -122,7 +121,7 @@ export default {
     });
 
     // horizontal legend
-    const horLegend = map.createChild(am4charts.HeatLegend);
+    const horLegend = map.createChild(am4maps.HeatLegend);
     horLegend.series = polygonSeries;
     horLegend.minValue = this.minValue;
     horLegend.maxValue = this.maxValue;
@@ -137,7 +136,7 @@ export default {
     horLegend.valueAxis.renderer.labels.template.adapter.add('text', labelAdapter);
 
     // vertical legend
-    const vertLegend = map.createChild(am4charts.HeatLegend);
+    const vertLegend = map.createChild(am4maps.HeatLegend);
     vertLegend.orientation = 'vertical';
     vertLegend.series = polygonSeries;
     vertLegend.minValue = this.minValue;

@@ -105,7 +105,6 @@ tiempoEspera.forEach((e) => {
 });
 
 const tiempoEsperaRegion = [];
-
 Object.entries(regionServs).forEach(([id, servs]) => {
   const media = regionMedias[id].reduce((acc, c) => acc + c, 0) / regionAtenciones[id];
 
@@ -114,4 +113,19 @@ Object.entries(regionServs).forEach(([id, servs]) => {
   tiempoEsperaRegion.push({ id, value: media, medianas: servsText });
 });
 
-export default tiempoEsperaRegion;
+const ofertaPor100Especialidad = [
+  { especialidad: 'Obestreticia y ginecología', ofertaPor100: 58 },
+  { especialidad: 'Neurocirugía', ofertaPor100: 9 },
+  { especialidad: 'Traumatología y ortopedia', ofertaPor100: 6 },
+  { especialidad: 'Urología', ofertaPor100: 14 },
+  { especialidad: 'Oftalmología', ofertaPor100: 20 },
+  { especialidad: 'Dermatología', ofertaPor100: 18 },
+  { especialidad: 'Ottorinolaringología', ofertaPor100: 6 },
+  { especialidad: 'Cirugía cardiovascular', ofertaPor100: 1 },
+  { especialidad: 'Cirugía de cabeza, cuello y maxilofacial', ofertaPor100: 0.2 },
+  { especialidad: 'Cirugía plástica y reparadora', ofertaPor100: 0.2 },
+];
+
+export {
+  tiempoEsperaRegion, ofertaPor100Especialidad,
+};
