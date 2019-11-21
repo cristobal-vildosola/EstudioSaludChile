@@ -5,7 +5,6 @@ import Inicio from '@/views/Inicio.vue';
 import Gestion from '@/views/Gestion.vue';
 import Tiempos from '@/views/Tiempos.vue';
 import Pabellones from '@/views/Pabellones.vue';
-import Licencias from '@/views/Licencias.vue';
 
 Vue.use(Router);
 
@@ -36,12 +35,6 @@ export default new Router({
       path: '/gestion-hospitalaria',
       name: 'gestion-hospitalaria',
       component: Gestion,
-    },
-
-    {
-      path: '/licencias',
-      name: 'licencias',
-      component: Licencias,
     },
 
     {

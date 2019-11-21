@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="main-section header" id="licencias">
+    <div class="main-section header">
       <div class="container">
           <div class="title">
             Tiempos de espera

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="main-section header" id="licencias">
+    <div class="main-section header">
       <div class="container">
           <div class="title">
             Gestion Hospitalaria
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div class="container px-0 py-4" id="establecimientos">
+    <div class="container px-0 py-4">
       <div class="title">
         Establecimientos con quirófanos
       </div>

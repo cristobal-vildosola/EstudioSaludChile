@@ -23,10 +23,6 @@
         <router-link class="nav-link" :to="{ name: 'gestion-hospitalaria' }">
           Gestión Hospitalaria
         </router-link>
-
-        <router-link class="nav-link" :to="{ name: 'licencias' }">
-          Licencias
-        </router-link>
       </div>
     </div>
   </nav>
