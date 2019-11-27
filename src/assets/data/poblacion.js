@@ -16,11 +16,6 @@ const poblacionRegionDict = {
   'CL-MA': 166533,
 };
 
-const poblacionSexo = [
-  { id: 2, value: 8972014, name: 'Mujeres' },
-  { id: 1, value: 8601989, name: 'Hombres' },
-];
-
 export {
-  poblacionRegionDict, poblacionSexo,
+  poblacionRegionDict,
 };

@@ -147,9 +147,7 @@ import BarChart from '@/components/BarChart.vue';
 import ChileChart from '@/components/ChileChart.vue';
 
 import { tiempoEsperaRegion, ofertaPor100Especialidad } from '@/assets/data/tiempoEspera';
-import {
-  top20GES, top10GESQx, top10GESnoQx, top10noGES, top10noGESQx, horasPedidasDisponibles,
-} from '@/assets/data/casos';
+import { top10noGES, top10noGESQx } from '@/assets/data/casos';
 
 export default {
   name: 'Tiempos',
@@ -164,12 +162,8 @@ export default {
 
   data() {
     return {
-      top20GES,
-      top10GESQx,
-      top10GESnoQx,
       top10noGES,
       top10noGESQx,
-      horasPedidasDisponibles,
       tiempoEsperaRegion,
       ofertaPor100Especialidad,
 
