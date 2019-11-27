@@ -1,12 +1,14 @@
 <template>
   <div>
-    <MapChart
+    <Heatmap
       :mapGeojson="mapGeojson"
       :data="data"
       :logaritmic="logaritmic"
 
       :minColor="minColor"
+      :midColor="midColor"
       :maxColor="maxColor"
+
       :minValue="minValue"
       :maxValue="maxValue"
 
@@ -23,7 +25,7 @@
 </template>
 
 <script>
-import MapChart from './MapChart.vue';
+import Heatmap from './Heatmap.vue';
 import chileGeo from '@/assets/maps/chileGeo';
 
 function randomData() {
@@ -47,9 +49,9 @@ function randomData() {
 }
 
 export default {
-  name: 'ChileChart',
+  name: 'ChileHeatmap',
 
-  components: { MapChart },
+  components: { Heatmap },
 
   data() {
     return {
@@ -62,6 +64,7 @@ export default {
     logaritmic: { type: Boolean, default: false },
 
     minColor: { type: String },
+    midColor: { type: String },
     maxColor: { type: String },
     minValue: { type: Number },
     maxValue: { type: Number },

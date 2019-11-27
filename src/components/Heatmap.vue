@@ -3,8 +3,13 @@
 </template>
 
 <script>
+
+function clip(number, min, max) {
+  return Math.max(min, Math.min(max, number));
+}
+
 export default {
-  name: 'MapChart',
+  name: 'Heatmap',
 
   data() {
     return {
@@ -18,13 +23,15 @@ export default {
     data: { type: Array, required: true },
     logaritmic: { type: Boolean, default: false },
 
-    minColor: { type: String, default: '#fcde9c' },
-    maxColor: { type: String, default: '#d41111' },
+    minColor: { type: String, default: '#001a66' },
+    midColor: { type: String, default: '#cccccc' },
+    maxColor: { type: String, default: '#800002' },
+
     // when not provided use data low and high
     minValue: { type: Number },
     maxValue: { type: Number },
 
-    hoverColor: { type: String },
+    hover: { type: Boolean, default: true },
     tooltipText: { type: String, default: '{name}: {value}' },
     legendFormat: { type: String, default: '#.0a' },
 
@@ -97,11 +104,12 @@ export default {
     polygonTemplate.tooltipPosition = 'fixed';
     polygonSeries.tooltip.background.filters.clear();
     polygonSeries.tooltip.label.wrap = true;
+    polygonSeries.tooltip.dy = 10;
 
     // hover color
-    if (this.hoverColor) {
-      const hover = polygonTemplate.states.create('hover');
-      hover.properties.fill = this.hoverColor;
+    if (this.hover) {
+      const hoverState = polygonTemplate.states.create('hover');
+      hoverState.adapter.add('fill', fill => (fill.lighten(0.5)));
     }
 
     // background color
@@ -110,47 +118,81 @@ export default {
       map.background.fillOpacity = this.backgroundOpacity;
     }
 
-    // heatmap colors
-    polygonSeries.heatRules.push({
-      target: polygonTemplate,
-      property: 'fill',
-      minValue: this.minValue,
-      min: am4core.color(this.minColor),
-      maxValue: this.maxValue,
-      max: am4core.color(this.maxColor),
-    });
+    // Base colors for custom "heatRules" gradient
+    const heatColors = [
+      am4core.color(this.minColor),
+      am4core.color(this.midColor),
+      am4core.color(this.maxColor),
+    ];
+    const ranges = heatColors.length - 1;
 
-    // horizontal legend
-    const horLegend = map.createChild(am4maps.HeatLegend);
-    horLegend.series = polygonSeries;
-    horLegend.minValue = this.minValue;
-    horLegend.maxValue = this.maxValue;
-    // alignment
+    const maxValue = this.maxValue || Math.max(...this.data.map(e => e.value));
+    const minValue = this.minValue || Math.min(...this.data.map(e => e.value));
+
+    polygonSeries.mapPolygons.template.adapter.add('fill',
+      (fill, target) => {
+        const { workingValue } = target.dataItem.values.value;
+        const percent = (workingValue - minValue) / (maxValue - minValue);
+
+        const index = clip(Math.floor(percent * ranges), 0, ranges - 1);
+
+        if (am4core.type.isNumber(percent)) {
+          return new am4core.Color(am4core.colors.interpolate(
+            heatColors[index].rgb,
+            heatColors[index + 1].rgb,
+            (percent - index / ranges) * ranges,
+          ));
+        }
+
+        return fill;
+      });
+
+    function createHeatLegend() {
+      const heatLegend = map.createChild(am4maps.HeatLegend);
+      heatLegend.minValue = minValue;
+      heatLegend.maxValue = maxValue;
+
+      heatLegend.valueAxis.renderer.minGridDistance = 50;
+      heatLegend.valueAxis.renderer.labels.template.fontSize = '.8rem';
+      heatLegend.valueAxis.renderer.labels.template.adapter.add('text', labelAdapter);
+
+      return heatLegend;
+    }
+
+    const horLegend = createHeatLegend();
     horLegend.valign = 'bottom';
     horLegend.align = 'center';
-    horLegend.width = am4core.percent(30);
-    // style
+    horLegend.width = am4core.percent(50);
     horLegend.markerContainer.height = 20;
-    horLegend.valueAxis.renderer.minGridDistance = 50;
-    horLegend.valueAxis.renderer.labels.template.fontSize = '.8rem';
-    horLegend.valueAxis.renderer.labels.template.adapter.add('text', labelAdapter);
 
-    // vertical legend
-    const vertLegend = map.createChild(am4maps.HeatLegend);
+    const vertLegend = createHeatLegend();
     vertLegend.orientation = 'vertical';
-    vertLegend.series = polygonSeries;
-    vertLegend.minValue = this.minValue;
-    vertLegend.maxValue = this.maxValue;
-    // alignment
-    vertLegend.valign = 'middle';
     vertLegend.align = 'right';
+    vertLegend.valign = 'middle';
     vertLegend.height = am4core.percent(50);
-    // style
-    vertLegend.marginRight = 55;
     vertLegend.markerContainer.width = 20;
-    vertLegend.valueAxis.renderer.minGridDistance = 30;
-    vertLegend.valueAxis.renderer.labels.template.fontSize = '.8rem';
-    vertLegend.valueAxis.renderer.labels.template.adapter.add('text', labelAdapter);
+    vertLegend.marginRight = 55;
+
+    // Override heatLegend gradient
+    const gradient = new am4core.LinearGradient();
+    heatColors.forEach((color) => {
+      gradient.addColor(color);
+    });
+
+    function addFillReset(legend) {
+      // change when drawing is ready
+      legend.events.on('ready', () => {
+        legend.markers.getIndex(0).fill = gradient;
+      });
+      // change everytime size changes
+      legend.events.on('sizechanged', () => {
+        if (legend.markers.getIndex(0)) {
+          legend.markers.getIndex(0).fill = gradient;
+        }
+      });
+    }
+    addFillReset(vertLegend);
+    addFillReset(horLegend);
 
     // disable pan and zoom
     map.seriesContainer.draggable = false;
@@ -173,21 +215,22 @@ export default {
         map.deltaLatitude = 0;
         map.goHome();
 
+        // swap legends
         vertLegend.disabled = false;
         horLegend.disabled = true;
+        gradient.rotation = 270;
       } else {
         // horizontal
         map.svgContainer.htmlElement.style.height = self.height;
         map.deltaLatitude = self.rotationDeegres;
         map.goHome();
 
+        // swap legends
         vertLegend.disabled = true;
         horLegend.disabled = false;
+        gradient.rotation = 0;
       }
     });
-
-    // add css classes
-    am4core.options.autoSetClassName = true;
   },
 
   beforeDestroy() {
