@@ -21,7 +21,6 @@ export default {
   props: {
     mapGeojson: { type: Object, required: true },
     data: { type: Array, required: true },
-    logaritmic: { type: Boolean, default: false },
 
     minColor: { type: String, default: '#001a66' },
     midColor: { type: String, default: '#cccccc' },
@@ -55,40 +54,9 @@ export default {
     map.geodata = this.mapGeojson;
     this.map = map;
 
-    // number formats
-    map.numberFormatter.numberFormat = '#,###';
-    const LegendFormatter = new am4core.NumberFormatter();
-    LegendFormatter.numberFormat = this.legendFormat;
-
-    // copy data for default display
-    const processed = JSON.parse(JSON.stringify(this.data));
-
-    let { tooltipText } = this;
-    let labelAdapter = (labelText) => {
-      if (labelText) { return LegendFormatter.format(labelText.replace(/,/g, '')); }
-      return '';
-    };
-
-    if (this.logaritmic) {
-      // convert data to log scale
-      for (let i = 0; i < processed.length; i += 1) {
-        processed[i].real = processed[i].value;
-        processed[i].value = Math.log2(processed[i].value);
-      }
-
-      // fix tooltip to show original value
-      tooltipText = tooltipText.replace(/value/g, 'real');
-
-      // fix legend to show original value
-      labelAdapter = (labelText) => {
-        if (labelText) { return LegendFormatter.format(2 ** labelText.replace(/,/g, '')); }
-        return '';
-      };
-    }
-
     // set data
     const polygonSeries = map.series.push(new am4maps.MapPolygonSeries());
-    polygonSeries.data = processed;
+    polygonSeries.data = this.data;
     polygonSeries.useGeodata = true;
 
     // template to change data style
@@ -100,7 +68,7 @@ export default {
     polygonTemplate.stroke = '#000';
 
     // tooltip
-    polygonTemplate.tooltipText = tooltipText;
+    polygonTemplate.tooltipText = this.tooltipText;
     polygonTemplate.tooltipPosition = 'fixed';
     polygonSeries.tooltip.background.filters.clear();
     polygonSeries.tooltip.label.wrap = true;
@@ -133,7 +101,6 @@ export default {
       (fill, target) => {
         const { workingValue } = target.dataItem.values.value;
         const percent = (workingValue - minValue) / (maxValue - minValue);
-
         const index = clip(Math.floor(percent * ranges), 0, ranges - 1);
 
         if (am4core.type.isNumber(percent)) {
@@ -154,7 +121,8 @@ export default {
 
       heatLegend.valueAxis.renderer.minGridDistance = 50;
       heatLegend.valueAxis.renderer.labels.template.fontSize = '.8rem';
-      heatLegend.valueAxis.renderer.labels.template.adapter.add('text', labelAdapter);
+      heatLegend.numberFormatter =  new am4core.NumberFormatter();
+      heatLegend.numberFormatter.numberFormat = self.legendFormat;
 
       return heatLegend;
     }
@@ -180,11 +148,11 @@ export default {
     });
 
     function addFillReset(legend) {
-      // change when drawing is ready
+      // refill when drawing is ready
       legend.events.on('ready', () => {
         legend.markers.getIndex(0).fill = gradient;
       });
-      // change everytime size changes
+      // refill everytime size changes
       legend.events.on('sizechanged', () => {
         if (legend.markers.getIndex(0)) {
           legend.markers.getIndex(0).fill = gradient;

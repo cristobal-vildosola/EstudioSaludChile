@@ -3,7 +3,6 @@
     <Heatmap
       :mapGeojson="mapGeojson"
       :data="data"
-      :logaritmic="logaritmic"
 
       :minColor="minColor"
       :midColor="midColor"
@@ -61,7 +60,6 @@ export default {
 
   props: {
     data: { type: Array, default: randomData },
-    logaritmic: { type: Boolean, default: false },
 
     minColor: { type: String },
     midColor: { type: String },
