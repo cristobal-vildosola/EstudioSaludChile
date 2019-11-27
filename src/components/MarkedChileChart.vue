@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MarkedMapChart
+    <MarkedMap
       :mapGeojson="mapGeojson"
       :data="data"
 
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import MarkedMapChart from './MarkedMapChart.vue';
+import MarkedMap from './MarkedMap.vue';
 import chileGeo from '@/assets/maps/chileGeo';
 
 function randomData() {
@@ -52,7 +52,7 @@ function randomData() {
 export default {
   name: 'ChileChart',
 
-  components: { MarkedMapChart },
+  components: { MarkedMap },
 
   data() {
     return {

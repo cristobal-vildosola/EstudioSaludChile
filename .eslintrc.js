@@ -20,5 +20,6 @@ module.exports = {
   rules: {
     // allow console during development
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-param-reassign': ["error", { "props": false }]
   },
 };

@@ -271,6 +271,7 @@ export default {
   beforeDestroy() {
     if (this.chart) {
       this.chart.dispose();
+      window.removeEventListener('resize', this.rotateOnResize, false);
     }
   },
 };
