@@ -126,14 +126,36 @@
 
       <ChileChart class="py-3"
         :data="tiempoEsperaRegion"
+        heatValue="media"
+
         :tooltipText="`{name}:
-                      [bold]{value.formatNumber('.#')}[/] días de espera en promedio
+                      [bold]{media.formatNumber('.#')}[/] días de espera en promedio
                       [opacity: 0].[/]
                       mediana según servicio de salud
                       {medianas}`"
         legendFormat="#"
       />
+
+      <div class="title">
+        Detalle región Metropolitana
+      </div>
+
+      <div class="row">
+        <Heatmap class="py-3 col-lg-6"
+          :mapGeojson="metropolitanaGeo"
+          :data="tiempoEsperaComunasRM"
+          heatValue="media"
+          :minValue="300"
+
+          :tooltipText="`{nombre}:
+                        Servicio de salud {serv}
+                        {media} días de espera en promedio.
+                        El 50% de los pacientes espera {mediana} dias o más.`"
+          legendFormat="#"
+        />
+      </div>
     </div>
+
 
   </div>
 </template>
@@ -144,10 +166,14 @@ import Sidebar from '@/common/Sidebar.vue';
 import Animation from '@/components/Animation.vue';
 import Bubble from '@/components/Bubble.vue';
 import BarChart from '@/components/BarChart.vue';
+import Heatmap from '@/components/Heatmap.vue';
 import ChileChart from '@/components/ChileChart.vue';
 
-import { tiempoEsperaRegion, ofertaPor100Especialidad } from '@/assets/data/tiempoEspera';
+import {
+  tiempoEsperaRegion, ofertaPor100Especialidad, tiempoEsperaComunasRM,
+} from '@/assets/data/tiempoEspera';
 import { top10noGES, top10noGESQx } from '@/assets/data/casos';
+import metropolitanaGeo from '@/assets/maps/metropolitana';
 
 export default {
   name: 'Tiempos',
@@ -156,16 +182,20 @@ export default {
     Sidebar,
     Animation,
     Bubble,
+    Heatmap,
     ChileChart,
     BarChart,
   },
 
   data() {
     return {
+      metropolitanaGeo,
+
       top10noGES,
       top10noGESQx,
-      tiempoEsperaRegion,
       ofertaPor100Especialidad,
+      tiempoEsperaRegion,
+      tiempoEsperaComunasRM,
 
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     };

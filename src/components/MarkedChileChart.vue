@@ -27,7 +27,7 @@
 
 <script>
 import MarkedMap from './MarkedMap.vue';
-import chileGeo from '@/assets/maps/chileGeo';
+import chileGeo from '@/assets/maps/chile';
 
 function randomData() {
   return [

@@ -1,8 +1,9 @@
 <template>
   <div>
     <Heatmap
-      :mapGeojson="mapGeojson"
+      :mapGeojson="chileGeo"
       :data="data"
+      :heatValue="heatValue"
 
       :minColor="minColor"
       :midColor="midColor"
@@ -25,7 +26,7 @@
 
 <script>
 import Heatmap from './Heatmap.vue';
-import chileGeo from '@/assets/maps/chileGeo';
+import chileGeo from '@/assets/maps/chile';
 
 function randomData() {
   return [
@@ -54,12 +55,13 @@ export default {
 
   data() {
     return {
-      mapGeojson: chileGeo,
+      chileGeo,
     };
   },
 
   props: {
     data: { type: Array, default: randomData },
+    heatValue: { type: String },
 
     minColor: { type: String },
     midColor: { type: String },

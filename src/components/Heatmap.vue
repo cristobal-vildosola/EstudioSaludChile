@@ -21,6 +21,7 @@ export default {
   props: {
     mapGeojson: { type: Object, required: true },
     data: { type: Array, required: true },
+    heatValue: { type: String, default: 'value' },
 
     minColor: { type: String, default: '#001a66' },
     midColor: { type: String, default: '#cccccc' },
@@ -34,7 +35,7 @@ export default {
     tooltipText: { type: String, default: '{name}: {value}' },
     legendFormat: { type: String, default: '#.0a' },
 
-    height: { type: String, default: '50vh' },
+    height: { type: String, default: '30rem' },
     rotationBreakpoint: { type: Number, default: 0 },
     rotationDeegres: { type: Number, default: 0 },
     rotatedHeight: { type: String, default: '0' },
@@ -47,6 +48,7 @@ export default {
     const am4core = this.$am4core;
     const am4maps = this.$am4maps;
     const self = this;
+    const { heatValue } = this;
 
     // create map, set projection and map geojson
     const map = this.$am4core.create(`mapdiv_${this.div_id}`, am4maps.MapChart);
@@ -64,15 +66,14 @@ export default {
 
     // map stroke
     polygonTemplate.nonScalingStroke = true;
-    polygonTemplate.strokeWidth = 0.3;
-    polygonTemplate.stroke = '#000';
+    polygonTemplate.strokeWidth = 0.5;
+    polygonTemplate.stroke = '#fff';
 
     // tooltip
     polygonTemplate.tooltipText = this.tooltipText;
     polygonTemplate.tooltipPosition = 'fixed';
     polygonSeries.tooltip.background.filters.clear();
     polygonSeries.tooltip.label.wrap = true;
-    polygonSeries.tooltip.dy = 10;
 
     // hover color
     if (this.hover) {
@@ -94,21 +95,23 @@ export default {
     ];
     const ranges = heatColors.length - 1;
 
-    const maxValue = this.maxValue || Math.max(...this.data.map(e => e.value));
-    const minValue = this.minValue || Math.min(...this.data.map(e => e.value));
+    const maxValue = this.maxValue || Math.max(...this.data.map(e => e[heatValue]));
+    const minValue = this.minValue || Math.min(...this.data.map(e => e[heatValue]));
 
     polygonSeries.mapPolygons.template.adapter.add('fill',
       (fill, target) => {
-        const { workingValue } = target.dataItem.values.value;
-        const percent = (workingValue - minValue) / (maxValue - minValue);
-        const index = clip(Math.floor(percent * ranges), 0, ranges - 1);
+        if (target.dataItem.dataContext) {
+          const value = target.dataItem.dataContext[heatValue];
+          const percent = (value - minValue) / (maxValue - minValue);
+          const index = clip(Math.floor(percent * ranges), 0, ranges - 1);
 
-        if (am4core.type.isNumber(percent)) {
-          return new am4core.Color(am4core.colors.interpolate(
-            heatColors[index].rgb,
-            heatColors[index + 1].rgb,
-            (percent - index / ranges) * ranges,
-          ));
+          if (am4core.type.isNumber(percent)) {
+            return new am4core.Color(am4core.colors.interpolate(
+              heatColors[index].rgb,
+              heatColors[index + 1].rgb,
+              (percent - index / ranges) * ranges,
+            ));
+          }
         }
 
         return fill;
@@ -121,8 +124,12 @@ export default {
 
       heatLegend.valueAxis.renderer.minGridDistance = 50;
       heatLegend.valueAxis.renderer.labels.template.fontSize = '.8rem';
-      heatLegend.numberFormatter =  new am4core.NumberFormatter();
+      heatLegend.numberFormatter = new am4core.NumberFormatter();
       heatLegend.numberFormatter.numberFormat = self.legendFormat;
+
+      heatLegend.background.fill = am4core.color('#fff');
+      heatLegend.background.fillOpacity = 0.7;
+      heatLegend.padding(5, 5, 5, 5);
 
       return heatLegend;
     }
