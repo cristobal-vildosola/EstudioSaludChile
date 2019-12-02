@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueWaypoint from 'vue-waypoint';
 
 // styles
+import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/assets/fontawesome/css/all.min.css';
 import '@/assets/styles.css';
