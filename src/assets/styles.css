@@ -21,6 +21,17 @@
   padding-bottom: 1rem;
 }
 
+.header {
+  background-color: #f3f3f3;
+  color: #4d4d4d;
+}
+
+.header-logo {
+  max-width: 50%;
+  height: auto;
+  padding-top: 1.5rem;
+}
+
 .main-title, .main-subtitle, .title {
   font-weight: 300;
   line-height: 1.2;
