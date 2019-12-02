@@ -3,13 +3,33 @@ node_js:
   - "node"
 
 cache: npm
+install:
+  - pip install --user awscli
+  - npm install
 
 script: npm run build
 
+# erase old s3 contents before deploying
+before_deploy:
+  - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+  - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+  - aws s3 rm s3://estudio-salud-desarrollo --recursive --region sa-east-1
+
 deploy:
-  provider: pages
+  provider: s3
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: "estudio-salud-desarrollo"
+  region: "sa-east-1"
+  acl: public_read
+  cache_control: "max-age=86400"
   local_dir: dist
+
   on:
     branch: master
+
+# invalidate cloudfront distribution
+after_deploy:
+  - aws configure set preview.cloudfront true
+  - aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DIST_ID --paths "/*"

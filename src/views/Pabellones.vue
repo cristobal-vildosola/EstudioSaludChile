@@ -12,21 +12,12 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 offset-md-2 col-sm-6">
           <Animation direction="right">
             <Bubble
               icon="building"
               title="Lorem Ipsum"
               :description="lorem"
-            />
-          </Animation>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <Animation direction="right">
-            <Bubble
-              text="400"
-              title="Días de espera"
-              description="en la lista de espera no GES en promedio"
             />
           </Animation>
         </div>
