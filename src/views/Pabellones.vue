@@ -2,61 +2,72 @@
   <div>
     <div class="main-section header">
       <div class="container">
-          <div class="title">
+          <div class="main-title">
             Eficiencia en Pabellones
           </div>
-
-          <p>A continuación se muestran ...</p>
       </div>
     </div>
 
-    <div class="container">
+    <div class="section">
       <div class="row">
-        <div class="col-md-4 offset-md-2 col-sm-6">
-          <Animation direction="right">
-            <Bubble
-              icon="building"
-              title="Lorem Ipsum"
-              :description="lorem"
-            />
-          </Animation>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <Animation direction="right">
-            <Bubble
-              icon="history"
-              title="Lorem Ipsum"
-              :description="lorem"
-            />
-          </Animation>
-        </div>
-        <div class="col-md-4 offset-md-2 col-sm-6">
-          <Animation direction="left">
-            <Bubble
-              icon="user"
-              title="Lorem Ipsum"
-              :description="lorem"
-            />
-          </Animation>
-        </div>
-        <div class="col-md-4 offset-md-0 col-sm-6 offset-sm-3">
-          <Animation direction="left">
-            <Bubble
-              text="5000"
-              title="Lorem Ipsum"
-              :description="lorem"
-            />
-          </Animation>
-        </div>
+        <Animation direction="right" class="col-lg-4 col-sm-6">
+          <Bubble
+            text="9"
+            title="Horas de quirófano"
+            description="Es el tiempo disponible de un quirófano en Chile, pero mientras en Chile
+            el tiempo promedio de utilización es 4:48 horas, en el benchmarking (que dispone
+            también de 9 hrs) el tiempo promedio de utilización es 6:23 horas."
+          />
+        </Animation>
+
+        <Animation direction="right" class="col-lg-4 col-sm-6">
+          <Bubble
+            text="1,9"
+            title="Cirugías por quirófano"
+            description="Fue el promedio de cirugías electivas por quirófano en el hospital con
+            peor desempeño en Chile, mientras que en los hospitales del Benchmarking fue de 4,1
+            cirugías por quirófano."
+          />
+        </Animation>
+
+        <Animation direction="right" class="col-lg-4 col-sm-6">
+          <Bubble
+            text="09:36"
+            title=""
+            description="Fue el horario promedio de inicio de la primera cirugía en el hospital con
+            peor desempeño en Chile, mientras que en los hospitales del Benchmarking fue a las
+            09:00"
+          />
+        </Animation>
+
+        <Animation direction="left" class="col-lg-4 offset-lg-2 col-sm-6">
+          <Bubble
+            text="4,2"
+            title="Cirugías por quirófano"
+            description="Fue el promedio de cirugías electivas por quirófano en el hospital con
+            mejor desempeño en Chile, mientras que en los hospitales del Benchmarking fue de 7
+            cirugías por quirófano."
+          />
+        </Animation>
+
+        <Animation direction="left" class="col-lg-4 offset-lg-0 col-sm-6 offset-sm-3">
+          <Bubble
+            text="41%"
+            title="Uso de Quirófanos"
+            description="Fue el uso promedio de los quirófanos electivos  en el hospital con mejor
+            desempeño en Chile, mientras que en los hospitales del Benchmarking la mejor ocupación
+            promedio fue 67%."
+          />
+        </Animation>
       </div>
     </div>
 
-    <div class="container px-0 py-4">
+    <div class="section">
       <div class="title">
-        Proporción de quirófanos en trabajo
+        Tasa de ocupación de pabellones electivos según tablas quirúrgicas.
       </div>
 
-      <LineChart class="py-3"
+      <LineChart
         :data="quirofanosEnTrabajo"
 
         date="hora"
@@ -70,8 +81,12 @@
 
         height="30rem"
       />
-    </div>
 
+      <div class="description">
+        Muestra la tasa de uso real por hora (según tablas quirúrgicas) en 4 hospitales de alta
+        complejidad del país durante el 2017.
+      </div>
+    </div>
   </div>
 </template>
 
