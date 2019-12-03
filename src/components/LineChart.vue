@@ -91,6 +91,7 @@ export default {
       bullet.radius = 5;
       bullet.fill = am4core.color('#fff');
       bullet.tooltipText = this.tooltipText;
+      series.tooltip.pointerOrientation = 'vertical';
 
       // animations
       const duration = this.animationDuration / (this.data.length + 1);

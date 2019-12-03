@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-section header">
-      <div class="container">
+      <div class="section">
           <div class="main-title">
             Uso eficiente de quirófanos electivos y Gestión de Lista de Espera
           </div>
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="section">
       <div class="row">
         <Animation direction="right" class="col-lg-4 col-sm-6">
           <Bubble

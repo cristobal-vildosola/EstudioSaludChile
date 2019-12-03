@@ -1,16 +1,14 @@
 <template>
   <div>
     <div class="main-section header">
-      <div class="container">
-          <div class="title">
+      <div class="section">
+          <div class="main-title">
             Gestion Hospitalaria
           </div>
-
-          <p>A continuación se muestran ...</p>
       </div>
     </div>
 
-    <div class="container">
+    <div class="section">
       <div class="row">
         <div class="col-md-4 offset-md-2 col-sm-6">
           <Animation direction="right">
@@ -33,13 +31,13 @@
       </div>
     </div>
 
-    <div class="container px-0 py-4">
+    <div class="section">
       <div class="title">
         Establecimientos con quirófanos
       </div>
 
-      <MarkedChileChart class="py-3"
-        :data="establecimientos"
+      <MarkedChileChart
+        :markData="establecimientos"
         :remarkThreshold="10"
         remarkValue="quirofanos"
         remarkValueName="quirófanos"
@@ -49,8 +47,8 @@
                       {camas} camas`"
       />
 
-      <MarkedChileChart class="py-3"
-        :data="establecimientos"
+      <MarkedChileChart
+        :markData="establecimientos"
         :remarkThreshold="300"
         remarkValue="camas"
         remarkValueName="camas"

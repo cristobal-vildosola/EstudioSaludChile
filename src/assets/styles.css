@@ -10,15 +10,11 @@
 }
 
 .main-section {
-  padding: 3rem;
+  padding: 2rem 3rem;
   background: var(--main-color);
   color: #eaeaea;
   text-align: center;
   width: 100%;
-}
-
-.main-section .title {
-  padding-bottom: 1rem;
 }
 
 .header {
@@ -39,12 +35,11 @@
 
 .main-title {
   font-size: 6rem;
-  padding-bottom: 2rem;
 }
 
 .main-subtitle {
   font-size: 2rem;
-  padding-bottom: 1rem;
+  padding-top: 2rem;
 }
 
 .section {
@@ -71,17 +66,21 @@
   }
 
   .main-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     padding-bottom: 1rem;
   }
 
   .main-subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding-bottom: 0.5rem;
   }
 
+  .section {
+    padding: 0 1rem 1rem;
+  }
+
   .title {
-    font-size: 2rem;
-    padding: 1rem 3rem 1rem;
+    font-size: 1.5rem;
+    padding: 1rem 2rem 1rem;
   }
 }

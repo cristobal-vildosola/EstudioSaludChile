@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-section header">
-      <div class="container">
+      <div class="section">
           <div class="main-title">
             Eficiencia en Pabellones
           </div>

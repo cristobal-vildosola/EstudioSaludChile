@@ -2,7 +2,7 @@
   <div>
     <MarkedMap
       :mapGeojson="mapGeojson"
-      :data="data"
+      :markData="markData"
 
       :tooltipText="tooltipText"
 
@@ -61,7 +61,7 @@ export default {
   },
 
   props: {
-    data: { type: Array, default: randomData },
+    markData: { type: Array, default: randomData },
     tooltipText: { type: String, default: '{name}: {value}' },
 
     fillColor: { type: String },

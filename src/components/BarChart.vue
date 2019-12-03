@@ -162,18 +162,21 @@ export default {
       series.dataFields.categoryY = this.category;
 
       // tooltip changes
-      series.tooltip.pointerOrientation = 'left';
-      if (!horizontal) {
+      if (horizontal) {
+        series.tooltip.pointerOrientation = 'left';
+        series.columns.template.propertyFields.alwaysShowTooltip = 'showTooltip';
+      } else {
         series.tooltip.pointerOrientation = 'down';
       }
 
       // modify tooltip
       series.columns.template.tooltipText = this.tooltipText;
-      series.columns.template.propertyFields.alwaysShowTooltip = 'showTooltip';
       series.tooltip.getFillFromObject = false;
       series.tooltip.background.fill = am4core.color('#fff');
       series.tooltip.label.fill = am4core.color('#000');
-      series.tooltip.background.filters.clear();
+
+      series.tooltip.label.wrap = true;
+      series.tooltip.label.maxWidth = windWidth * 0.8;
 
       // fill each column with a different color
       series.columns.template.strokeOpacity = 0;

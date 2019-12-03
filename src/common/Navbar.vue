@@ -1,6 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg">
-    <img class="logo" width="117" height="50" src="@/assets/img/logo.png">
+    <router-link :to="{ name: 'inicio' }">
+      <img class="logo" width="117" height="50" src="@/assets/img/logo.png">
+    </router-link>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
       <i class="fas fa-bars"></i>
@@ -8,19 +10,23 @@
 
     <div class="collapse navbar-collapse" id="navbar">
       <div class="navbar-nav mt-2 mt-lg-0">
-        <router-link class="nav-link" :to="{ name: 'inicio' }">
+        <router-link :to="{ name: 'inicio' }"
+          class="nav-link" data-toggle="collapse" data-target="#navbar">
           Inicio
         </router-link>
 
-        <router-link class="nav-link" :to="{ name: 'tiempos-espera' }">
+        <router-link :to="{ name: 'tiempos-espera' }"
+          class="nav-link" data-toggle="collapse" data-target="#navbar">
           Tiempos de Espera
         </router-link>
 
-        <router-link class="nav-link" :to="{ name: 'eficiencia-pabellones' }">
+        <router-link :to="{ name: 'eficiencia-pabellones' }"
+          class="nav-link" data-toggle="collapse" data-target="#navbar">
           Eficiencia en Pabellones
         </router-link>
 
-        <router-link class="nav-link" :to="{ name: 'gestion-hospitalaria' }">
+        <router-link :to="{ name: 'gestion-hospitalaria' }"
+          class="nav-link" data-toggle="collapse" data-target="#navbar">
           Gestión Hospitalaria
         </router-link>
       </div>
@@ -57,15 +63,22 @@ export default {
 .nav-link:hover {
   color: var(--main-color);
 }
+
+.logo {
+  height: 35px;
+  width: auto;
+  margin-right: 3em;
+}
+
+/* only on large devices */
 @media (min-width: 992px) {
   .router-link-exact-active {
     border-color: var(--main-color);
   }
+
+  .logo {
+    height: 50px;
+  }
 }
 
-.logo {
-  height: 50px;
-  width: auto;
-  margin-right: 3em;
-}
 </style>

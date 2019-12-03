@@ -72,7 +72,6 @@ export default {
     // tooltip
     polygonTemplate.tooltipText = this.tooltipText;
     polygonTemplate.tooltipPosition = 'fixed';
-    polygonSeries.tooltip.background.filters.clear();
     polygonSeries.tooltip.label.wrap = true;
 
     // hover color
@@ -182,7 +181,7 @@ export default {
       const windHeight = window.innerHeight || document.documentElement.clientHeight;
       const windWidth = window.innerWidth || document.documentElement.clientWidth;
 
-      polygonSeries.tooltip.label.maxWidth = windWidth;
+      polygonSeries.tooltip.label.maxWidth = windWidth * 0.8;
 
       if (windWidth < windHeight && ev.target.pixelWidth < self.rotationBreakpoint) {
         // vertical

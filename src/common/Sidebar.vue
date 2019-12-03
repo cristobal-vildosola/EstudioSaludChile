@@ -104,11 +104,16 @@ ul {
 @media (max-width: 1000px) {
   .show-btn {
     left: .5rem;
+    top: .5rem;
 
     width: 2rem;
     height: 2rem;
     font-size: 1rem;
     padding: 1px 6px;
+  }
+
+  .sidebar-container {
+    top: calc(36px + 1rem); /* navbar height */
   }
 }
 

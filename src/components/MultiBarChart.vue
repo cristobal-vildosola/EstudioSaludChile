@@ -197,7 +197,9 @@ export default {
         series.tooltip.getFillFromObject = false;
         series.tooltip.background.fill = am4core.color('#fff');
         series.tooltip.label.fill = am4core.color('#000');
-        series.tooltip.background.filters.clear();
+
+        series.tooltip.label.wrap = true;
+        series.tooltip.label.maxWidth = windWidth * 0.8;
 
         // animations
         if (!self.calcPercent) {

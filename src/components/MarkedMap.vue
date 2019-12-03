@@ -15,7 +15,7 @@ export default {
 
   props: {
     mapGeojson: { type: Object, required: true },
-    data: { type: Array, required: true },
+    markData: { type: Array, required: true },
 
     tooltipText: { type: String, default: '{name}: {value}' },
 
@@ -67,22 +67,23 @@ export default {
     map.chartContainer.wheelable = false;
 
     map.zoomControl = new am4maps.ZoomControl();
-    map.zoomControl.slider.height = 200;
-    map.zoomControl.valign = 'center';
     map.zoomControl.orientation = 'vertical';
+    map.zoomControl.slider.height = 160;
+    map.zoomControl.valign = 'top';
+    map.zoomControl.align = 'right';
     map.maxZoomLevel = 200;
 
-    // add images
+    // add marks
     const imageSeries = map.series.push(new am4maps.MapImageSeries());
     const imageSeriesTemplate = imageSeries.mapImages.template;
 
-    imageSeries.data = this.data;
+    imageSeries.data = this.markData;
     imageSeriesTemplate.propertyFields.latitude = 'latitud';
     imageSeriesTemplate.propertyFields.longitude = 'longitud';
 
     const circle = imageSeriesTemplate.createChild(am4core.Circle);
     circle.stroke = am4core.color('#fff');
-    circle.strokeWidth = 0.7;
+    circle.strokeWidth = 1;
     circle.nonScaling = true;
     circle.tooltipText = this.tooltipText;
     imageSeries.tooltip.label.wrap = true;
@@ -129,12 +130,6 @@ export default {
         },
       ];
 
-      const cornerRadius = (radius, target) => {
-        if (target.dataItem && target.dataItem.dataContext) {
-          return 2 * target.dataItem.dataContext.radius;
-        }
-        return radius;
-      };
       const sizeAdapter = (size, target) => {
         if (target.dataItem && target.dataItem.dataContext) {
           return 4 * target.dataItem.dataContext.radius;
@@ -143,10 +138,8 @@ export default {
       };
 
       const marker = legend.markers.template.children.getIndex(0);
-      marker.adapter.add('cornerRadiusTopLeft', cornerRadius);
-      marker.adapter.add('cornerRadiusTopRight', cornerRadius);
-      marker.adapter.add('cornerRadiusBottomLeft', cornerRadius);
-      marker.adapter.add('cornerRadiusBottomRight', cornerRadius);
+      const radius = 4 * this.remarkRadius;
+      marker.cornerRadius(radius, radius, radius, radius);
       marker.adapter.add('pixelHeight', sizeAdapter);
       marker.adapter.add('pixelWidth', sizeAdapter);
 
@@ -164,7 +157,7 @@ export default {
       const windHeight = window.innerHeight || document.documentElement.clientHeight;
       const windWidth = window.innerWidth || document.documentElement.clientWidth;
 
-      imageSeries.tooltip.label.maxWidth = windWidth;
+      imageSeries.tooltip.label.maxWidth = windWidth * 0.8;
 
       if (windWidth < windHeight && ev.target.pixelWidth < self.rotationBreakpoint) {
         // vertical
@@ -178,9 +171,6 @@ export default {
         map.goHome();
       }
     });
-
-    // add css classes
-    am4core.options.autoSetClassName = true;
   },
 
   beforeDestroy() {
