@@ -2,11 +2,9 @@
   <div>
     <div class="main-section header">
       <div class="container">
-          <div class="title">
-            Tiempos de espera
+          <div class="main-title">
+            Tiempos de Espera
           </div>
-
-          <p>A continuación se muestran ...</p>
       </div>
     </div>
 
@@ -18,44 +16,61 @@
       }"
     />
 
-    <div class="container">
+    <div class="section">
       <div class="row">
-        <div class="col-md-4 col-sm-6">
-          <Animation direction="right">
-            <Bubble
-              icon="building"
-              title="Lorem Ipsum"
-              :description="lorem"
-            />
-          </Animation>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <Animation direction="right">
-            <Bubble
-              text="400"
-              title="Días de espera"
-              description="en la lista de espera no GES en promedio"
-            />
-          </Animation>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <Animation direction="right">
-            <Bubble
-              icon="history"
-              title="Lorem Ipsum"
-              :description="lorem"
-            />
-          </Animation>
-        </div>
+        <Animation direction="left" class="col-lg-4 col-sm-6">
+          <Bubble
+            text="765 días"
+            description="Es la brecha promedio para el grupo de 5 cirugías más demandadas, entre
+            el hospital que se demora menos y el que más demora en resolver estos casos."
+          />
+        </Animation>
+
+        <Animation direction="left" class="col-lg-4 col-sm-6">
+          <Bubble
+            text="550 días"
+            description="Es la brecha promedio para el grupo de 2 cirugías pediátricas más
+            demandadas, entre el hospital que se demora menos y el que más demora en resolver
+            estos casos."
+          />
+        </Animation>
+
+        <Animation direction="left" class="col-lg-4 col-sm-6">
+          <Bubble
+            text="63.284 casos"
+            description="No informan diagnóstico en la lista de espera. Por ejemplo 22.685
+            casos informan = “0”, 3.869 casos informan = “1”, mientras otros 1.866 casos dejan
+            vacío el espacio que solicita el diagnóstico del paciente."
+          />
+        </Animation>
+
+        <Animation direction="right" class="col-lg-4 offset-lg-2 col-sm-6">
+          <Bubble
+            text="2 años"
+            description="Es la brecha promedio para la resolución de un caso de hernioplastia,
+            entre el hospital que se demora menos y el que más demora en resolver estos casos."
+          />
+        </Animation>
+
+        <Animation direction="right" class="col-lg-4 offset-lg-0 col-sm-6 offset-sm-3">
+          <Bubble
+            text="90%"
+            title="de los casos en lista de espera"
+            description="hasta el 90% de los casos en la lista de espera (Circuncisiones,
+            hernioplastias, colecistectomías, safenectomias, resección de pterigion etc.) pudo
+            haber sido atendido en forma ambulatoria, por lo tanto sin la necesidad de
+            hospitalización."
+          />
+        </Animation>
       </div>
     </div>
 
-    <div class="container px-0 py-4" id="top10noGES">
+    <div class="section" id="top10noGES">
       <div class="title">
-        Top 10 casos no GES más antendidos
+        Top 10 demanda por atención de especialidad no GES
       </div>
 
-      <BarChart class="py-3"
+      <BarChart
         :data="top10noGES"
 
         category="enfermedad"
@@ -71,14 +86,19 @@
         :horizontal="true"
         height="30rem"
       />
+
+      <div class="description">
+        Corresponde a la estimación de la demanda y no quirúrgicas de la lista de espera no ges por
+        especialidad, para el periodo 2014-2017.
+      </div>
     </div>
 
-    <div class="container px-0 py-4" id="top10noGES-Qx">
+    <div class="section" id="top10noGES-Qx">
       <div class="title">
-        Top 10 casos no GES quirurjicos más antendidos
+        Top 10 casos no GES quirúrgicos más antendidos
       </div>
 
-      <BarChart class="py-3"
+      <BarChart
         :data="top10noGESQx"
 
         category="enfermedad"
@@ -96,12 +116,12 @@
       />
     </div>
 
-    <div class="container px-0 py-4" id="oferta-demanda">
+    <div class="section" id="oferta-demanda">
       <div class="title">
         Diferencias entre Oferta y Demanda de Quirófanos
       </div>
 
-      <BarChart class="py-3"
+      <BarChart
         :data="ofertaPor100Especialidad"
 
         category="especialidad"
@@ -119,12 +139,12 @@
       />
     </div>
 
-    <div class="container px-0 py-4" id="tiempo-espera">
+    <div class="section" id="tiempo-espera">
       <div class="title">
         Tiempo de espera en lista no GES (dias)
       </div>
 
-      <ChileChart class="py-3"
+      <ChileChart
         :data="tiempoEsperaRegion"
         heatValue="media"
 
@@ -136,12 +156,17 @@
         legendFormat="#"
       />
 
+      <div class="description">
+        El gráfico muestra los tiempos de espera (promedio de tiempo de espera y mediana) para
+        todas las regiones y servicios de salud del país.
+      </div>
+
       <div class="title">
         Detalle región Metropolitana
       </div>
 
       <div class="row">
-        <Heatmap class="py-3 col-lg-6"
+        <Heatmap class="col-lg-6"
           :mapGeojson="metropolitanaGeo"
           :data="tiempoEsperaComunasRM"
           heatValue="media"
@@ -153,6 +178,12 @@
                         El 50% de los pacientes espera {mediana} dias o más.`"
           legendFormat="#"
         />
+
+        <div class="col-lg-6">
+          <div class="description">
+            {{ lorem }}
+          </div>
+        </div>
       </div>
     </div>
 

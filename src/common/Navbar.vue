@@ -13,7 +13,7 @@
         </router-link>
 
         <router-link class="nav-link" :to="{ name: 'tiempos-espera' }">
-          Tiempos de espera
+          Tiempos de Espera
         </router-link>
 
         <router-link class="nav-link" :to="{ name: 'eficiencia-pabellones' }">

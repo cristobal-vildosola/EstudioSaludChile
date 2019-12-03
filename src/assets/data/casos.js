@@ -13,14 +13,14 @@ const top10noGES = [
 
 const top10noGESQx = [
   { enfermedad: 'Colecistectomía por videolaparoscopía', casos: 61699, Qx: true },
-  { enfermedad: 'Hernia inguinal, crural, umbilical, de la línea blanca o similares', casos: 54815, Qx: true },
+  { enfermedad: 'Hernioplastía', casos: 54815, Qx: true },
   { enfermedad: 'Amigdalectomía', casos: 46814, Qx: true },
   { enfermedad: 'Circuncisión', casos: 33073, Qx: true },
-  { enfermedad: 'Safenectomía unilateral, o endoablación.', casos: 29010, Qx: true },
-  { enfermedad: 'Pterigión y/o pseudopterigión o su recidiva, extirpación', casos: 22884, Qx: true },
-  { enfermedad: 'Ligadura o sección uni o bilateral de las trompas', casos: 17036, Qx: true },
+  { enfermedad: 'Safenectomía', casos: 29010, Qx: true },
+  { enfermedad: 'Extirpación de pterigión', casos: 22884, Qx: true },
+  { enfermedad: 'Ligadura de trompas', casos: 17036, Qx: true },
   { enfermedad: 'Endoprótesis total de rodilla', casos: 15999, Qx: true },
-  { enfermedad: 'Liberación quirúrgica de nervio periférico extracraneano (trat. quir. del Síndrome del Túnel Carpiano, tarso u otro)', casos: 15861, Qx: true },
+  { enfermedad: 'liberación del túnel carpiano', casos: 15861, Qx: true },
   { enfermedad: 'Cesárea', casos: 13932, Qx: true },
 ];
 

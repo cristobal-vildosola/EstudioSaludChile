@@ -5,7 +5,7 @@
     </button>
 
     <ul class="sidebar" :class="{ active : open }">
-      <div class="header">
+      <div class="sidebar-header">
         Secciones
         <button type="button" @click="switchState" class="btn collapse-btn">
           <i class="fas fa-arrow-left"></i>
@@ -130,12 +130,12 @@ ul {
 }
 
 /* header and close button */
-.sidebar .header {
+.sidebar-header {
   padding: .8rem;
   font-size: 1.4rem;
   background: #063467;
 }
-.sidebar .collapse-btn {
+.collapse-btn {
   position: absolute;
   color: #fff;
   right: 5px;

@@ -47,10 +47,21 @@
   padding-bottom: 1rem;
 }
 
+.section {
+  max-width: 1200px;
+  padding: 0 1rem 2rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .title {
   font-size: 2.5rem;
   text-align: center;
-  padding: 0 4rem;
+  padding: 1rem 4rem 2rem;
+}
+
+.description {
+  padding: 1rem;
 }
 
 /* reduce size in smaller devices */
@@ -71,6 +82,6 @@
 
   .title {
     font-size: 2rem;
-    padding: 0 3rem;
+    padding: 1rem 3rem 1rem;
   }
 }

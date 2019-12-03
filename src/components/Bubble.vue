@@ -1,8 +1,10 @@
 <template>
   <div class="bubble-item">
     <div class="bubble">
-      <i v-if="icon" :class="`fas fa-${icon}`"></i>
-      {{ text }}
+      <div class="bubble-text">
+        <i v-if="icon" :class="`fas fa-${icon}`"></i>
+        {{ text }}
+      </div>
     </div>
     <div v-if="title" class="bubble-title">{{ title }}</div>
     <div v-if="description" class="bubble-description">{{ description }}</div>
@@ -36,9 +38,16 @@ export default {
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  padding: 1rem;
 
-  line-height: 150px;
-  font-size: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bubble-text {
+  font-size: 2.5rem;
+  line-height: 1.2;
 }
 
 .bubble-title {
