@@ -45,18 +45,22 @@
         :tooltipText="`{nombre}:
                       {quirofanos} quirófanos
                       {camas} camas`"
+
+        :heatData="poblacionFonasa"
+        heatValue="qx_por_100000"
+        :heatTooltipText="`{name}:
+                          [bold]{qx_por_100000}[/] quirófanos por cada
+                          100.000 beneficiarios FONASA`"
+        minColor="#800002"
+        maxColor="#001a66"
       />
 
-      <MarkedChileChart
-        :markData="establecimientos"
-        :remarkThreshold="300"
-        remarkValue="camas"
-        remarkValueName="camas"
-
-        :tooltipText="`{nombre}:
-                      {quirofanos} quirófanos
-                      {camas} camas`"
-      />
+      <div class="description">
+        El mapa muestra todos los establecimientos públicos en Chile que poseen por lo menos un
+        quirófano disponible. Además, para cada región se calcula el número de quirófanos por cada
+        100.000 beneficiarios de FONASA, lo que se muestra utilizando la escala de color en la
+        parte inferior del gráfico.
+      </div>
     </div>
   </div>
 </template>
@@ -67,6 +71,7 @@ import Bubble from '@/components/Bubble.vue';
 import MarkedChileChart from '@/components/MarkedChileChart.vue';
 
 import establecimientos from '@/assets/data/establecimientos';
+import poblacionFonasa from '@/assets/data/poblacion';
 
 export default {
   name: 'Gestion',
@@ -80,6 +85,7 @@ export default {
   data() {
     return {
       establecimientos,
+      poblacionFonasa,
 
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     };

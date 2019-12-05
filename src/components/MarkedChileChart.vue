@@ -1,12 +1,8 @@
 <template>
   <div>
     <MarkedMap
-      :mapGeojson="mapGeojson"
+      :mapGeojson="chileGeo"
       :markData="markData"
-
-      :tooltipText="tooltipText"
-
-      :fillColor="fillColor"
 
       :markColor="markColor"
       :markRadius="markRadius"
@@ -16,6 +12,20 @@
       :remarkValueName="remarkValueName"
       :remarkColor="remarkColor"
       :remarkRadius="remarkRadius"
+
+      :tooltipText="tooltipText"
+
+      :fillColor="fillColor"
+
+      :heatData="heatData"
+      :heatValue="heatValue"
+      :heatTooltipText="heatTooltipText"
+      :minColor="minColor"
+      :midColor="midColor"
+      :maxColor="maxColor"
+
+      :minValue="minValue"
+      :maxValue="maxValue"
 
       :height="height"
       :rotationBreakpoint="rotationBreakpoint"
@@ -56,15 +66,13 @@ export default {
 
   data() {
     return {
-      mapGeojson: chileGeo,
+      chileGeo,
     };
   },
 
   props: {
     markData: { type: Array, default: randomData },
-    tooltipText: { type: String, default: '{name}: {value}' },
 
-    fillColor: { type: String },
     markColor: { type: String },
     markRadius: { type: Number },
 
@@ -73,6 +81,22 @@ export default {
     remarkValueName: { type: String },
     remarkColor: { type: String },
     remarkRadius: { type: Number },
+
+    tooltipText: { type: String },
+
+    fillColor: { type: String },
+
+    heatData: { type: Array },
+    heatValue: { type: String },
+    heatTooltipText: { type: String },
+    minColor: { type: String },
+    midColor: { type: String },
+    maxColor: { type: String },
+
+    minValue: { type: Number },
+    maxValue: { type: Number },
+
+    legendFormat: { type: String },
 
     height: { type: String, default: '28vw' },
     rotationBreakpoint: { type: Number, default: 800 },

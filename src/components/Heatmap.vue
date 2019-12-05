@@ -97,7 +97,7 @@ export default {
     const maxValue = this.maxValue || Math.max(...this.data.map(e => e[heatValue]));
     const minValue = this.minValue || Math.min(...this.data.map(e => e[heatValue]));
 
-    polygonSeries.mapPolygons.template.adapter.add('fill',
+    polygonTemplate.adapter.add('fill',
       (fill, target) => {
         if (target.dataItem.dataContext) {
           const value = target.dataItem.dataContext[heatValue];
