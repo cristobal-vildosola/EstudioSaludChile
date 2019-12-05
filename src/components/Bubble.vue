@@ -1,8 +1,8 @@
 <template>
   <div class="bubble-item">
     <div class="bubble">
+      <i v-if="icon" :class="`bubble-icon fas fa-${icon}`"></i>
       <div class="bubble-text">
-        <i v-if="icon" :class="`fas fa-${icon}`"></i>
         {{ text }}
       </div>
     </div>
@@ -43,6 +43,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.bubble-icon {
+  font-size: 3rem;
 }
 
 .bubble-text {

@@ -181,7 +181,6 @@
 
         <div class="col-lg-6">
           <div class="description">
-            {{ lorem }}
           </div>
         </div>
       </div>
@@ -226,8 +225,6 @@ export default {
       ofertaPor100Especialidad,
       tiempoEsperaRegion,
       tiempoEsperaComunasRM,
-
-      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     };
   },
 };
