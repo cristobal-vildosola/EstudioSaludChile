@@ -55,7 +55,6 @@
         <Animation direction="right" class="col-lg-4 offset-lg-0 col-sm-6 offset-sm-3">
           <Bubble
             text="90%"
-            title="de los casos en lista de espera"
             description="hasta el 90% de los casos en la lista de espera (Circuncisiones,
             hernioplastias, colecistectomías, safenectomias, resección de pterigion etc.) pudo
             haber sido atendido en forma ambulatoria, por lo tanto sin la necesidad de

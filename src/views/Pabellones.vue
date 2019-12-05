@@ -12,8 +12,8 @@
       <div class="row">
         <Animation direction="right" class="col-lg-4 col-sm-6">
           <Bubble
-            text="9"
-            title="Horas de quirófano"
+            icon="hourglass"
+            title="9 Horas de quirófano"
             description="Es el tiempo disponible de un quirófano en Chile, pero mientras en Chile
             el tiempo promedio de utilización es 4:48 horas, en el benchmarking (que dispone
             también de 9 hrs) el tiempo promedio de utilización es 6:23 horas."
@@ -22,8 +22,8 @@
 
         <Animation direction="right" class="col-lg-4 col-sm-6">
           <Bubble
-            text="1,9"
-            title="Cirugías por quirófano"
+            icon="user-md"
+            title="1,9 Cirugías por quirófano"
             description="Fue el promedio de cirugías electivas por quirófano en el hospital con
             peor desempeño en Chile, mientras que en los hospitales del Benchmarking fue de 4,1
             cirugías por quirófano."
@@ -32,21 +32,21 @@
 
         <Animation direction="right" class="col-lg-4 col-sm-6">
           <Bubble
-            text="09:36"
-            title=""
-            description="Fue el horario promedio de inicio de la primera cirugía en el hospital con
-            peor desempeño en Chile, mientras que en los hospitales del Benchmarking fue a las
-            09:00"
+            text="4,2"
+            title="Cirugías por quirófano"
+            description="Fue el promedio de cirugías electivas por quirófano en el hospital con
+            mejor desempeño en Chile, mientras que en los hospitales del Benchmarking el mejor fue
+            de 7 cirugías por quirófano."
           />
         </Animation>
 
         <Animation direction="left" class="col-lg-4 offset-lg-2 col-sm-6">
           <Bubble
-            text="4,2"
-            title="Cirugías por quirófano"
-            description="Fue el promedio de cirugías electivas por quirófano en el hospital con
-            mejor desempeño en Chile, mientras que en los hospitales del Benchmarking fue de 7
-            cirugías por quirófano."
+            text="09:36"
+            title=""
+            description="Fue el horario promedio de inicio de la primera cirugía en el hospital con
+            peor desempeño en Chile, mientras que en los hospitales del Benchmarking fue a las
+            09:00"
           />
         </Animation>
 
