@@ -57,7 +57,7 @@ export default {
       },
     },
 
-    height: { type: String, default: '50vh' },
+    height: { type: String, default: '30rem' },
     rotationBreakpoint: { type: Number, default: 1000 },
     rotatedHeight: { type: String, default: '90vh' },
 

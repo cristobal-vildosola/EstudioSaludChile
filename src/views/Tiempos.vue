@@ -83,7 +83,6 @@
                       [bold]{casos}[/] atenciones`"
 
         :horizontal="true"
-        height="30rem"
       />
 
       <div class="description">
@@ -111,7 +110,6 @@
                       [bold]{casos}[/] atenciones`"
 
         :horizontal="true"
-        height="30rem"
       />
     </div>
 
@@ -134,7 +132,6 @@
         :tooltipText="`{especialidad}: [bold]{ofertaPor100}[/] horas`"
 
         :horizontal="true"
-        height="30rem"
       />
     </div>
 

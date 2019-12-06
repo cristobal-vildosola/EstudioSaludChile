@@ -39,6 +39,7 @@ export default {
 
     category: { type: String, default: 'category' },
     categoryTitle: { type: String },
+    hideCategory: { type: Boolean, default: false },
 
     valueTitle: { type: String },
     valueFormat: { type: String, default: '#' },
@@ -62,7 +63,7 @@ export default {
       },
     },
 
-    height: { type: String, default: '50vh' },
+    height: { type: String, default: '30rem' },
     rotationBreakpoint: { type: Number, default: 1000 },
     rotatedHeight: { type: String, default: '90vh' },
 
@@ -108,6 +109,7 @@ export default {
       categoryAxis.title.text = this.categoryTitle;
       categoryAxis.title.fontSize = '1rem';
       categoryAxis.fontSize = '.8rem';
+      categoryAxis.renderer.labels.template.disabled = this.hideCategory;
 
       categoryAxis.renderer.line.strokeOpacity = 1;
       categoryAxis.renderer.grid.template.disabled = true;
@@ -162,7 +164,7 @@ export default {
       const self = this;
       this.series = [];
 
-      function createSeries(field, stacked = true) {
+      function createSeries(field, stacked = false, legend = '{name}') {
         const series = chart.series.push(new am4charts.ColumnSeries());
         series.stacked = stacked || self.calcPercent;
         self.series.push(series);
@@ -174,6 +176,7 @@ export default {
         series.dataFields.category = self.category;
         series.dataFields.categoryX = self.category;
         series.dataFields.categoryY = self.category;
+        series.legendSettings.labelText = legend;
 
         if (self.calcPercent) {
           series.dataFields.valueYShow = 'totalPercent';
@@ -214,7 +217,7 @@ export default {
       }
 
       for (let i = 0; i < this.values.length; i += 1) {
-        createSeries(this.values[i].value, this.values[i].stacked);
+        createSeries(this.values[i].value, this.values[i].stacked, this.values[i].legend);
       }
       this.appeared = false;
 
