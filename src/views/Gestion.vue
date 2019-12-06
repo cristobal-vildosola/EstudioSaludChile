@@ -72,8 +72,9 @@ import Animation from '@/components/Animation.vue';
 import Bubble from '@/components/Bubble.vue';
 import MarkedChileChart from '@/components/MarkedChileChart.vue';
 
-import establecimientos from '@/assets/data/establecimientos';
-import poblacionFonasa from '@/assets/data/poblacion';
+import {
+  establecimientos, poblacionFonasa,
+} from '@/assets/data/gestion';
 
 export default {
   name: 'Gestion',

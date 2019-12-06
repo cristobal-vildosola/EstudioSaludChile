@@ -95,7 +95,7 @@ import Animation from '@/components/Animation.vue';
 import Bubble from '@/components/Bubble.vue';
 import LineChart from '@/components/LineChart.vue';
 
-import quirofanosEnTrabajo from '@/assets/data/pabellones';
+import { quirofanosEnTrabajo } from '@/assets/data/pabellones';
 
 export default {
   name: 'Pabellones',

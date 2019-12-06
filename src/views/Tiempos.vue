@@ -197,11 +197,10 @@ import BarChart from '@/components/BarChart.vue';
 import Heatmap from '@/components/Heatmap.vue';
 import ChileChart from '@/components/ChileChart.vue';
 
-import {
-  tiempoEsperaRegion, ofertaPor100Especialidad, tiempoEsperaComunasRM,
-} from '@/assets/data/tiempoEspera';
-import { top10noGES, top10noGESQx } from '@/assets/data/casos';
 import metropolitanaGeo from '@/assets/maps/metropolitana';
+import {
+  tiempoEsperaRegion, ofertaPor100Especialidad, tiempoEsperaComunasRM, top10noGES, top10noGESQx,
+} from '@/assets/data/tiempoEspera';
 
 export default {
   name: 'Tiempos',

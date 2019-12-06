@@ -355,4 +355,216 @@ const establecimientos = [
 // sort in ascending order
 establecimientos.sort((a, b) => (a.quirofanos - b.quirofanos));
 
-export default establecimientos;
+const poblacionFonasa = [
+  {
+    id: 'CL-AP', poblacionFonasa: 170138, qx: 7, qx_por_100000: 4.11,
+  }, {
+    id: 'CL-TA', poblacionFonasa: 255648, qx: 9, qx_por_100000: 3.52,
+  }, {
+    id: 'CL-AN', poblacionFonasa: 425217, qx: 18, qx_por_100000: 4.23,
+  }, {
+    id: 'CL-AT', poblacionFonasa: 243857, qx: 14, qx_por_100000: 5.74,
+  }, {
+    id: 'CL-CO', poblacionFonasa: 639173, qx: 24, qx_por_100000: 3.75,
+  }, {
+    id: 'CL-VS', poblacionFonasa: 1433738, qx: 47, qx_por_100000: 3.28,
+  }, {
+    id: 'CL-RM', poblacionFonasa: 5140381, qx: 250, qx_por_100000: 4.86,
+  }, {
+    id: 'CL-LI', poblacionFonasa: 754941, qx: 45, qx_por_100000: 5.96,
+  }, {
+    id: 'CL-ML', poblacionFonasa: 887330, qx: 47, qx_por_100000: 5.30,
+  }, {
+    id: 'CL-BI', poblacionFonasa: 1732606, qx: 84, qx_por_100000: 4.85,
+  }, {
+    id: 'CL-AR', poblacionFonasa: 824215, qx: 33, qx_por_100000: 4.00,
+  }, {
+    id: 'CL-LR', poblacionFonasa: 301929, qx: 24, qx_por_100000: 7.95,
+  }, {
+    id: 'CL-LL', poblacionFonasa: 720035, qx: 37, qx_por_100000: 5.14,
+  }, {
+    id: 'CL-AI', poblacionFonasa: 87382, qx: 7, qx_por_100000: 8.01,
+  }, {
+    id: 'CL-MA', poblacionFonasa: 126697, qx: 12, qx_por_100000: 9.47,
+  },
+];
+
+const estanciaCole = [
+  { hospital: 110120, estancia: 1, N: 368 },
+  { hospital: 111100, estancia: 1, N: 85 },
+  { hospital: 117102, estancia: 1, N: 121 },
+  { hospital: 133150, estancia: 1, N: 39 },
+  { hospital: 128109, estancia: 1, N: 196 },
+  { hospital: 114101, estancia: 1, N: 396 },
+  { hospital: 115100, estancia: 1, N: 90 },
+  { hospital: 116100, estancia: 1, N: 321 },
+  { hospital: 116108, estancia: 1, N: 252 },
+  { hospital: 125100, estancia: 1, N: 86 },
+  { hospital: 108101, estancia: 1, N: 208 },
+  { hospital: 113150, estancia: 1, N: 51 },
+  { hospital: 115107, estancia: 1, N: 193 },
+  { hospital: 119100, estancia: 1, N: 222 },
+  { hospital: 129100, estancia: 1, N: 170 },
+  { hospital: 101100, estancia: 1, N: 246 },
+  { hospital: 103101, estancia: 1, N: 103 },
+  { hospital: 104103, estancia: 1, N: 161 },
+  { hospital: 115110, estancia: 1, N: 38 },
+  { hospital: 110130, estancia: 1, N: 129 },
+  { hospital: 105100, estancia: 1, N: 176 },
+  { hospital: 114105, estancia: 1.5, N: 102 },
+  { hospital: 106102, estancia: 2, N: 150 },
+  { hospital: 108100, estancia: 2, N: 282 },
+  { hospital: 110150, estancia: 2, N: 72 },
+  { hospital: 112100, estancia: 2, N: 53 },
+  { hospital: 112101, estancia: 2, N: 219 },
+  { hospital: 116105, estancia: 2, N: 196 },
+  { hospital: 116110, estancia: 2, N: 96 },
+  { hospital: 118105, estancia: 2, N: 160 },
+  { hospital: 121114, estancia: 2, N: 173 },
+  { hospital: 123100, estancia: 2, N: 257 },
+  { hospital: 122100, estancia: 2, N: 80 },
+  { hospital: 103100, estancia: 2, N: 72 },
+  { hospital: 106100, estancia: 2, N: 36 },
+  { hospital: 107100, estancia: 2, N: 100 },
+  { hospital: 110100, estancia: 2, N: 292 },
+  { hospital: 120101, estancia: 2, N: 368 },
+  { hospital: 126100, estancia: 2, N: 164 },
+  { hospital: 105101, estancia: 2, N: 114 },
+  { hospital: 105102, estancia: 2, N: 111 },
+  { hospital: 117101, estancia: 2, N: 527 },
+  { hospital: 121109, estancia: 2, N: 127 },
+  { hospital: 124105, estancia: 2, N: 188 },
+  { hospital: 113180, estancia: 2, N: 173 },
+  { hospital: 118100, estancia: 2, N: 289 },
+  { hospital: 104100, estancia: 2.5, N: 132 },
+  { hospital: 111195, estancia: 3, N: 110 },
+  { hospital: 129106, estancia: 3, N: 117 },
+  { hospital: 111101, estancia: 3, N: 191 },
+  { hospital: 106103, estancia: 3, N: 134 },
+  { hospital: 107101, estancia: 3, N: 177 },
+  { hospital: 107102, estancia: 4, N: 50 },
+  { hospital: 113100, estancia: 4, N: 230 },
+  { hospital: 102100, estancia: 5, N: 242 },
+  { hospital: 109100, estancia: 5, N: 312 },
+];
+
+const estanciaPrVsUr = [
+  {
+    hospital: 108100, estanciaUr: 2, nUr: 63, estanciaPr: 2, nPr: 219,
+  },
+  {
+    hospital: 112101, estanciaUr: 2, nUr: 136, estanciaPr: 1, nPr: 83,
+  },
+  {
+    hospital: 114101, estanciaUr: 2, nUr: 201, estanciaPr: 1, nPr: 195,
+  },
+  {
+    hospital: 114105, estanciaUr: 2, nUr: 65, estanciaPr: 1, nPr: 37,
+  },
+  {
+    hospital: 116105, estanciaUr: 2, nUr: 78, estanciaPr: 2, nPr: 118,
+  },
+  {
+    hospital: 116108, estanciaUr: 2, nUr: 77, estanciaPr: 1, nPr: 175,
+  },
+  {
+    hospital: 119100, estanciaUr: 2, nUr: 64, estanciaPr: 1, nPr: 158,
+  },
+  {
+    hospital: 122100, estanciaUr: 2, nUr: 48, estanciaPr: 2, nPr: 32,
+  },
+  {
+    hospital: 123100, estanciaUr: 2, nUr: 125, estanciaPr: 2, nPr: 132,
+  },
+  {
+    hospital: 107100, estanciaUr: 3, nUr: 70, estanciaPr: 2, nPr: 30,
+  },
+  {
+    hospital: 111101, estanciaUr: 3, nUr: 153, estanciaPr: 1, nPr: 38,
+  },
+  {
+    hospital: 115100, estanciaUr: 3, nUr: 47, estanciaPr: 1, nPr: 43,
+  },
+  {
+    hospital: 116100, estanciaUr: 3, nUr: 138, estanciaPr: 1, nPr: 183,
+  },
+  {
+    hospital: 117101, estanciaUr: 3, nUr: 297, estanciaPr: 1, nPr: 230,
+  },
+  {
+    hospital: 121109, estanciaUr: 3, nUr: 71, estanciaPr: 1, nPr: 56,
+  },
+  {
+    hospital: 124105, estanciaUr: 3.5, nUr: 96, estanciaPr: 1, nPr: 92,
+  },
+  {
+    hospital: 104103, estanciaUr: 4, nUr: 66, estanciaPr: 1, nPr: 95,
+  },
+  {
+    hospital: 110100, estanciaUr: 4, nUr: 172, estanciaPr: 1, nPr: 120,
+  },
+  {
+    hospital: 115107, estanciaUr: 4, nUr: 55, estanciaPr: 1, nPr: 138,
+  },
+  {
+    hospital: 118100, estanciaUr: 4, nUr: 193, estanciaPr: 1, nPr: 96,
+  },
+  {
+    hospital: 120101, estanciaUr: 4, nUr: 183, estanciaPr: 1, nPr: 185,
+  },
+  {
+    hospital: 126100, estanciaUr: 4, nUr: 85, estanciaPr: 1, nPr: 79,
+  },
+  {
+    hospital: 105101, estanciaUr: 5, nUr: 66, estanciaPr: 1, nPr: 48,
+  },
+  {
+    hospital: 105102, estanciaUr: 5, nUr: 50, estanciaPr: 1, nPr: 61,
+  },
+  {
+    hospital: 106103, estanciaUr: 5, nUr: 101, estanciaPr: 1, nPr: 33,
+  },
+  {
+    hospital: 113180, estanciaUr: 5, nUr: 83, estanciaPr: 1, nPr: 90,
+  },
+  {
+    hospital: 129100, estanciaUr: 5, nUr: 49, estanciaPr: 1, nPr: 121,
+  },
+  {
+    hospital: 103100, estanciaUr: 5.5, nUr: 38, estanciaPr: 2, nPr: 34,
+  },
+  {
+    hospital: 101100, estanciaUr: 6, nUr: 94, estanciaPr: 1, nPr: 152,
+  },
+  {
+    hospital: 102100, estanciaUr: 6, nUr: 212, estanciaPr: 1, nPr: 30,
+  },
+  {
+    hospital: 108101, estanciaUr: 6, nUr: 61, estanciaPr: 1, nPr: 147,
+  },
+  {
+    hospital: 103101, estanciaUr: 8, nUr: 34, estanciaPr: 1, nPr: 69,
+  },
+  {
+    hospital: 106102, estanciaUr: 8, nUr: 31, estanciaPr: 2, nPr: 119,
+  },
+  {
+    hospital: 107101, estanciaUr: 8, nUr: 92, estanciaPr: 1, nPr: 85,
+  },
+  {
+    hospital: 104100, estanciaUr: 10.5, nUr: 66, estanciaPr: 1, nPr: 66,
+  },
+  {
+    hospital: 105100, estanciaUr: 11, nUr: 40, estanciaPr: 1, nPr: 136,
+  },
+  {
+    hospital: 109100, estanciaUr: 11, nUr: 175, estanciaPr: 1, nPr: 137,
+  },
+  {
+    hospital: 113100, estanciaUr: 11, nUr: 141, estanciaPr: 1, nPr: 89,
+  },
+];
+
+export {
+  establecimientos, poblacionFonasa, estanciaCole, estanciaPrVsUr,
+};
