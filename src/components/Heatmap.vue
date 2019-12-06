@@ -38,7 +38,7 @@ export default {
     height: { type: String, default: '30rem' },
     rotationBreakpoint: { type: Number, default: 0 },
     rotationDeegres: { type: Number, default: 0 },
-    rotatedHeight: { type: String, default: '0' },
+    rotatedHeight: { type: String, default: '90vh' },
 
     backgroundColor: { type: String },
     backgroundOpacity: { type: Number, default: 1 },
@@ -128,7 +128,7 @@ export default {
 
       heatLegend.background.fill = am4core.color('#fff');
       heatLegend.background.fillOpacity = 0.7;
-      heatLegend.padding(5, 5, 5, 5);
+      heatLegend.padding(10, 10, 10, 10);
 
       return heatLegend;
     }
@@ -138,6 +138,7 @@ export default {
     horLegend.align = 'center';
     horLegend.width = am4core.percent(50);
     horLegend.markerContainer.height = 20;
+    horLegend.marginBottom = 10;
 
     const vertLegend = createHeatLegend();
     vertLegend.orientation = 'vertical';
@@ -145,7 +146,8 @@ export default {
     vertLegend.valign = 'middle';
     vertLegend.height = am4core.percent(50);
     vertLegend.markerContainer.width = 20;
-    vertLegend.marginRight = 55;
+    vertLegend.paddingRight = 40;
+    vertLegend.marginRight = 20;
 
     // Override heatLegend gradient
     const gradient = new am4core.LinearGradient();

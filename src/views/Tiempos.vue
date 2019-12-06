@@ -173,6 +173,8 @@
                         {media} días de espera en promedio.
                         El 50% de los pacientes espera {mediana} dias o más.`"
           legendFormat="#"
+          :rotationBreakpoint="1000"
+          rotatedHeight="100vw"
         />
 
         <div class="col-lg-6">

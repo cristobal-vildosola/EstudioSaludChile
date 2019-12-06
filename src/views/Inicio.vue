@@ -14,6 +14,9 @@
             por otro lado, recomendaciones que permitan mejorar la gestión de los tiempos de espera
             quirúrgicos asociado a los casos no GES con el objetivo último de ofrecer una atención
             más oportuna y justa.
+            (<a href="https://www.comisiondeproductividad.cl/estudios/estudios-en-proceso-mandatados-por-el-gobierno-de-chile/estudio-eficiencia-en-pabellones-y-priorizacion-de-pacientes-para-cirugia-electiva/" target="_blank">
+              Página del estudio
+            </a>)
           </div>
 
           <img class="header-logo" width="234" height="100" src="@/assets/img/logo.png">
