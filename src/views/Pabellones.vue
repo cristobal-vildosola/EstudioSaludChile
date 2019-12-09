@@ -2,15 +2,15 @@
   <div>
     <div class="main-section header">
       <div class="section">
-          <div class="main-title">
-            Eficiencia en Pabellones
-          </div>
+        <div class="main-title">
+          Eficiencia en Pabellones
+        </div>
       </div>
     </div>
 
     <div class="section">
       <div class="row">
-        <Animation direction="right" class="col-lg-4 col-sm-6">
+        <Animation class="col-lg-4 col-sm-6">
           <Bubble
             icon="hourglass"
             title="9 Horas de quirófano"
@@ -20,7 +20,7 @@
           />
         </Animation>
 
-        <Animation direction="right" class="col-lg-4 col-sm-6">
+        <Animation class="col-lg-4 col-sm-6">
           <Bubble
             icon="user-md"
             title="1,9 Cirugías por quirófano"
@@ -30,7 +30,7 @@
           />
         </Animation>
 
-        <Animation direction="right" class="col-lg-4 col-sm-6">
+        <Animation class="col-lg-4 col-sm-6">
           <Bubble
             text="4,2"
             title="Cirugías por quirófano"
@@ -40,7 +40,7 @@
           />
         </Animation>
 
-        <Animation direction="left" class="col-lg-4 offset-lg-2 col-sm-6">
+        <Animation class="col-lg-4 offset-lg-2 col-sm-6">
           <Bubble
             text="09:36"
             title=""
@@ -50,7 +50,7 @@
           />
         </Animation>
 
-        <Animation direction="left" class="col-lg-4 offset-lg-0 col-sm-6 offset-sm-3">
+        <Animation class="col-lg-4 offset-lg-0 col-sm-6 offset-sm-3">
           <Bubble
             text="41%"
             title="Uso de Quirófanos"

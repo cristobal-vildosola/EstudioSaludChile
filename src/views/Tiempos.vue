@@ -2,9 +2,9 @@
   <div>
     <div class="main-section header">
       <div class="section">
-          <div class="main-title">
-            Tiempos de Espera
-          </div>
+        <div class="main-title">
+          Tiempos de Espera
+        </div>
       </div>
     </div>
 
@@ -18,7 +18,7 @@
 
     <div class="section">
       <div class="row">
-        <Animation direction="left" class="col-lg-4 col-sm-6">
+        <Animation class="col-lg-4 col-sm-6">
           <Bubble
             text="765 días"
             description="Es la brecha promedio para el grupo de 5 cirugías más demandadas, entre
@@ -26,7 +26,7 @@
           />
         </Animation>
 
-        <Animation direction="left" class="col-lg-4 col-sm-6">
+        <Animation class="col-lg-4 col-sm-6">
           <Bubble
             text="550 días"
             description="Es la brecha promedio para el grupo de 2 cirugías pediátricas más
@@ -35,7 +35,7 @@
           />
         </Animation>
 
-        <Animation direction="left" class="col-lg-4 col-sm-6">
+        <Animation class="col-lg-4 col-sm-6">
           <Bubble
             text="63.284 casos"
             description="No informan diagnóstico en la lista de espera. Por ejemplo 22.685
@@ -44,7 +44,7 @@
           />
         </Animation>
 
-        <Animation direction="right" class="col-lg-4 offset-lg-2 col-sm-6">
+        <Animation class="col-lg-4 offset-lg-2 col-sm-6">
           <Bubble
             text="2 años"
             description="Es la brecha promedio para la resolución de un caso de hernioplastia,
@@ -52,7 +52,7 @@
           />
         </Animation>
 
-        <Animation direction="right" class="col-lg-4 offset-lg-0 col-sm-6 offset-sm-3">
+        <Animation class="col-lg-4 offset-lg-0 col-sm-6 offset-sm-3">
           <Bubble
             text="90%"
             description="hasta el 90% de los casos en la lista de espera (Circuncisiones,

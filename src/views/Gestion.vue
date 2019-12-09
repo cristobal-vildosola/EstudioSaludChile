@@ -2,34 +2,30 @@
   <div>
     <div class="main-section header">
       <div class="section">
-          <div class="main-title">
-            Gestion Hospitalaria
-          </div>
+        <div class="main-title">
+          Gestion Hospitalaria
+        </div>
       </div>
     </div>
 
     <div class="section">
       <div class="row">
-        <div class="col-md-4 offset-md-2 col-sm-6">
-          <Animation direction="right">
-            <Bubble
-              text="8 veces"
-              description="Hasta 8 veces más puede ser el consumo de días cama para un paciente
-              sometido a la misma cirugía (colecistectomía videolaparoscopica, severidad 1), según
-              datos del MINSAL 2014-2017."
-            />
-          </Animation>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <Animation direction="right">
-            <Bubble
-              icon="procedures"
-              title="1,5 millones de días cama de sobre estancia"
-              description="Fue la sobre estancia por año, equivalente al 17% de la oferta de días
-              cama del SNSS."
-            />
-          </Animation>
-        </div>
+        <Animation class="col-md-4 offset-md-2 col-sm-6">
+          <Bubble
+            text="8 veces"
+            description="Hasta 8 veces más puede ser el consumo de días cama para un paciente
+            sometido a la misma cirugía (colecistectomía videolaparoscopica, severidad 1), según
+            datos del MINSAL 2014-2017."
+          />
+        </Animation>
+        <Animation class="col-md-4 col-sm-6">
+          <Bubble
+            icon="procedures"
+            title="1,5 millones de días cama de sobre estancia"
+            description="Fue la sobre estancia por año, equivalente al 17% de la oferta de días
+            cama del SNSS."
+          />
+        </Animation>
       </div>
     </div>
 

@@ -21,7 +21,7 @@ export default {
   },
 
   props: {
-    direction: { type: String, default: 'up' },
+    direction: { type: String, default: 'right' },
     active: { type: Boolean, default: true },
     threshold: { type: Number, default: 0.5 },
   },
