@@ -21,7 +21,7 @@
         <Animation class="col-md-4 col-sm-6">
           <Bubble
             icon="procedures"
-            title="1,5 millones de días cama de sobre estancia"
+            title="1,5 millones de días cama de sobre estancia XXXXXXXXXXX"
             description="Fue la sobre estancia por año, equivalente al 17% de la oferta de días
             cama del SNSS."
           />
