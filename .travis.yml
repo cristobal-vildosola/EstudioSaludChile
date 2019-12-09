@@ -11,17 +11,15 @@ script: npm run build
 
 # erase old s3 contents before deploying
 before_deploy:
-  - aws configure set aws_access_key_id $AWS_ACCESS_KEY
-  - aws configure set aws_secret_access_key $AWS_SECRET_KEY
-  - aws s3 rm s3://estudio-salud-desarrollo --recursive --region sa-east-1
+  - aws s3 rm s3://$BUCKET_NAME --recursive --region $BUCKET_REGION
 
 deploy:
   provider: s3
   skip_cleanup: true
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: "estudio-salud-desarrollo"
-  region: "sa-east-1"
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  bucket: $BUCKET_NAME
+  region: $BUCKET_REGION
   acl: public_read
   cache_control: "max-age=86400"
   local_dir: dist
