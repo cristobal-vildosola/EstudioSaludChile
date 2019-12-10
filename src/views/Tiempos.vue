@@ -184,6 +184,26 @@
       </div>
     </div>
 
+    <div class="section" id="comorbilidad">
+      <div class="title">
+        Comorbilidad de la población
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <img class="chart-img" src="@/assets/img/comorbilidad.png">
+        </div>
+
+        <div class="col-lg-6">
+          <div class="description">
+            Este gráfico muestra la cantidad de personas en cada lista de espera durante el periodo
+            del estudio (2014-2017), los números están expresados en miles de personas. Más de 4
+            millones de pacientes se encontraban presentes en ambas listas simultaneamente, lo que
+            representa un 36% de los pacientes que estuvieron en lista de espera.
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
