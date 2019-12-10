@@ -37,7 +37,7 @@
         <Animation class="col-lg-4 col-sm-6">
           <Bubble
             text="3,3"
-            title="Cirugías por qiorófano"
+            title="Cirugías por quirófano"
             description="Fue el promedio de cirugías electivas por quirófano en Chile, mientras
             que en los hospitales del Benchmarking fue de 5,1 por quirófano."
           />

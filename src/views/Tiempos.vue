@@ -8,14 +8,6 @@
       </div>
     </div>
 
-    <Sidebar
-      :links="{
-        'Top 10 casos GES': 'top10GES',
-        'Top 10 casos no GES': 'top10noGES',
-        'Horas disponibles v/s pedidas': 'oferta-demanda',
-      }"
-    />
-
     <div class="section">
       <div class="row">
         <Animation class="col-lg-4 col-sm-6">
@@ -208,8 +200,6 @@
 </template>
 
 <script>
-import Sidebar from '@/common/Sidebar.vue';
-
 import Animation from '@/components/Animation.vue';
 import Bubble from '@/components/Bubble.vue';
 import BarChart from '@/components/BarChart.vue';
@@ -225,7 +215,6 @@ export default {
   name: 'Tiempos',
 
   components: {
-    Sidebar,
     Animation,
     Bubble,
     Heatmap,
