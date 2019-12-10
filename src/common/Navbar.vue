@@ -52,13 +52,9 @@ export default {
 
 .nav-link {
   font-size: 1.2rem;
-  line-height: 1;
+  line-height: 0.8;
   color: inherit;
-
-  padding: .5rem 0 !important;
   margin: 0 .5rem;
-
-  border-bottom: 3px solid white;
 }
 .nav-link:hover {
   color: var(--main-color);
@@ -70,10 +66,19 @@ export default {
   margin-right: 3em;
 }
 
+.nav-link.router-link-exact-active {
+  border-left: 3px solid var(--main-color);
+  padding-left: .5rem;
+}
+
 /* only on large devices */
 @media (min-width: 992px) {
-  .router-link-exact-active {
+  .nav-link {
+    border-bottom: 3px solid #0000;
+  }
+  .nav-link.router-link-exact-active {
     border-color: var(--main-color);
+    border-left: 0;
   }
 
   .logo {
