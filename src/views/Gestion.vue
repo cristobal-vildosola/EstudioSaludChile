@@ -13,7 +13,7 @@
         <Animation class="col-sm-6">
           <Bubble
             text="8 veces"
-            description="Hasta 8 veces más puede ser el consumo de días cama para un paciente
+            description="Hasta 8 veces JAJAJAJAJAJAJA más puede ser el consumo de días cama para un paciente
             sometido a la misma cirugía (colecistectomía videolaparoscopica, severidad 1), según
             datos del MINSAL 2014-2017."
           />
