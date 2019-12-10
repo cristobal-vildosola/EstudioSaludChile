@@ -10,7 +10,7 @@
 
     <div class="section">
       <div class="row">
-        <Animation class="col-md-4 offset-md-2 col-sm-6">
+        <Animation class="col-sm-6">
           <Bubble
             text="8 veces"
             description="Hasta 8 veces más puede ser el consumo de días cama para un paciente
@@ -18,7 +18,7 @@
             datos del MINSAL 2014-2017."
           />
         </Animation>
-        <Animation class="col-md-4 col-sm-6">
+        <Animation class="col-sm-6">
           <Bubble
             icon="procedures"
             title="1,5 millones de días cama de sobre estancia"
@@ -46,7 +46,7 @@
         :min="0"
 
         valueTitle="días de estada"
-        categoryTitle="hospital"
+        categoryTitle="hospital (anonimizado)"
         :hideCategory="true"
 
         valueFormat="#"
@@ -98,6 +98,29 @@
         quirófano disponible. Además, para cada región se calcula el número de quirófanos por cada
         100.000 beneficiarios de FONASA, lo que se muestra utilizando la escala de color en la
         parte inferior del gráfico.
+      </div>
+    </div>
+
+    <div class="section" id="oferta-demanda">
+      <div class="title">
+        Sobre estancia hospitalaria por servicio de salud 2017
+      </div>
+
+      <img src="@/assets/img/EST2.png" class="chart-img" style="max-height: 35rem;">
+
+      <div class="description">
+        El gráfico muestra,  por servicio de salud, que el volumen de sobre estancias se presenta
+        en los ingresos por urgencias. Por lo tanto, mejorar la gestión de la estancia del grupo
+        ingresado por urgencia que no tiene severidad o comorbilidad permitiría liberar alrededor
+        de 800 mil días-cama de los 1,5 millones anteriores. A modo de ejemplo, si se reduce un 10%
+        de la sobre estancia asociada a dicho grupo, se cuenta con una oferta de días-cama que
+        permitiría generar un egreso de 27 mil personas más, equivalente al 7% del volumen actual
+        de cirugías electivas.
+
+        <div class="text-muted">
+          <br>
+          * Sobreestancia fue medida como la suma de los días sobre la mediana para cada código GRD.
+        </div>
       </div>
     </div>
   </div>
