@@ -43,7 +43,7 @@
           />
         </Animation>
 
-        <Animation class="col-lg-4 col-sm-6">
+        <Animation class="col-lg-4 offset-lg-0 col-sm-6 offset-sm-3">
           <Bubble
             text="623"
             title="Días de Brecha"

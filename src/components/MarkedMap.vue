@@ -89,6 +89,9 @@ export default {
     map.zoomControl.align = 'right';
     map.maxZoomLevel = 200;
 
+    map.tapToActivate = true;
+    map.tapTimeout = 2000;
+
     // add marks
     const imageSeries = map.series.push(new am4maps.MapImageSeries());
     const imageSeriesTemplate = imageSeries.mapImages.template;

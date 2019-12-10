@@ -68,10 +68,15 @@
       </div>
 
       <LineChart
-        :data="quirofanosEnTrabajo"
+        :data="usoQx"
 
         date="hora"
-        value="proporcion"
+        :values="[
+          { value: 'rm2', legend: 'hosp. RM2' },
+          { value: 'rm1', legend: 'hosp. RM1' },
+          { value: 'sur', legend: 'hosp. región sur' },
+          { value: 'centroSur', legend: 'hosp. región centro-sur' },
+        ]"
 
         :min="0"
         :max="100"
@@ -95,7 +100,7 @@ import Animation from '@/components/Animation.vue';
 import Bubble from '@/components/Bubble.vue';
 import LineChart from '@/components/LineChart.vue';
 
-import { quirofanosEnTrabajo } from '@/assets/data/pabellones';
+import { usoQx } from '@/assets/data/pabellones';
 
 export default {
   name: 'Pabellones',
@@ -108,7 +113,7 @@ export default {
 
   data() {
     return {
-      quirofanosEnTrabajo,
+      usoQx,
     };
   },
 };

@@ -18,6 +18,7 @@ export default {
     return {
       chart: null,
       id: `chartdiv_${Math.random().toString(30).substr(2, 8)}`,
+      series: [],
 
       appeared: false,
       intersectionOptions: {
@@ -32,7 +33,7 @@ export default {
     max: { type: Number },
 
     date: { type: String, default: 'date' },
-    value: { type: String, default: 'value' },
+    values: { type: Array, default: () => (['value']) },
     xTitle: { type: String },
     yTitle: { type: String },
 
@@ -48,6 +49,7 @@ export default {
     drawChart() {
       const am4core = this.$am4core;
       const am4charts = this.$am4charts;
+      const self = this;
 
       // create chart
       const chart = this.$am4core.create(this.id, am4charts.XYChart);
@@ -79,36 +81,59 @@ export default {
       valueAxis.numberFormatter.numberFormat = this.valueFormat;
 
       // line
-      const series = chart.series.push(new am4charts.LineSeries());
-      this.series = series;
+      const duration = self.animationDuration / (self.data.length + 1);
+      function createLine(value, legend = '{name}') {
+        const series = chart.series.push(new am4charts.LineSeries());
+        self.series.push(series);
 
-      series.dataFields.dateX = this.date;
-      series.dataFields.valueY = this.value;
+        series.dataFields.dateX = self.date;
+        series.dataFields.valueY = value;
+        series.legendSettings.labelText = legend;
 
-      // bullets
-      const bullet = series.bullets.push(new am4core.Circle());
-      bullet.strokeWidth = 2;
-      bullet.radius = 5;
-      bullet.fill = am4core.color('#fff');
-      bullet.tooltipText = this.tooltipText;
-      series.tooltip.pointerOrientation = 'vertical';
+        // bullets
+        const bullet = series.bullets.push(new am4core.Circle());
+        bullet.strokeWidth = 2;
+        bullet.radius = 5;
+        bullet.fill = am4core.color('#fff');
+        bullet.tooltipText = self.tooltipText;
+        series.tooltip.pointerOrientation = 'vertical';
 
-      // animations
-      const duration = this.animationDuration / (this.data.length + 1);
-      series.interpolationDuration = duration * 2;
-      series.sequencedInterpolationDelay = duration;
-      series.sequencedInterpolation = true;
+        // animations
+        series.interpolationDuration = duration * 2;
+        series.sequencedInterpolationDelay = duration;
+        series.sequencedInterpolation = true;
 
-      // start hidden
-      series.hidden = true;
+        // start hidden
+        series.hidden = true;
+      }
+
+      this.series = [];
+      for (let i = 0; i < this.values.length; i += 1) {
+        createLine(this.values[i].value, this.values[i].legend);
+      }
       this.appeared = false;
+
+      // disable zoom out
+      chart.zoomOutButton.disabled = true;
+
+      chart.legend = new am4charts.Legend();
+      chart.legend.fontSize = '.8rem';
+
+      // disable legend
+      if (this.disableLegend) {
+        chart.legend.itemContainers.template.clickable = false;
+        chart.legend.itemContainers.template.focusable = false;
+        chart.legend.itemContainers.template.cursorOverStyle = am4core.MouseCursorStyle.default;
+      }
     },
 
     appearOnScroll({ going }) {
       const { series, appeared } = this;
       if (!appeared && going === this.$waypointMap.GOING_IN) {
-        series.hidden = false;
-        series.appear();
+        for (let i = 0; i < series.length; i += 1) {
+          series[i].hidden = false;
+          series[i].appear();
+        }
         this.appeared = true;
       }
     },
