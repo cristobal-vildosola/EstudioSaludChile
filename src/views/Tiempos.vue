@@ -108,6 +108,40 @@
       </div>
     </div>
 
+    <div class="section">
+      <div class="title">
+        Tiempos de espera para algunos casos no GES quirúrgicos comunes
+      </div>
+
+      <MultiBarChart
+        :data="tiemposCasos"
+
+        category="caso"
+        :values="[
+          { value: 'min', name: 'mínimo' },
+          { value: 'medio', name: 'promedio' },
+          { value: 'max', name: 'máximo' },
+        ]"
+
+        :min="0"
+
+        valueTitle="días de espera"
+        valueFormat="#"
+
+        :tooltipText="`[bold]{caso}[/]
+                      mínima espera: {min} días
+                      espera promedio: {medio} días
+                      máxima espera: {max} días`"
+
+        :horizontal="true"
+        :disableLegend="true"
+      />
+
+      <div class="description">
+        lorem ipsum tiempos de espera para casos comunes
+      </div>
+    </div>
+
     <div class="section" id="oferta-demanda">
       <div class="title">
         Diferencias entre Oferta y Demanda de Quirófanos
@@ -247,6 +281,7 @@
 import Animation from '@/components/Animation.vue';
 import Bubble from '@/components/Bubble.vue';
 import BarChart from '@/components/BarChart.vue';
+import MultiBarChart from '@/components/MultiBarChart.vue';
 import Heatmap from '@/components/Heatmap.vue';
 import ChileChart from '@/components/ChileChart.vue';
 import LineChart from '@/components/LineChart.vue';
@@ -254,7 +289,7 @@ import LineChart from '@/components/LineChart.vue';
 import metropolitanaGeo from '@/assets/maps/metropolitana';
 import {
   tiempoEsperaRegion, ofertaPor100Especialidad, tiempoEsperaComunasRM, top10noGES, top10noGESQx,
-  evolucionEspera,
+  evolucionEspera, tiemposCasos,
 } from '@/assets/data/tiempoEspera';
 
 export default {
@@ -266,6 +301,7 @@ export default {
     Heatmap,
     ChileChart,
     BarChart,
+    MultiBarChart,
     LineChart,
   },
 
@@ -279,6 +315,7 @@ export default {
       tiempoEsperaRegion,
       tiempoEsperaComunasRM,
       evolucionEspera,
+      tiemposCasos,
     };
   },
 };

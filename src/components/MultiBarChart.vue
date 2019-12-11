@@ -164,19 +164,18 @@ export default {
       const self = this;
       this.series = [];
 
-      function createSeries(field, stacked = false, legend = '{name}') {
+      function createSeries(value, name, stacked = false) {
         const series = chart.series.push(new am4charts.ColumnSeries());
         series.stacked = stacked || self.calcPercent;
         self.series.push(series);
 
-        series.name = field;
-        series.dataFields.value = field;
-        series.dataFields.valueX = field;
-        series.dataFields.valueY = field;
+        series.name = name || value;
+        series.dataFields.value = value;
+        series.dataFields.valueX = value;
+        series.dataFields.valueY = value;
         series.dataFields.category = self.category;
         series.dataFields.categoryX = self.category;
         series.dataFields.categoryY = self.category;
-        series.legendSettings.labelText = legend;
 
         if (self.calcPercent) {
           series.dataFields.valueYShow = 'totalPercent';
@@ -192,7 +191,7 @@ export default {
 
         // tooltip changes
         if (!horizontal) {
-          series.tooltip.pointerOrientation = 'down';
+          series.tooltip.pointerOrientation = 'veritcal';
         }
 
         // modify tooltip
@@ -217,7 +216,7 @@ export default {
       }
 
       for (let i = 0; i < this.values.length; i += 1) {
-        createSeries(this.values[i].value, this.values[i].stacked, this.values[i].legend);
+        createSeries(this.values[i].value, this.values[i].name, this.values[i].stacked);
       }
       this.appeared = false;
 

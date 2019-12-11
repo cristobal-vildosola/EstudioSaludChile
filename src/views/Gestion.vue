@@ -39,8 +39,8 @@
 
         category="hospital"
         :values="[
-          { value: 'estanciaUr', legend: 'ingresos por urgencia' },
-          { value: 'estanciaPr', legend: 'ingresos programados' },
+          { value: 'estanciaUr', name: 'ingresos por urgencia' },
+          { value: 'estanciaPr', name: 'ingresos programados' },
         ]"
 
         :min="0"

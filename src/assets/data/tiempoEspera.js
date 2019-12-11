@@ -154,6 +154,24 @@ const evolucionEspera = [
   },
 ];
 
+const tiemposCasos = [
+  {
+    caso: 'Colesistectomía', medio: 334, min: 38, max: 1154,
+  }, {
+    caso: 'Hernioplastía', medio: 274, min: 41, max: 760,
+  }, {
+    caso: 'Amigdalectomía', medio: 300, min: 38, max: 597,
+  }, {
+    caso: 'Circunsición', medio: 201, min: 52, max: 594,
+  }, {
+    caso: 'Safenectomía', medio: 495, min: 109, max: 1375,
+  }, {
+    caso: 'Resección de Pterigion', medio: 321, min: 95, max: 859,
+  }, {
+    caso: 'Ligadura de Trompas', medio: 267, min: 74, max: 528,
+  },
+];
+
 const comunaServicio = [
   { codigo: 13101, comuna: 'Santiago', serv: 'Metropolitano Central' },
   { codigo: 13102, comuna: 'Cerrillos', serv: 'Metropolitano Central' },
@@ -263,5 +281,5 @@ const tiempoEsperaComunasRM = comunaServicio.map(
 
 export {
   tiempoEsperaRegion, ofertaPor100Especialidad, tiempoEsperaComunasRM, top10noGES, top10noGESQx,
-  evolucionEspera,
+  evolucionEspera, tiemposCasos,
 };
