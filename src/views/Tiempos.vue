@@ -171,6 +171,7 @@
 
         <div class="col-lg-6">
           <div class="description">
+            lorem ipsum detalle region metropolitana
           </div>
         </div>
       </div>
@@ -196,6 +197,40 @@
         </div>
       </div>
     </div>
+
+    <div class="section">
+      <div class="title">
+        Evolución de los tiempos de espera
+      </div>
+
+      <LineChart
+        :data="evolucionEspera"
+
+        date="fecha"
+        :values="[
+          {
+            value: 'media',
+            tooltip: `[bold]{valueY}[/] días de espera promedio en {fecha.formatDate('MMM-yyyy')}.`
+          }, {
+            value: 'min',
+            name: 'mínimo',
+            tooltip: `[bold]{valueY}[/] días de espera mínimo en {fecha.formatDate('MMM-yyyy')}.`
+          }, {
+            value: 'max',
+            name: 'máximo',
+            tooltip: `[bold]{valueY}[/] días de espera máximo en {fecha.formatDate('MMM-yyyy')}.`
+          },
+        ]"
+
+        :min="0"
+        :max="700"
+        yTitle="días de espera"
+      />
+
+      <div class="description">
+        lorem ipsum evolucion tiempos de espera
+      </div>
+    </div>
   </div>
 </template>
 
@@ -205,10 +240,12 @@ import Bubble from '@/components/Bubble.vue';
 import BarChart from '@/components/BarChart.vue';
 import Heatmap from '@/components/Heatmap.vue';
 import ChileChart from '@/components/ChileChart.vue';
+import LineChart from '@/components/LineChart.vue';
 
 import metropolitanaGeo from '@/assets/maps/metropolitana';
 import {
   tiempoEsperaRegion, ofertaPor100Especialidad, tiempoEsperaComunasRM, top10noGES, top10noGESQx,
+  evolucionEspera,
 } from '@/assets/data/tiempoEspera';
 
 export default {
@@ -220,6 +257,7 @@ export default {
     Heatmap,
     ChileChart,
     BarChart,
+    LineChart,
   },
 
   data() {
@@ -231,6 +269,7 @@ export default {
       ofertaPor100Especialidad,
       tiempoEsperaRegion,
       tiempoEsperaComunasRM,
+      evolucionEspera,
     };
   },
 };
