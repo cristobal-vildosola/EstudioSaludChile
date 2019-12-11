@@ -190,7 +190,7 @@ export default {
       series.sequencedInterpolation = true;
 
       // start hidden
-      series.hidden = true;
+      series.hidden = this.animationActive;
       this.appeared = false;
     },
 

@@ -128,7 +128,7 @@ export default {
         series.sequencedInterpolation = true;
 
         // start hidden
-        series.hidden = true;
+        series.hidden = self.animationActive;
       }
 
       this.series = [];

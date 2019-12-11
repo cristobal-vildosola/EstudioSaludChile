@@ -103,6 +103,9 @@
 
         :horizontal="true"
       />
+
+      <div class="description">
+      </div>
     </div>
 
     <div class="section" id="oferta-demanda">
@@ -125,6 +128,9 @@
 
         :horizontal="true"
       />
+
+      <div class="description">
+      </div>
     </div>
 
     <div class="section" id="tiempo-espera">
@@ -210,21 +216,24 @@
         :values="[
           {
             value: 'media',
-            tooltip: `[bold]{valueY}[/] días de espera promedio en {fecha.formatDate('MMM-yyyy')}.`
+            tooltip: `[bold]{valueY}[/] días de espera promedio en {fecha.formatDate('MMMM/yy')}.`
           }, {
             value: 'min',
             name: 'mínimo',
-            tooltip: `[bold]{valueY}[/] días de espera mínimo en {fecha.formatDate('MMM-yyyy')}.`
+            tooltip: `[bold]{valueY}[/] días de espera mínimo en {fecha.formatDate('MMMM/yy')}.`
           }, {
             value: 'max',
             name: 'máximo',
-            tooltip: `[bold]{valueY}[/] días de espera máximo en {fecha.formatDate('MMM-yyyy')}.`
+            tooltip: `[bold]{valueY}[/] días de espera máximo en {fecha.formatDate('MMMM/yy')}.`
           },
         ]"
 
         :min="0"
         :max="700"
         yTitle="días de espera"
+
+        :animationActive="false"
+        :disableLegend="true"
       />
 
       <div class="description">
