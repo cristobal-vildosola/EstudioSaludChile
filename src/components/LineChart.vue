@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import material from '@amcharts/amcharts4/themes/material';
+import am4langEspañol from '@amcharts/amcharts4/lang/es_ES';
 
 export default {
   name: 'LineChart',
@@ -38,11 +40,15 @@ export default {
     yTitle: { type: String },
 
     valueFormat: { type: String, default: '#' },
-    tooltipText: { type: String, default: '{date}: {value}' },
+    tooltipText: { type: String, default: '{dateX}: {valueY}' },
 
-    height: { type: String, default: '50vh' },
+    disableLegend: { type: Boolean, default: false },
+
+    height: { type: String, default: '30rem' },
     animationDuration: { type: Number, default: 500 },
     animationActive: { type: Boolean, default: true },
+
+    dateRange: { type: Object },
   },
 
   methods: {
@@ -50,6 +56,7 @@ export default {
       const am4core = this.$am4core;
       const am4charts = this.$am4charts;
       const self = this;
+      am4core.useTheme(material);
 
       // create chart
       const chart = this.$am4core.create(this.id, am4charts.XYChart);
@@ -57,6 +64,8 @@ export default {
       chart.data = this.data;
       chart.svgContainer.htmlElement.style.height = this.height;
       chart.maskBullets = false;
+      chart.language.locale = am4langEspañol;
+      chart.dateFormatter.inputDateFormat = 'd/M/yyyy';
 
       const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
       dateAxis.title.text = this.xTitle;
@@ -80,22 +89,37 @@ export default {
       valueAxis.numberFormatter = new am4core.NumberFormatter();
       valueAxis.numberFormatter.numberFormat = this.valueFormat;
 
+      // add range
+      if (this.dateRange) {
+        const range = dateAxis.axisRanges.create();
+        range.date = this.dateRange.start;
+        range.endDate = this.dateRange.end;
+        range.axisFill.fill = chart.colors.getIndex(7);
+        range.axisFill.fillOpacity = 0.2;
+
+        range.label.text = this.dateRange.title;
+        range.label.inside = true;
+        range.label.valign = 'bottom';
+        range.label.paddingLeft = am4core.percent(50);
+      }
+
       // line
       const duration = self.animationDuration / (self.data.length + 1);
-      function createLine(value, legend = '{name}') {
+      function createLine(value, name, tooltip = self.tooltipText) {
         const series = chart.series.push(new am4charts.LineSeries());
         self.series.push(series);
 
         series.dataFields.dateX = self.date;
         series.dataFields.valueY = value;
-        series.legendSettings.labelText = legend;
+        series.name = name || value;
+        series.strokeWidth = 2;
 
         // bullets
         const bullet = series.bullets.push(new am4core.Circle());
         bullet.strokeWidth = 2;
         bullet.radius = 5;
         bullet.fill = am4core.color('#fff');
-        bullet.tooltipText = self.tooltipText;
+        bullet.tooltipText = tooltip;
         series.tooltip.pointerOrientation = 'vertical';
 
         // animations
@@ -109,7 +133,7 @@ export default {
 
       this.series = [];
       for (let i = 0; i < this.values.length; i += 1) {
-        createLine(this.values[i].value, this.values[i].legend);
+        createLine(this.values[i].value, this.values[i].name, this.values[i].tooltip);
       }
       this.appeared = false;
 
@@ -125,6 +149,8 @@ export default {
         chart.legend.itemContainers.template.focusable = false;
         chart.legend.itemContainers.template.cursorOverStyle = am4core.MouseCursorStyle.default;
       }
+
+      am4core.unuseTheme(material);
     },
 
     appearOnScroll({ going }) {

@@ -27,90 +27,130 @@ const top10noGESQx = [
 const tiempoEspera = [
   {
     id: 'CL-AP', serv: 'Arica', media: 403.2, mediana: 125, atenciones: 159951,
-  },
-  {
+  }, {
     id: 'CL-TA', serv: 'Iquique', media: 663.9, mediana: 661, atenciones: 68560,
-  },
-  {
+  }, {
     id: 'CL-AN', serv: 'Antofagasta', media: 444, mediana: 235, atenciones: 224275,
-  },
-  {
+  }, {
     id: 'CL-AT', serv: 'Atacama', media: 407, mediana: 223, atenciones: 122574,
-  },
-  {
+  }, {
     id: 'CL-CO', serv: 'Coquimbo', media: 543, mediana: 320, atenciones: 489008,
-  },
-  {
+  }, {
     id: 'CL-VS', serv: 'Aconcagua', media: 296, mediana: 60, atenciones: 239342,
-  },
-  {
+  }, {
     id: 'CL-VS', serv: 'Valparaíso San Antonio', media: 548, mediana: 380, atenciones: 319209,
-  },
-  {
+  }, {
     id: 'CL-VS', serv: 'Viña del Mar Quillota', media: 651, mediana: 482, atenciones: 381869,
-  },
-  {
+  }, {
     id: 'CL-RM', serv: 'Metropolitano Central', media: 371, mediana: 133, atenciones: 388185,
-  },
-  {
+  }, {
     id: 'CL-RM', serv: 'Metropolitano Norte', media: 512, mediana: 190, atenciones: 406813,
-  },
-  {
+  }, {
     id: 'CL-RM', serv: 'Metropolitano Occidente', media: 302, mediana: 99, atenciones: 547882,
-  },
-  {
+  }, {
     id: 'CL-RM', serv: 'Metropolitano Oriente', media: 333, mediana: 89, atenciones: 423555,
-  },
-  {
+  }, {
     id: 'CL-RM', serv: 'Metropolitano Sur', media: 459, mediana: 254, atenciones: 464302,
-  },
-  {
+  }, {
     id: 'CL-RM', serv: 'Metropolitano Sur Oriente', media: 360, mediana: 62, atenciones: 723701,
-  },
-  {
+  }, {
     id: 'CL-LI', serv: "Libertador B. O'Higgins", media: 457, mediana: 273, atenciones: 388851,
-  },
-  {
+  }, {
     id: 'CL-ML', serv: 'Del Maule', media: 429, mediana: 202, atenciones: 528381,
-  },
-  {
+  }, {
     id: 'CL-BI', serv: 'Arauco', media: 303.2, mediana: 145, atenciones: 159293,
-  },
-  {
+  }, {
     id: 'CL-BI', serv: 'Biobío', media: 554, mediana: 569, atenciones: 259053,
-  },
-  {
+  }, {
     id: 'CL-BI', serv: 'Concepción', media: 243, mediana: 75, atenciones: 513787,
-  },
-  {
+  }, {
     id: 'CL-BI', serv: 'Ñuble', media: 364, mediana: 147, atenciones: 375615,
-  },
-  {
+  }, {
     id: 'CL-BI', serv: 'Talcahuano', media: 244, mediana: 105, atenciones: 294923,
-  },
-  {
+  }, {
     id: 'CL-AR', serv: 'Araucanía Norte', media: 495.5, mediana: 377, atenciones: 185691,
-  },
-  {
+  }, {
     id: 'CL-AR', serv: 'Araucanía Sur', media: 417, mediana: 141, atenciones: 564918,
-  },
-  {
+  }, {
     id: 'CL-LR', serv: 'Valdivia', media: 733, mediana: 905, atenciones: 222280,
-  },
-  {
+  }, {
     id: 'CL-LL', serv: 'Chiloé', media: 435.3, mediana: 245, atenciones: 119996,
-  },
-  {
+  }, {
     id: 'CL-LL', serv: 'Del Reloncaví', media: 613.4, mediana: 520, atenciones: 234977,
-  },
-  {
+  }, {
     id: 'CL-LL', serv: 'Osorno', media: 402.3, mediana: 384, atenciones: 207996,
-  },
-  {
+  }, {
     id: 'CL-AI', serv: 'Aisén', media: 161.2, mediana: 69, atenciones: 132281,
-  },
-  {
+  }, {
     id: 'CL-MA', serv: 'Magallanes', media: 363, mediana: 177, atenciones: 154426,
+  },
+];
+
+const evolucionEspera = [
+  {
+    fecha: '1/1/2016', media: 431, min: 234, max: 572,
+  }, {
+    fecha: '1/2/2016', media: 438, min: 209, max: 593,
+  }, {
+    fecha: '1/3/2016', media: 429, min: 217, max: 590,
+  }, {
+    fecha: '1/4/2016', media: 418, min: 222, max: 585,
+  }, {
+    fecha: '1/5/2016', media: 417, min: 189, max: 595,
+  }, {
+    fecha: '1/6/2016', media: 409, min: 122, max: 609,
+  }, {
+    fecha: '1/7/2016', media: 403, min: 109, max: 615,
+  }, {
+    fecha: '1/8/2016', media: 393, min: 92, max: 618,
+  }, {
+    fecha: '1/9/2016', media: 393, min: 108, max: 619,
+  }, {
+    fecha: '1/10/2016', media: 390, min: 118.5, max: 616,
+  }, {
+    fecha: '1/11/2016', media: 393, min: 124, max: 616,
+  }, {
+    fecha: '1/12/2016', media: 400, min: 145, max: 613,
+  }, {
+    fecha: '1/1/2017', media: 405, min: 159, max: 628,
+  }, {
+    fecha: '1/2/2017', media: 407, min: 168, max: 651,
+  }, {
+    fecha: '1/3/2017', media: 396, min: 163, max: 655,
+  }, {
+    fecha: '1/4/2017', media: 398, min: 163.5, max: 678,
+  }, {
+    fecha: '1/5/2017', media: 394, min: 155, max: 677,
+  }, {
+    fecha: '1/6/2017', media: 394, min: 163.5, max: 672,
+  }, {
+    fecha: '1/7/2017', media: 396, min: 181, max: 670,
+  }, {
+    fecha: '1/8/2017', media: 394, min: 170, max: 656.5,
+  }, {
+    fecha: '1/9/2017', media: 397, min: 159, max: 619,
+  }, {
+    fecha: '1/10/2017', media: 399, min: 160, max: 608,
+  }, {
+    fecha: '1/11/2017', media: 399, min: 150, max: 612,
+  }, {
+    fecha: '1/12/2017', media: 396, min: 180, max: 599,
+  }, {
+    fecha: '1/1/2018', media: 391, min: 180.5, max: 589,
+  }, {
+    fecha: '1/2/2018', media: 393, min: 198, max: 590,
+  }, {
+    fecha: '1/3/2018', media: 389, min: 172, max: 592,
+  }, {
+    fecha: '1/4/2018', media: 392, min: 173, max: 601,
+  }, {
+    fecha: '1/5/2018', media: 388, min: 171, max: 615,
+  }, {
+    fecha: '1/6/2018', media: 382, min: 165, max: 613,
+  }, {
+    fecha: '1/7/2018', media: 371, min: 165, max: 606.5,
+  }, {
+    fecha: '1/8/2018', media: 375, min: 179, max: 633,
   },
 ];
 
@@ -223,4 +263,5 @@ const tiempoEsperaComunasRM = comunaServicio.map(
 
 export {
   tiempoEsperaRegion, ofertaPor100Especialidad, tiempoEsperaComunasRM, top10noGES, top10noGESQx,
+  evolucionEspera,
 };

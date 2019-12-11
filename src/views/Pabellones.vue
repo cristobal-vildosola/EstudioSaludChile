@@ -72,19 +72,23 @@
 
         date="hora"
         :values="[
-          { value: 'rm2', legend: 'hosp. RM2' },
-          { value: 'rm1', legend: 'hosp. RM1' },
-          { value: 'sur', legend: 'hosp. región sur' },
-          { value: 'centroSur', legend: 'hosp. región centro-sur' },
+          { value: 'rm2', name: 'hosp. RM2' },
+          { value: 'rm1', name: 'hosp. RM1' },
+          { value: 'sur', name: 'hosp. región sur' },
+          { value: 'centroSur', name: 'hosp. región centro-sur' },
         ]"
 
         :min="0"
         :max="100"
 
         yTitle="% de quirófanos en trabajo"
-        :tooltipText="`[bold]{proporcion}%[/] en trabajo a las {hora.formatDate('HH:mm')}.`"
+        :tooltipText="`[bold]{valueY}%[/] en trabajo a las {hora.formatDate('HH:mm')} en {name}.`"
 
-        height="30rem"
+        :dateRange="{
+          start: new Date(2019, 1, 1, 8, 30, 0),
+          end: new Date(2019, 1, 1, 18, 30, 0),
+          title: 'Jornada laboral teórica',
+        }"
       />
 
       <div class="description">
